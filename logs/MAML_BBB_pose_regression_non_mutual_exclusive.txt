@@ -1,0 +1,262 @@
+length of episode :  5
+========================= DEBUG =========================
+support_x shape :  (1, 10, 1, 128, 128)
+support_y shape :  (1, 10, 1)
+query_x shape :  (1, 10, 1, 128, 128)
+query_y shape :  (1, 10, 1)
+========================= Meta trainig =========================
+**********
+optimization iteration 1, loss of query set in meta training nan
+optimization iteration 1, criterion of query set in meta training  nan
+**********
+---------- Temporarily save the model ----------
+========================= Epoch 1 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 2 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 3 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 4 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 5 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 6 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 7 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 8 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 9 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 10 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 11 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 12 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 13 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 14 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 15 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 16 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 17 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 18 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 19 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 20 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 21 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 22 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 23 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 24 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 25 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 26 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 27 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 28 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 29 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 30 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 31 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 32 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 33 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 34 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 35 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 36 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 37 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 38 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 39 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 40 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+**********
+optimization iteration 201, loss of query set in meta training nan
+optimization iteration 201, criterion of query set in meta training  nan
+**********
+========================= Epoch 41 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 42 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 43 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 44 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 45 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 46 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 47 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 48 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+========================= Epoch 49 / 3000 =========================
+epoch_loss : nan
+epoch_criterion : nan
+epoch_loss_val : nan
+epoch_criterion_val : nan
+=========================

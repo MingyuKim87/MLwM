@@ -1,4 +1,5 @@
 import os
+import shutil
 
 import numpy as np
 import math
@@ -300,7 +301,21 @@ def set_dir_path_args(args, dataset_name):
 
     return args
 
-    
+def remove_temp_files_and_move_directory(save_model_path, result_path, model, problem_name, datatype):
+    temp_path = os.path.join(save_model_path, "temp")
+    file_names = os.listdir(temp_path)
+
+    for filename in file_names:
+        if filename in "20":
+            os.remove(filename)
+
+    last_path = model + "_" + problem_name + "_" + datatype
+    result_path = os.path.join(result_path, last_path)
+    shutil.copytree(save_model_path, result_path)
+
+    print("*"*10, "save the results", "*"*10)
+
+    return 0
 
 if __name__ == '__main__':
 

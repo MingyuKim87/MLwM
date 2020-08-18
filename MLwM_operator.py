@@ -32,7 +32,7 @@ class MAML_operator(object):
         self.num_epochs = num_epochs
         self.steps = 0 
         self.print_freq = 200
-        self.save_freq = 1000
+        self.save_freq = 3
         self.figure_freq = 10
 
         # Model Save (Temp)

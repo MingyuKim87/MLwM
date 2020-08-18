@@ -110,6 +110,7 @@ def train(model, save_model_path, initializer=torch.nn.init.xavier_normal_):
     # Save Model
     torch.save(model.state_dict(), os.path.join(save_model_path, "Model_{}_{}.pt".format(args.model, args.encoder_type)))
     print("="*20, "Save the model (After training)", "="*20)
+    remove_temp_files_and_move_directory(save_model_path, "/home/mgyukim/workspaces/result_MLwM", args.model, "poseregression", args.datatypes)
 
 def test(model, load_model_path, initializer=torch.nn.init.xavier_normal_):
     # Create Model

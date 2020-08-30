@@ -8,7 +8,6 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 
 
-
 def set_config_encoder(config, encoder_type, encoder_output_dim):
     '''
         Set last fc layer should be setted as img_size * img_size
@@ -24,7 +23,8 @@ def set_config_encoder(config, encoder_type, encoder_output_dim):
     # Encoder types
     if encoder_type == "deterministic" or \
         encoder_type == "VAE" or \
-            encoder_type == "BBB" :
+            encoder_type == "BBB" or \
+                encoder_type == "BBB_FC":
 
         config[0] = encoder_type
     
@@ -111,6 +111,23 @@ def set_config(config, n_way, img_size, is_regression=False):
     result = config + last_layer
 
     return result
+
+
+def set_config_fc_layers(n_way, embed_size, hidden_size, layer_counts):
+    Layers = []
+
+    for i in range(layer_counts):
+        if i == 0:
+            fc_layer = fc_layer = ('fc', [hidden_size, embed_size])
+        elif i == (layer_counts - 1):
+            fc_layer = fc_layer = ('fc', [n_way, hidden_size])
+        else:
+            fc_layer = fc_layer = ('fc', [hidden_size, hidden_size])
+
+        Layers.append(fc_layer)
+
+    return Layers
+
 
 
 def get_save_model_path(args):
@@ -301,19 +318,26 @@ def set_dir_path_args(args, dataset_name):
 
     return args
 
-def remove_temp_files_and_move_directory(save_model_path, result_path, model, problem_name, datatype):
+def remove_temp_files_and_move_directory(save_model_path, result_path, model, \
+    encoder_type, beta_kl, problem_name, datatype):
     temp_path = os.path.join(save_model_path, "temp")
     file_names = os.listdir(temp_path)
 
     for filename in file_names:
-        if filename in "20":
-            os.remove(filename)
+        if "20" in filename:
+            filepath = os.path.join(temp_path, filename)
+            os.remove(filepath)
 
-    last_path = model + "_" + problem_name + "_" + datatype
+    last_path = model + "_" + encoder_type + "_" + str(beta_kl) + "_" + problem_name + "_" + datatype
     result_path = os.path.join(result_path, last_path)
-    shutil.copytree(save_model_path, result_path)
 
-    print("*"*10, "save the results", "*"*10)
+    # copy a temp folder to result folder
+    shutil.copytree(save_model_path, result_path)
+    
+    # remove temp folder
+    shutil.rmtree(save_model_path)
+
+    print("*"*10, "move the result folder", "*"*10)
 
     return 0
 

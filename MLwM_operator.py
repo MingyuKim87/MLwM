@@ -9,7 +9,8 @@ import torchsummary
 
 from torch.utils.data import Dataset, DataLoader
 
-from model.maml_meta import *
+from model.MAML.maml_meta import *
+from model.LEO.LEO_model import *
 
 from utils import *
 
@@ -32,8 +33,8 @@ class MAML_operator(object):
         self.num_epochs = num_epochs
         self.steps = 0 
         self.print_freq = 200
-        self.save_freq = 3
-        self.figure_freq = 10
+        self.save_freq = 1000
+        self.figure_freq = 3000
 
         # Model Save (Temp)
         self.savedir = savedir
@@ -55,7 +56,6 @@ class MAML_operator(object):
             n_way = query_y_shape[1]
             k_shot = query_y_shape[2]
             
-
             # Allocate a device
             support_x = support_x.type(torch.FloatTensor).to(self.device)
             query_x = query_x.type(torch.FloatTensor).to(self.device)
@@ -67,8 +67,6 @@ class MAML_operator(object):
             else:
                 support_y = support_y.type(torch.LongTensor).to(self.device)
                 query_y = query_y.type(torch.LongTensor).to(self.device)
-            
-            
             
             # Feed forward
             pred = self.model(support_x, support_y, query_x)
@@ -125,7 +123,7 @@ class MAML_operator(object):
         
         print('=' * 25, 'Meta trainig', '=' * 25)
         
-        for epoch in range(1, self.num_epochs + 1):
+        for epoch in range(1, self.num_epochs + 1):            
             # Run one epoch
             _, _, (epoch_loss, epoch_criterion) = self._epochs(self.data_loader, train=True)
             
@@ -172,10 +170,13 @@ class MAML_operator(object):
                 self._print_and_write(filename_last_result, "epoch_loss : {:.3f}".format(epoch_loss / len(self.data_loader)))
                 self._print_and_write(filename_last_result, "epoch_criterion : {:.3f}".format(epoch_criterion / len(self.data_loader)))
 
-
             # Plot a figure
             if epoch % self.figure_freq == 0:
                 training_line_plot(filename_train_result, filename_val_result)
+
+            # Termination Condition
+            if self.steps >= 100000:
+                break
                     
             
     def test(self, update_step=None):

@@ -47,6 +47,12 @@ class meta_pose_regression_dataset(Dataset):
     def __init__(self, n_way, k_shot_support, k_shot_query, root_path, \
         x_transform=None, y_transform=None, mode=None, types='non_mutual_exclusive'):
 
+        '''
+            Args
+                mode : training set or validation set
+                types : data types
+        '''
+
         # Data Import
         if x_transform is None:
             # On Numpy
@@ -179,6 +185,7 @@ class meta_pose_regression_dataset(Dataset):
             Args:
                 dir_path : the path of data directory
                 data_path_list : the filename of train or test set. 
+                mode : validation set or training set
             
             Return : 
                 # torch.Tensor or np.array

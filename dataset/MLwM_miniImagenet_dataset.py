@@ -185,7 +185,6 @@ class meta_miniImagenet_dataset(Dataset):
         # Exceptional Treatment
         assert self.k_shot_query + self.k_shot_support <= self.min_num_points
         
-
         # Define episode length
         self.episode_length = self._get_episode_length(self.num_classes, self.n_way)
 

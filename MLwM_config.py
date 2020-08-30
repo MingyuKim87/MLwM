@@ -1,7 +1,10 @@
 # "encoder_type" , "img_size", "input_channel", "output_dim", "filter_sizes", "kernel_size"
 ENCODER_CONFIG_OMNIGLOT = ['VAE', [28, 1, 784, [32, 48, 64], 3]]
 ENCODER_CONFIG_MINIIMAGENET = ['VAE', [84, 3, 784, [32, 48, 64], 3]]
-ENCODER_CONFIG_POSE_REGRESSION = ['VAE', [128, 1, 784, [32, 48, 64], 3]]
+ENCODER_CONFIG_POSE_REGRESSION = ['VAE', [84, 3, 784, [32, 48, 64], 3]]
+
+# "encoder_type" , "feature_dim", "hidden_dim", "output_dim", "layer_count"
+ENCODER_CONFIG_EMBED_MINIIMAGENET = ['VAE', [640, 64, 5, 4]]
 
 CONFIG_CONV_4 = [
     ('conv2d', [64, 1, 3, 3, 2, 0]),

@@ -358,7 +358,7 @@ class meta_miniImagenet_dataset(Dataset):
         return
 
 
-if __name__ is "__main__":
+if __name__ == "__main__":
     DEBUG = True
     
     miniImagenet_filepath = "/home/mgyukim/Data/miniimagenet"

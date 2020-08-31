@@ -34,7 +34,7 @@ class Learner(nn.Module):
 
         # self.config is a "dict" 
         for i, (name, param) in enumerate(self.config):
-            if name is 'conv2d':
+            if name == 'conv2d':
                 # [ch_out, ch_in, kernel_size, kernel_size]
                     # param[:4] is list 
                 w = nn.Parameter(torch.empty(*param[:4]))
@@ -48,7 +48,7 @@ class Learner(nn.Module):
                 self.vars.append(w)
                 self.vars.append(b)
 
-            elif name is 'convt2d':
+            elif name == 'convt2d':
                 # [ch_int, ch_out, kernel_size, kernel_size, stride, padding]
                     # gain=1 according to cbfin's implementation
                 w = nn.Parameter(torch.empty(*param[:4]))
@@ -62,7 +62,7 @@ class Learner(nn.Module):
                 self.vars.append(w)
                 self.vars.append(b)
 
-            elif name is "fc":
+            elif name == "fc":
                 # [input_dim, output_dim]
                 w = nn.Parameter(torch.empty(*param))
                 b = nn.Parameter(torch.empty(param[0]))
@@ -75,7 +75,7 @@ class Learner(nn.Module):
                 self.vars.append(w)
                 self.vars.append(b)
 
-            elif name is "bn":
+            elif name == "bn":
                 # [output_dim]
                 w = nn.Parameter(torch.empty(param[0]))
                 b = nn.Parameter(torch.empty(param[0]))
@@ -113,30 +113,30 @@ class Learner(nn.Module):
         info = ''
 
         for name, param in self.config:
-            if name is 'conv2d':
+            if name == 'conv2d':
                 tmp = "conv2d: (ch_in:{}, ch_out:{}, k:{} x {}, stride:{}, padding:{})".format(\
                     param[1], param[0], param[2], param[3], param[4], param[5])
                 info += tmp + '\n'
 
-            elif name is 'convt2d':
+            elif name == 'convt2d':
                 tmp = 'convTranspose2d:(ch_in:{}, ch_out:{}, k:{} x {}, stride:{}, padding:{})'.format(\
                     param[0], param[1], param[2], param[3], param[4], param[5])
                 info += tmp + '\n'
 
-            elif name is 'fc':    
+            elif name == 'fc':    
                 tmp = 'linear:(in: {}, out: {})'.format(param[1], param[0])
                 info += tmp + '\n'
 
-            elif name is 'leakyrelu':
+            elif name == 'leakyrelu':
                 tmp = 'leakyrelu:(slope: {})'.format(param[0])
                 info += tmp + '\n'
 
-            elif name is 'avg_pool2d':
+            elif name == 'avg_pool2d':
                 tmp = 'avg_pool2d:(k: {}, stride: {}, padding: {})'.format(\
                     param[0], param[1], param[2])
                 info += tmp + '\n'
 
-            elif name is 'max_pool2d':
+            elif name == 'max_pool2d':
                 tmp = 'max_pool2d:(k: {}, stride: {}, padding: {})'.format(\
                     param[0], param[1], param[2])
                 info += tmp + '\n'
@@ -180,35 +180,35 @@ class Learner(nn.Module):
         for name, param in self.config:
             
             # Weights
-            if name is 'conv2d':
+            if name == 'conv2d':
                 w, b = vars[idx], vars[idx + 1]
 
                 # remember to keep synchrozied of forward_encoder and forward_decoder
                 hidden = F.conv2d(hidden, w, b, stride=param[4], padding=param[5])
                 idx += 2
 
-                if DEBUG is True:
+                if DEBUG == True:
                     print(name, param, "shape: ", hidden.shape)
 
-            elif name is 'convt2d':
+            elif name == 'convt2d':
                 w, b = vars[idx], vars[idx+1]
                 # remember to keep synchrozied of forward_encoder and forward_decoder
                 hidden = F.conv_transpose2d(hidden, w, b, stride=param[4], padding=param[5])
                 idx += 2
 
-                if DEBUG is True:
+                if DEBUG == True:
                     print(name, param, "shape: ", hidden.shape)
 
-            elif name is 'fc':
+            elif name == 'fc':
                 w, b = vars[idx], vars[idx+1]
                 # remember to keep synchrozied of forward_encoder and forward_decoder
                 hidden = F.linear(hidden, w, b)
                 idx += 2
 
-                if DEBUG is True:
+                if DEBUG == True:
                     print(name, param, "shape: ", hidden.shape)
 
-            elif name is 'bn':
+            elif name == 'bn':
                 w, b = vars[idx], vars[idx+1]
                 running_mean, running_var = self.vars_bn[bn_idx], self.vars_bn[bn_idx+1]
 
@@ -216,41 +216,41 @@ class Learner(nn.Module):
                 idx += 2
                 bn_idx += 2
 
-                if DEBUG is True:
+                if DEBUG == True:
                     print(name, param, "shape: ", hidden.shape)
 
             # Activations
-            elif name is 'flatten':
-                if DEBUG is True:
+            elif name == 'flatten':
+                if DEBUG == True:
                     print(name, param, "Before flatten shape: ", hidden.shape)
                 
                 hidden = hidden.view(hidden.size(0), -1) # synchronize the number of data point
 
-                if DEBUG is True:
+                if DEBUG == True:
                     print(name, param, "shape: ", hidden.shape)
 
-            elif name is 'reshape':
+            elif name == 'reshape':
                 hidden = hidden.view(hidden.size(0), *param)
 
-            elif name is 'relu':
+            elif name == 'relu':
                 hidden = F.relu(hidden, inplace=param[0])
 
-            elif name is 'reakyrelu':
+            elif name == 'reakyrelu':
                 hidden = F.leaky_relu(hidden, negative_slope=param[0], inplace=param[1])
 
-            elif name is 'tanh':
+            elif name == 'tanh':
                 hidden = F.tanh(hidden)
 
-            elif name is 'sigmoid':
+            elif name == 'sigmoid':
                 hidden = F.sigmoid(hidden)
 
-            elif name is 'upsample':
+            elif name == 'upsample':
                 hidden = F.upsample_nearest(hidden, scale_factor=param[0])
 
-            elif name is 'max_pool2d':
+            elif name == 'max_pool2d':
                 hidden = F.max_pool2d(hidden, param[0], param[1], param[2])
 
-            elif name is 'avg_pool2d':
+            elif name == 'avg_pool2d':
                 hidden = F.avg_pool2d(hidden, param[0], param[1], param[2])
 
             else:

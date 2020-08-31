@@ -1,0 +1,2444 @@
+length of episode :  5
+========================= DEBUG =========================
+support_x shape :  (1, 10, 1, 128, 128)
+support_y shape :  (1, 10, 1)
+query_x shape :  (1, 10, 1, 128, 128)
+query_y shape :  (1, 10, 1)
+========================= Meta trainig =========================
+**********
+optimization iteration 1, loss of query set in meta training 46.283
+optimization iteration 1, criterion of query set in meta training  46.283
+**********
+---------- Temporarily save the model ----------
+========================= Epoch 1 / 3000 =========================
+epoch_loss : 30.647
+epoch_criterion : 30.648
+epoch_loss_val : 20.828
+epoch_criterion_val : 20.828
+========================= Epoch 2 / 3000 =========================
+epoch_loss : 23.017
+epoch_criterion : 23.023
+epoch_loss_val : 20.191
+epoch_criterion_val : 20.190
+========================= Epoch 3 / 3000 =========================
+epoch_loss : 27.515
+epoch_criterion : 27.515
+epoch_loss_val : 42.333
+epoch_criterion_val : 42.353
+========================= Epoch 4 / 3000 =========================
+epoch_loss : 58.084
+epoch_criterion : 58.084
+epoch_loss_val : 154.137
+epoch_criterion_val : 154.138
+========================= Epoch 5 / 3000 =========================
+epoch_loss : 64.057
+epoch_criterion : 64.051
+epoch_loss_val : 47.898
+epoch_criterion_val : 47.902
+========================= Epoch 6 / 3000 =========================
+epoch_loss : 70.333
+epoch_criterion : 70.324
+epoch_loss_val : 127.138
+epoch_criterion_val : 127.138
+========================= Epoch 7 / 3000 =========================
+epoch_loss : 117.583
+epoch_criterion : 117.586
+epoch_loss_val : 227.294
+epoch_criterion_val : 227.290
+========================= Epoch 8 / 3000 =========================
+epoch_loss : 201.142
+epoch_criterion : 201.143
+epoch_loss_val : 114.399
+epoch_criterion_val : 114.411
+========================= Epoch 9 / 3000 =========================
+epoch_loss : 112.970
+epoch_criterion : 112.970
+epoch_loss_val : 113.095
+epoch_criterion_val : 113.096
+========================= Epoch 10 / 3000 =========================
+epoch_loss : 137.361
+epoch_criterion : 137.360
+epoch_loss_val : 232.390
+epoch_criterion_val : 232.390
+========================= Epoch 11 / 3000 =========================
+epoch_loss : 98.506
+epoch_criterion : 98.497
+epoch_loss_val : 77.403
+epoch_criterion_val : 77.405
+========================= Epoch 12 / 3000 =========================
+epoch_loss : 119.843
+epoch_criterion : 119.767
+epoch_loss_val : 126.204
+epoch_criterion_val : 126.216
+========================= Epoch 13 / 3000 =========================
+epoch_loss : 137.279
+epoch_criterion : 137.274
+epoch_loss_val : 177.914
+epoch_criterion_val : 177.913
+========================= Epoch 14 / 3000 =========================
+epoch_loss : 150.656
+epoch_criterion : 150.665
+epoch_loss_val : 67.990
+epoch_criterion_val : 68.051
+========================= Epoch 15 / 3000 =========================
+epoch_loss : 76.807
+epoch_criterion : 76.817
+epoch_loss_val : 66.452
+epoch_criterion_val : 66.452
+========================= Epoch 16 / 3000 =========================
+epoch_loss : 89.014
+epoch_criterion : 89.014
+epoch_loss_val : 67.170
+epoch_criterion_val : 67.170
+========================= Epoch 17 / 3000 =========================
+epoch_loss : 120.289
+epoch_criterion : 120.288
+epoch_loss_val : 105.607
+epoch_criterion_val : 105.589
+========================= Epoch 18 / 3000 =========================
+epoch_loss : 75.828
+epoch_criterion : 75.840
+epoch_loss_val : 79.314
+epoch_criterion_val : 79.327
+========================= Epoch 19 / 3000 =========================
+epoch_loss : 78.688
+epoch_criterion : 78.626
+epoch_loss_val : 98.239
+epoch_criterion_val : 98.238
+========================= Epoch 20 / 3000 =========================
+epoch_loss : 37.876
+epoch_criterion : 37.876
+epoch_loss_val : 46.197
+epoch_criterion_val : 46.196
+========================= Epoch 21 / 3000 =========================
+epoch_loss : 42.772
+epoch_criterion : 42.771
+epoch_loss_val : 76.778
+epoch_criterion_val : 76.864
+========================= Epoch 22 / 3000 =========================
+epoch_loss : 43.275
+epoch_criterion : 43.275
+epoch_loss_val : 34.908
+epoch_criterion_val : 34.908
+========================= Epoch 23 / 3000 =========================
+epoch_loss : 35.085
+epoch_criterion : 35.084
+epoch_loss_val : 28.544
+epoch_criterion_val : 28.541
+========================= Epoch 24 / 3000 =========================
+epoch_loss : 39.022
+epoch_criterion : 39.022
+epoch_loss_val : 30.249
+epoch_criterion_val : 30.249
+========================= Epoch 25 / 3000 =========================
+epoch_loss : 46.694
+epoch_criterion : 46.700
+epoch_loss_val : 34.156
+epoch_criterion_val : 34.102
+========================= Epoch 26 / 3000 =========================
+epoch_loss : 35.254
+epoch_criterion : 35.253
+epoch_loss_val : 44.644
+epoch_criterion_val : 44.645
+========================= Epoch 27 / 3000 =========================
+epoch_loss : 42.932
+epoch_criterion : 42.930
+epoch_loss_val : 75.172
+epoch_criterion_val : 75.161
+========================= Epoch 28 / 3000 =========================
+epoch_loss : 49.525
+epoch_criterion : 49.522
+epoch_loss_val : 37.805
+epoch_criterion_val : 37.805
+========================= Epoch 29 / 3000 =========================
+epoch_loss : 43.865
+epoch_criterion : 43.865
+epoch_loss_val : 44.319
+epoch_criterion_val : 44.260
+========================= Epoch 30 / 3000 =========================
+epoch_loss : 59.364
+epoch_criterion : 59.376
+epoch_loss_val : 68.585
+epoch_criterion_val : 68.585
+========================= Epoch 31 / 3000 =========================
+epoch_loss : 59.860
+epoch_criterion : 59.923
+epoch_loss_val : 44.447
+epoch_criterion_val : 44.447
+========================= Epoch 32 / 3000 =========================
+epoch_loss : 58.697
+epoch_criterion : 58.697
+epoch_loss_val : 48.517
+epoch_criterion_val : 48.521
+========================= Epoch 33 / 3000 =========================
+epoch_loss : 44.494
+epoch_criterion : 44.495
+epoch_loss_val : 49.712
+epoch_criterion_val : 49.710
+========================= Epoch 34 / 3000 =========================
+epoch_loss : 40.081
+epoch_criterion : 40.081
+epoch_loss_val : 35.027
+epoch_criterion_val : 35.028
+========================= Epoch 35 / 3000 =========================
+epoch_loss : 45.090
+epoch_criterion : 45.089
+epoch_loss_val : 35.463
+epoch_criterion_val : 35.448
+========================= Epoch 36 / 3000 =========================
+epoch_loss : 51.759
+epoch_criterion : 51.760
+epoch_loss_val : 31.936
+epoch_criterion_val : 31.942
+========================= Epoch 37 / 3000 =========================
+epoch_loss : 29.889
+epoch_criterion : 29.886
+epoch_loss_val : 20.541
+epoch_criterion_val : 20.541
+========================= Epoch 38 / 3000 =========================
+epoch_loss : 37.902
+epoch_criterion : 37.910
+epoch_loss_val : 23.997
+epoch_criterion_val : 23.995
+========================= Epoch 39 / 3000 =========================
+epoch_loss : 36.049
+epoch_criterion : 36.045
+epoch_loss_val : 26.744
+epoch_criterion_val : 26.739
+========================= Epoch 40 / 3000 =========================
+epoch_loss : 39.707
+epoch_criterion : 39.700
+epoch_loss_val : 43.066
+epoch_criterion_val : 43.066
+**********
+optimization iteration 201, loss of query set in meta training 23.594
+optimization iteration 201, criterion of query set in meta training  23.594
+**********
+========================= Epoch 41 / 3000 =========================
+epoch_loss : 32.104
+epoch_criterion : 32.103
+epoch_loss_val : 34.469
+epoch_criterion_val : 34.469
+========================= Epoch 42 / 3000 =========================
+epoch_loss : 40.602
+epoch_criterion : 40.603
+epoch_loss_val : 34.151
+epoch_criterion_val : 34.153
+========================= Epoch 43 / 3000 =========================
+epoch_loss : 41.753
+epoch_criterion : 41.756
+epoch_loss_val : 21.352
+epoch_criterion_val : 21.352
+========================= Epoch 44 / 3000 =========================
+epoch_loss : 43.161
+epoch_criterion : 43.161
+epoch_loss_val : 16.963
+epoch_criterion_val : 16.963
+========================= Epoch 45 / 3000 =========================
+epoch_loss : 29.384
+epoch_criterion : 29.386
+epoch_loss_val : 15.954
+epoch_criterion_val : 15.954
+========================= Epoch 46 / 3000 =========================
+epoch_loss : 34.667
+epoch_criterion : 34.667
+epoch_loss_val : 15.582
+epoch_criterion_val : 15.582
+========================= Epoch 47 / 3000 =========================
+epoch_loss : 29.465
+epoch_criterion : 29.465
+epoch_loss_val : 14.255
+epoch_criterion_val : 14.255
+========================= Epoch 48 / 3000 =========================
+epoch_loss : 23.325
+epoch_criterion : 23.323
+epoch_loss_val : 17.903
+epoch_criterion_val : 17.902
+========================= Epoch 49 / 3000 =========================
+epoch_loss : 34.793
+epoch_criterion : 34.793
+epoch_loss_val : 24.333
+epoch_criterion_val : 24.336
+========================= Epoch 50 / 3000 =========================
+epoch_loss : 27.241
+epoch_criterion : 27.243
+epoch_loss_val : 33.638
+epoch_criterion_val : 33.639
+========================= Epoch 51 / 3000 =========================
+epoch_loss : 28.110
+epoch_criterion : 28.111
+epoch_loss_val : 19.002
+epoch_criterion_val : 19.007
+========================= Epoch 52 / 3000 =========================
+epoch_loss : 28.310
+epoch_criterion : 28.312
+epoch_loss_val : 22.341
+epoch_criterion_val : 22.338
+========================= Epoch 53 / 3000 =========================
+epoch_loss : 24.789
+epoch_criterion : 24.789
+epoch_loss_val : 20.128
+epoch_criterion_val : 20.128
+========================= Epoch 54 / 3000 =========================
+epoch_loss : 29.504
+epoch_criterion : 29.504
+epoch_loss_val : 21.475
+epoch_criterion_val : 21.476
+========================= Epoch 55 / 3000 =========================
+epoch_loss : 19.343
+epoch_criterion : 19.342
+epoch_loss_val : 23.071
+epoch_criterion_val : 23.059
+========================= Epoch 56 / 3000 =========================
+epoch_loss : 22.676
+epoch_criterion : 22.673
+epoch_loss_val : 25.429
+epoch_criterion_val : 25.429
+========================= Epoch 57 / 3000 =========================
+epoch_loss : 26.308
+epoch_criterion : 26.309
+epoch_loss_val : 29.148
+epoch_criterion_val : 29.148
+========================= Epoch 58 / 3000 =========================
+epoch_loss : 23.421
+epoch_criterion : 23.421
+epoch_loss_val : 19.795
+epoch_criterion_val : 19.795
+========================= Epoch 59 / 3000 =========================
+epoch_loss : 21.719
+epoch_criterion : 21.719
+epoch_loss_val : 22.690
+epoch_criterion_val : 22.680
+========================= Epoch 60 / 3000 =========================
+epoch_loss : 22.214
+epoch_criterion : 22.213
+epoch_loss_val : 22.348
+epoch_criterion_val : 22.349
+========================= Epoch 61 / 3000 =========================
+epoch_loss : 22.809
+epoch_criterion : 22.807
+epoch_loss_val : 20.623
+epoch_criterion_val : 20.623
+========================= Epoch 62 / 3000 =========================
+epoch_loss : 21.632
+epoch_criterion : 21.632
+epoch_loss_val : 20.786
+epoch_criterion_val : 20.786
+========================= Epoch 63 / 3000 =========================
+epoch_loss : 20.857
+epoch_criterion : 20.858
+epoch_loss_val : 15.499
+epoch_criterion_val : 15.501
+========================= Epoch 64 / 3000 =========================
+epoch_loss : 23.182
+epoch_criterion : 23.187
+epoch_loss_val : 16.240
+epoch_criterion_val : 16.240
+========================= Epoch 65 / 3000 =========================
+epoch_loss : 33.550
+epoch_criterion : 33.549
+epoch_loss_val : 16.719
+epoch_criterion_val : 16.729
+========================= Epoch 66 / 3000 =========================
+epoch_loss : 18.714
+epoch_criterion : 18.713
+epoch_loss_val : 19.300
+epoch_criterion_val : 19.300
+========================= Epoch 67 / 3000 =========================
+epoch_loss : 24.506
+epoch_criterion : 24.506
+epoch_loss_val : 15.730
+epoch_criterion_val : 15.729
+========================= Epoch 68 / 3000 =========================
+epoch_loss : 18.998
+epoch_criterion : 18.980
+epoch_loss_val : 14.341
+epoch_criterion_val : 14.341
+========================= Epoch 69 / 3000 =========================
+epoch_loss : 20.494
+epoch_criterion : 20.491
+epoch_loss_val : 17.289
+epoch_criterion_val : 17.289
+========================= Epoch 70 / 3000 =========================
+epoch_loss : 15.184
+epoch_criterion : 15.184
+epoch_loss_val : 16.401
+epoch_criterion_val : 16.406
+========================= Epoch 71 / 3000 =========================
+epoch_loss : 18.246
+epoch_criterion : 18.246
+epoch_loss_val : 24.414
+epoch_criterion_val : 24.414
+========================= Epoch 72 / 3000 =========================
+epoch_loss : 24.911
+epoch_criterion : 24.911
+epoch_loss_val : 31.467
+epoch_criterion_val : 31.467
+========================= Epoch 73 / 3000 =========================
+epoch_loss : 22.625
+epoch_criterion : 22.625
+epoch_loss_val : 48.327
+epoch_criterion_val : 48.327
+========================= Epoch 74 / 3000 =========================
+epoch_loss : 31.155
+epoch_criterion : 31.150
+epoch_loss_val : 44.867
+epoch_criterion_val : 44.851
+========================= Epoch 75 / 3000 =========================
+epoch_loss : 20.688
+epoch_criterion : 20.688
+epoch_loss_val : 24.060
+epoch_criterion_val : 24.061
+========================= Epoch 76 / 3000 =========================
+epoch_loss : 25.595
+epoch_criterion : 25.596
+epoch_loss_val : 26.496
+epoch_criterion_val : 26.531
+========================= Epoch 77 / 3000 =========================
+epoch_loss : 23.123
+epoch_criterion : 23.122
+epoch_loss_val : 23.277
+epoch_criterion_val : 23.278
+========================= Epoch 78 / 3000 =========================
+epoch_loss : 28.560
+epoch_criterion : 28.560
+epoch_loss_val : 21.549
+epoch_criterion_val : 21.552
+========================= Epoch 79 / 3000 =========================
+epoch_loss : 20.645
+epoch_criterion : 20.609
+epoch_loss_val : 14.405
+epoch_criterion_val : 14.407
+========================= Epoch 80 / 3000 =========================
+epoch_loss : 16.944
+epoch_criterion : 16.944
+epoch_loss_val : 15.499
+epoch_criterion_val : 15.500
+**********
+optimization iteration 401, loss of query set in meta training 12.893
+optimization iteration 401, criterion of query set in meta training  12.893
+**********
+========================= Epoch 81 / 3000 =========================
+epoch_loss : 18.949
+epoch_criterion : 18.951
+epoch_loss_val : 16.257
+epoch_criterion_val : 16.257
+========================= Epoch 82 / 3000 =========================
+epoch_loss : 15.308
+epoch_criterion : 15.307
+epoch_loss_val : 15.018
+epoch_criterion_val : 15.018
+========================= Epoch 83 / 3000 =========================
+epoch_loss : 14.215
+epoch_criterion : 14.216
+epoch_loss_val : 13.227
+epoch_criterion_val : 13.227
+========================= Epoch 84 / 3000 =========================
+epoch_loss : 18.038
+epoch_criterion : 18.033
+epoch_loss_val : 13.805
+epoch_criterion_val : 13.805
+========================= Epoch 85 / 3000 =========================
+epoch_loss : 15.106
+epoch_criterion : 15.106
+epoch_loss_val : 15.920
+epoch_criterion_val : 15.921
+========================= Epoch 86 / 3000 =========================
+epoch_loss : 14.529
+epoch_criterion : 14.529
+epoch_loss_val : 13.014
+epoch_criterion_val : 13.014
+========================= Epoch 87 / 3000 =========================
+epoch_loss : 12.830
+epoch_criterion : 12.830
+epoch_loss_val : 16.398
+epoch_criterion_val : 16.398
+========================= Epoch 88 / 3000 =========================
+epoch_loss : 14.833
+epoch_criterion : 14.833
+epoch_loss_val : 16.502
+epoch_criterion_val : 16.502
+========================= Epoch 89 / 3000 =========================
+epoch_loss : 14.084
+epoch_criterion : 14.084
+epoch_loss_val : 13.198
+epoch_criterion_val : 13.198
+========================= Epoch 90 / 3000 =========================
+epoch_loss : 13.748
+epoch_criterion : 13.747
+epoch_loss_val : 14.314
+epoch_criterion_val : 14.313
+========================= Epoch 91 / 3000 =========================
+epoch_loss : 14.582
+epoch_criterion : 14.582
+epoch_loss_val : 12.499
+epoch_criterion_val : 12.499
+========================= Epoch 92 / 3000 =========================
+epoch_loss : 14.243
+epoch_criterion : 14.243
+epoch_loss_val : 13.200
+epoch_criterion_val : 13.200
+========================= Epoch 93 / 3000 =========================
+epoch_loss : 13.411
+epoch_criterion : 13.410
+epoch_loss_val : 15.589
+epoch_criterion_val : 15.589
+========================= Epoch 94 / 3000 =========================
+epoch_loss : 14.173
+epoch_criterion : 14.174
+epoch_loss_val : 12.671
+epoch_criterion_val : 12.671
+========================= Epoch 95 / 3000 =========================
+epoch_loss : 15.228
+epoch_criterion : 15.226
+epoch_loss_val : 15.755
+epoch_criterion_val : 15.755
+========================= Epoch 96 / 3000 =========================
+epoch_loss : 14.846
+epoch_criterion : 14.846
+epoch_loss_val : 13.586
+epoch_criterion_val : 13.586
+========================= Epoch 97 / 3000 =========================
+epoch_loss : 15.700
+epoch_criterion : 15.701
+epoch_loss_val : 14.369
+epoch_criterion_val : 14.369
+========================= Epoch 98 / 3000 =========================
+epoch_loss : 17.818
+epoch_criterion : 17.818
+epoch_loss_val : 15.381
+epoch_criterion_val : 15.381
+========================= Epoch 99 / 3000 =========================
+epoch_loss : 14.116
+epoch_criterion : 14.118
+epoch_loss_val : 21.732
+epoch_criterion_val : 21.711
+========================= Epoch 100 / 3000 =========================
+epoch_loss : 14.434
+epoch_criterion : 14.434
+epoch_loss_val : 15.961
+epoch_criterion_val : 15.962
+========================= Epoch 101 / 3000 =========================
+epoch_loss : 11.502
+epoch_criterion : 11.502
+epoch_loss_val : 12.574
+epoch_criterion_val : 12.574
+========================= Epoch 102 / 3000 =========================
+epoch_loss : 11.307
+epoch_criterion : 11.307
+epoch_loss_val : 12.302
+epoch_criterion_val : 12.302
+========================= Epoch 103 / 3000 =========================
+epoch_loss : 12.023
+epoch_criterion : 12.023
+epoch_loss_val : 11.871
+epoch_criterion_val : 11.871
+========================= Epoch 104 / 3000 =========================
+epoch_loss : 11.072
+epoch_criterion : 11.072
+epoch_loss_val : 11.694
+epoch_criterion_val : 11.694
+========================= Epoch 105 / 3000 =========================
+epoch_loss : 11.250
+epoch_criterion : 11.250
+epoch_loss_val : 12.815
+epoch_criterion_val : 12.815
+========================= Epoch 106 / 3000 =========================
+epoch_loss : 12.926
+epoch_criterion : 12.926
+epoch_loss_val : 13.114
+epoch_criterion_val : 13.114
+========================= Epoch 107 / 3000 =========================
+epoch_loss : 11.709
+epoch_criterion : 11.709
+epoch_loss_val : 11.636
+epoch_criterion_val : 11.636
+========================= Epoch 108 / 3000 =========================
+epoch_loss : 12.246
+epoch_criterion : 12.246
+epoch_loss_val : 14.875
+epoch_criterion_val : 14.875
+========================= Epoch 109 / 3000 =========================
+epoch_loss : 12.234
+epoch_criterion : 12.234
+epoch_loss_val : 12.035
+epoch_criterion_val : 12.034
+========================= Epoch 110 / 3000 =========================
+epoch_loss : 10.940
+epoch_criterion : 10.939
+epoch_loss_val : 15.179
+epoch_criterion_val : 15.179
+========================= Epoch 111 / 3000 =========================
+epoch_loss : 11.340
+epoch_criterion : 11.340
+epoch_loss_val : 12.711
+epoch_criterion_val : 12.711
+========================= Epoch 112 / 3000 =========================
+epoch_loss : 11.351
+epoch_criterion : 11.350
+epoch_loss_val : 15.085
+epoch_criterion_val : 15.085
+========================= Epoch 113 / 3000 =========================
+epoch_loss : 11.316
+epoch_criterion : 11.316
+epoch_loss_val : 13.680
+epoch_criterion_val : 13.679
+========================= Epoch 114 / 3000 =========================
+epoch_loss : 11.874
+epoch_criterion : 11.874
+epoch_loss_val : 12.522
+epoch_criterion_val : 12.522
+========================= Epoch 115 / 3000 =========================
+epoch_loss : 11.746
+epoch_criterion : 11.746
+epoch_loss_val : 10.965
+epoch_criterion_val : 10.965
+========================= Epoch 116 / 3000 =========================
+epoch_loss : 11.439
+epoch_criterion : 11.439
+epoch_loss_val : 11.935
+epoch_criterion_val : 11.935
+========================= Epoch 117 / 3000 =========================
+epoch_loss : 10.663
+epoch_criterion : 10.663
+epoch_loss_val : 11.510
+epoch_criterion_val : 11.510
+========================= Epoch 118 / 3000 =========================
+epoch_loss : 10.159
+epoch_criterion : 10.159
+epoch_loss_val : 11.367
+epoch_criterion_val : 11.367
+========================= Epoch 119 / 3000 =========================
+epoch_loss : 11.188
+epoch_criterion : 11.188
+epoch_loss_val : 10.508
+epoch_criterion_val : 10.508
+========================= Epoch 120 / 3000 =========================
+epoch_loss : 12.078
+epoch_criterion : 12.078
+epoch_loss_val : 14.007
+epoch_criterion_val : 14.007
+**********
+optimization iteration 601, loss of query set in meta training 10.938
+optimization iteration 601, criterion of query set in meta training  10.938
+**********
+========================= Epoch 121 / 3000 =========================
+epoch_loss : 11.523
+epoch_criterion : 11.523
+epoch_loss_val : 10.380
+epoch_criterion_val : 10.380
+========================= Epoch 122 / 3000 =========================
+epoch_loss : 10.550
+epoch_criterion : 10.549
+epoch_loss_val : 13.894
+epoch_criterion_val : 13.894
+========================= Epoch 123 / 3000 =========================
+epoch_loss : 11.520
+epoch_criterion : 11.520
+epoch_loss_val : 10.987
+epoch_criterion_val : 10.987
+========================= Epoch 124 / 3000 =========================
+epoch_loss : 11.542
+epoch_criterion : 11.542
+epoch_loss_val : 10.704
+epoch_criterion_val : 10.704
+========================= Epoch 125 / 3000 =========================
+epoch_loss : 11.452
+epoch_criterion : 11.452
+epoch_loss_val : 13.380
+epoch_criterion_val : 13.380
+========================= Epoch 126 / 3000 =========================
+epoch_loss : 10.880
+epoch_criterion : 10.880
+epoch_loss_val : 11.264
+epoch_criterion_val : 11.264
+========================= Epoch 127 / 3000 =========================
+epoch_loss : 11.092
+epoch_criterion : 11.092
+epoch_loss_val : 13.276
+epoch_criterion_val : 13.276
+========================= Epoch 128 / 3000 =========================
+epoch_loss : 10.946
+epoch_criterion : 10.946
+epoch_loss_val : 10.349
+epoch_criterion_val : 10.349
+========================= Epoch 129 / 3000 =========================
+epoch_loss : 9.499
+epoch_criterion : 9.499
+epoch_loss_val : 12.496
+epoch_criterion_val : 12.496
+========================= Epoch 130 / 3000 =========================
+epoch_loss : 10.944
+epoch_criterion : 10.944
+epoch_loss_val : 10.544
+epoch_criterion_val : 10.544
+========================= Epoch 131 / 3000 =========================
+epoch_loss : 10.853
+epoch_criterion : 10.853
+epoch_loss_val : 11.284
+epoch_criterion_val : 11.284
+========================= Epoch 132 / 3000 =========================
+epoch_loss : 11.241
+epoch_criterion : 11.241
+epoch_loss_val : 10.626
+epoch_criterion_val : 10.626
+========================= Epoch 133 / 3000 =========================
+epoch_loss : 11.108
+epoch_criterion : 11.114
+epoch_loss_val : 13.592
+epoch_criterion_val : 13.592
+========================= Epoch 134 / 3000 =========================
+epoch_loss : 10.625
+epoch_criterion : 10.625
+epoch_loss_val : 11.365
+epoch_criterion_val : 11.365
+========================= Epoch 135 / 3000 =========================
+epoch_loss : 11.541
+epoch_criterion : 11.541
+epoch_loss_val : 10.905
+epoch_criterion_val : 10.905
+========================= Epoch 136 / 3000 =========================
+epoch_loss : 11.598
+epoch_criterion : 11.598
+epoch_loss_val : 9.716
+epoch_criterion_val : 9.716
+========================= Epoch 137 / 3000 =========================
+epoch_loss : 10.790
+epoch_criterion : 10.801
+epoch_loss_val : 9.414
+epoch_criterion_val : 9.414
+========================= Epoch 138 / 3000 =========================
+epoch_loss : 11.023
+epoch_criterion : 11.023
+epoch_loss_val : 10.342
+epoch_criterion_val : 10.342
+========================= Epoch 139 / 3000 =========================
+epoch_loss : 10.932
+epoch_criterion : 10.932
+epoch_loss_val : 10.428
+epoch_criterion_val : 10.428
+========================= Epoch 140 / 3000 =========================
+epoch_loss : 10.828
+epoch_criterion : 10.830
+epoch_loss_val : 11.980
+epoch_criterion_val : 11.980
+========================= Epoch 141 / 3000 =========================
+epoch_loss : 10.529
+epoch_criterion : 10.529
+epoch_loss_val : 10.009
+epoch_criterion_val : 10.009
+========================= Epoch 142 / 3000 =========================
+epoch_loss : 11.687
+epoch_criterion : 11.687
+epoch_loss_val : 10.544
+epoch_criterion_val : 10.544
+========================= Epoch 143 / 3000 =========================
+epoch_loss : 10.662
+epoch_criterion : 10.662
+epoch_loss_val : 12.049
+epoch_criterion_val : 12.049
+========================= Epoch 144 / 3000 =========================
+epoch_loss : 11.047
+epoch_criterion : 11.046
+epoch_loss_val : 10.302
+epoch_criterion_val : 10.302
+========================= Epoch 145 / 3000 =========================
+epoch_loss : 10.888
+epoch_criterion : 10.888
+epoch_loss_val : 11.572
+epoch_criterion_val : 11.572
+========================= Epoch 146 / 3000 =========================
+epoch_loss : 10.421
+epoch_criterion : 10.421
+epoch_loss_val : 10.063
+epoch_criterion_val : 10.063
+========================= Epoch 147 / 3000 =========================
+epoch_loss : 11.079
+epoch_criterion : 11.077
+epoch_loss_val : 10.154
+epoch_criterion_val : 10.154
+========================= Epoch 148 / 3000 =========================
+epoch_loss : 11.074
+epoch_criterion : 11.074
+epoch_loss_val : 11.440
+epoch_criterion_val : 11.440
+========================= Epoch 149 / 3000 =========================
+epoch_loss : 10.219
+epoch_criterion : 10.219
+epoch_loss_val : 10.956
+epoch_criterion_val : 10.956
+========================= Epoch 150 / 3000 =========================
+epoch_loss : 11.600
+epoch_criterion : 11.600
+epoch_loss_val : 12.277
+epoch_criterion_val : 12.277
+========================= Epoch 151 / 3000 =========================
+epoch_loss : 9.781
+epoch_criterion : 9.781
+epoch_loss_val : 10.592
+epoch_criterion_val : 10.592
+========================= Epoch 152 / 3000 =========================
+epoch_loss : 10.376
+epoch_criterion : 10.376
+epoch_loss_val : 12.460
+epoch_criterion_val : 12.460
+========================= Epoch 153 / 3000 =========================
+epoch_loss : 10.647
+epoch_criterion : 10.646
+epoch_loss_val : 11.665
+epoch_criterion_val : 11.665
+========================= Epoch 154 / 3000 =========================
+epoch_loss : 10.514
+epoch_criterion : 10.514
+epoch_loss_val : 9.788
+epoch_criterion_val : 9.788
+========================= Epoch 155 / 3000 =========================
+epoch_loss : 10.064
+epoch_criterion : 10.064
+epoch_loss_val : 12.761
+epoch_criterion_val : 12.761
+========================= Epoch 156 / 3000 =========================
+epoch_loss : 9.954
+epoch_criterion : 9.954
+epoch_loss_val : 8.924
+epoch_criterion_val : 8.924
+========================= Epoch 157 / 3000 =========================
+epoch_loss : 11.722
+epoch_criterion : 11.720
+epoch_loss_val : 10.429
+epoch_criterion_val : 10.429
+========================= Epoch 158 / 3000 =========================
+epoch_loss : 11.485
+epoch_criterion : 11.485
+epoch_loss_val : 11.175
+epoch_criterion_val : 11.175
+========================= Epoch 159 / 3000 =========================
+epoch_loss : 10.242
+epoch_criterion : 10.242
+epoch_loss_val : 16.231
+epoch_criterion_val : 16.231
+========================= Epoch 160 / 3000 =========================
+epoch_loss : 10.285
+epoch_criterion : 10.285
+epoch_loss_val : 13.757
+epoch_criterion_val : 13.757
+**********
+optimization iteration 801, loss of query set in meta training 9.629
+optimization iteration 801, criterion of query set in meta training  9.629
+**********
+========================= Epoch 161 / 3000 =========================
+epoch_loss : 10.258
+epoch_criterion : 10.258
+epoch_loss_val : 10.710
+epoch_criterion_val : 10.710
+========================= Epoch 162 / 3000 =========================
+epoch_loss : 11.740
+epoch_criterion : 11.740
+epoch_loss_val : 11.067
+epoch_criterion_val : 11.067
+========================= Epoch 163 / 3000 =========================
+epoch_loss : 10.312
+epoch_criterion : 10.312
+epoch_loss_val : 10.375
+epoch_criterion_val : 10.409
+========================= Epoch 164 / 3000 =========================
+epoch_loss : 11.514
+epoch_criterion : 11.514
+epoch_loss_val : 11.629
+epoch_criterion_val : 11.630
+========================= Epoch 165 / 3000 =========================
+epoch_loss : 11.687
+epoch_criterion : 11.689
+epoch_loss_val : 10.586
+epoch_criterion_val : 10.586
+========================= Epoch 166 / 3000 =========================
+epoch_loss : 10.441
+epoch_criterion : 10.441
+epoch_loss_val : 10.978
+epoch_criterion_val : 10.978
+========================= Epoch 167 / 3000 =========================
+epoch_loss : 10.934
+epoch_criterion : 10.934
+epoch_loss_val : 12.915
+epoch_criterion_val : 12.915
+========================= Epoch 168 / 3000 =========================
+epoch_loss : 11.428
+epoch_criterion : 11.428
+epoch_loss_val : 10.338
+epoch_criterion_val : 10.338
+========================= Epoch 169 / 3000 =========================
+epoch_loss : 11.537
+epoch_criterion : 11.538
+epoch_loss_val : 11.865
+epoch_criterion_val : 11.865
+========================= Epoch 170 / 3000 =========================
+epoch_loss : 10.930
+epoch_criterion : 10.930
+epoch_loss_val : 11.608
+epoch_criterion_val : 11.608
+========================= Epoch 171 / 3000 =========================
+epoch_loss : 11.190
+epoch_criterion : 11.190
+epoch_loss_val : 13.329
+epoch_criterion_val : 13.329
+========================= Epoch 172 / 3000 =========================
+epoch_loss : 11.625
+epoch_criterion : 11.625
+epoch_loss_val : 10.294
+epoch_criterion_val : 10.294
+========================= Epoch 173 / 3000 =========================
+epoch_loss : 11.010
+epoch_criterion : 11.010
+epoch_loss_val : 12.668
+epoch_criterion_val : 12.668
+========================= Epoch 174 / 3000 =========================
+epoch_loss : 10.305
+epoch_criterion : 10.304
+epoch_loss_val : 9.919
+epoch_criterion_val : 9.919
+========================= Epoch 175 / 3000 =========================
+epoch_loss : 9.919
+epoch_criterion : 9.919
+epoch_loss_val : 10.840
+epoch_criterion_val : 10.841
+========================= Epoch 176 / 3000 =========================
+epoch_loss : 10.707
+epoch_criterion : 10.707
+epoch_loss_val : 11.929
+epoch_criterion_val : 11.929
+========================= Epoch 177 / 3000 =========================
+epoch_loss : 9.947
+epoch_criterion : 9.947
+epoch_loss_val : 11.366
+epoch_criterion_val : 11.366
+========================= Epoch 178 / 3000 =========================
+epoch_loss : 11.543
+epoch_criterion : 11.543
+epoch_loss_val : 11.574
+epoch_criterion_val : 11.574
+========================= Epoch 179 / 3000 =========================
+epoch_loss : 11.664
+epoch_criterion : 11.664
+epoch_loss_val : 11.965
+epoch_criterion_val : 11.965
+========================= Epoch 180 / 3000 =========================
+epoch_loss : 11.993
+epoch_criterion : 11.996
+epoch_loss_val : 12.481
+epoch_criterion_val : 12.481
+========================= Epoch 181 / 3000 =========================
+epoch_loss : 10.912
+epoch_criterion : 10.911
+epoch_loss_val : 13.854
+epoch_criterion_val : 13.862
+========================= Epoch 182 / 3000 =========================
+epoch_loss : 10.696
+epoch_criterion : 10.695
+epoch_loss_val : 10.303
+epoch_criterion_val : 10.303
+========================= Epoch 183 / 3000 =========================
+epoch_loss : 11.114
+epoch_criterion : 11.114
+epoch_loss_val : 9.635
+epoch_criterion_val : 9.631
+========================= Epoch 184 / 3000 =========================
+epoch_loss : 11.195
+epoch_criterion : 11.197
+epoch_loss_val : 11.950
+epoch_criterion_val : 11.950
+========================= Epoch 185 / 3000 =========================
+epoch_loss : 11.048
+epoch_criterion : 11.048
+epoch_loss_val : 11.459
+epoch_criterion_val : 11.459
+========================= Epoch 186 / 3000 =========================
+epoch_loss : 10.522
+epoch_criterion : 10.521
+epoch_loss_val : 12.349
+epoch_criterion_val : 12.349
+========================= Epoch 187 / 3000 =========================
+epoch_loss : 10.621
+epoch_criterion : 10.621
+epoch_loss_val : 12.359
+epoch_criterion_val : 12.359
+========================= Epoch 188 / 3000 =========================
+epoch_loss : 10.974
+epoch_criterion : 10.973
+epoch_loss_val : 12.118
+epoch_criterion_val : 12.118
+========================= Epoch 189 / 3000 =========================
+epoch_loss : 9.971
+epoch_criterion : 9.971
+epoch_loss_val : 9.702
+epoch_criterion_val : 9.702
+========================= Epoch 190 / 3000 =========================
+epoch_loss : 10.576
+epoch_criterion : 10.574
+epoch_loss_val : 9.223
+epoch_criterion_val : 9.223
+========================= Epoch 191 / 3000 =========================
+epoch_loss : 10.165
+epoch_criterion : 10.165
+epoch_loss_val : 9.477
+epoch_criterion_val : 9.477
+========================= Epoch 192 / 3000 =========================
+epoch_loss : 10.778
+epoch_criterion : 10.778
+epoch_loss_val : 11.392
+epoch_criterion_val : 11.392
+========================= Epoch 193 / 3000 =========================
+epoch_loss : 12.160
+epoch_criterion : 12.160
+epoch_loss_val : 12.079
+epoch_criterion_val : 12.079
+========================= Epoch 194 / 3000 =========================
+epoch_loss : 11.259
+epoch_criterion : 11.259
+epoch_loss_val : 11.138
+epoch_criterion_val : 11.138
+========================= Epoch 195 / 3000 =========================
+epoch_loss : 11.536
+epoch_criterion : 11.536
+epoch_loss_val : 11.337
+epoch_criterion_val : 11.337
+========================= Epoch 196 / 3000 =========================
+epoch_loss : 11.249
+epoch_criterion : 11.250
+epoch_loss_val : 11.520
+epoch_criterion_val : 11.519
+========================= Epoch 197 / 3000 =========================
+epoch_loss : 11.910
+epoch_criterion : 11.910
+epoch_loss_val : 11.013
+epoch_criterion_val : 11.013
+========================= Epoch 198 / 3000 =========================
+epoch_loss : 11.061
+epoch_criterion : 11.061
+epoch_loss_val : 12.843
+epoch_criterion_val : 12.843
+========================= Epoch 199 / 3000 =========================
+epoch_loss : 10.659
+epoch_criterion : 10.659
+epoch_loss_val : 12.090
+epoch_criterion_val : 12.090
+========================= Epoch 200 / 3000 =========================
+epoch_loss : 11.999
+epoch_criterion : 11.999
+epoch_loss_val : 11.777
+epoch_criterion_val : 11.777
+**********
+optimization iteration 1001, loss of query set in meta training 15.867
+optimization iteration 1001, criterion of query set in meta training  15.867
+**********
+---------- Temporarily save the model ----------
+========================= Epoch 201 / 3000 =========================
+epoch_loss : 13.607
+epoch_criterion : 13.606
+epoch_loss_val : 14.864
+epoch_criterion_val : 14.864
+========================= Epoch 202 / 3000 =========================
+epoch_loss : 11.925
+epoch_criterion : 11.925
+epoch_loss_val : 11.074
+epoch_criterion_val : 11.074
+========================= Epoch 203 / 3000 =========================
+epoch_loss : 14.376
+epoch_criterion : 14.415
+epoch_loss_val : 11.745
+epoch_criterion_val : 11.746
+========================= Epoch 204 / 3000 =========================
+epoch_loss : 14.290
+epoch_criterion : 14.291
+epoch_loss_val : 13.092
+epoch_criterion_val : 13.092
+========================= Epoch 205 / 3000 =========================
+epoch_loss : 14.770
+epoch_criterion : 14.769
+epoch_loss_val : 19.508
+epoch_criterion_val : 19.508
+========================= Epoch 206 / 3000 =========================
+epoch_loss : 15.888
+epoch_criterion : 15.888
+epoch_loss_val : 18.678
+epoch_criterion_val : 18.678
+========================= Epoch 207 / 3000 =========================
+epoch_loss : 22.018
+epoch_criterion : 22.018
+epoch_loss_val : 20.321
+epoch_criterion_val : 20.321
+========================= Epoch 208 / 3000 =========================
+epoch_loss : 22.216
+epoch_criterion : 22.217
+epoch_loss_val : 16.266
+epoch_criterion_val : 16.266
+========================= Epoch 209 / 3000 =========================
+epoch_loss : 17.117
+epoch_criterion : 17.117
+epoch_loss_val : 19.870
+epoch_criterion_val : 19.870
+========================= Epoch 210 / 3000 =========================
+epoch_loss : 17.014
+epoch_criterion : 17.014
+epoch_loss_val : 16.760
+epoch_criterion_val : 16.759
+========================= Epoch 211 / 3000 =========================
+epoch_loss : 16.853
+epoch_criterion : 16.853
+epoch_loss_val : 19.636
+epoch_criterion_val : 19.636
+========================= Epoch 212 / 3000 =========================
+epoch_loss : 16.812
+epoch_criterion : 16.812
+epoch_loss_val : 13.104
+epoch_criterion_val : 13.104
+========================= Epoch 213 / 3000 =========================
+epoch_loss : 17.587
+epoch_criterion : 17.587
+epoch_loss_val : 11.666
+epoch_criterion_val : 11.666
+========================= Epoch 214 / 3000 =========================
+epoch_loss : 13.387
+epoch_criterion : 13.387
+epoch_loss_val : 10.966
+epoch_criterion_val : 10.966
+========================= Epoch 215 / 3000 =========================
+epoch_loss : 15.238
+epoch_criterion : 15.238
+epoch_loss_val : 10.439
+epoch_criterion_val : 10.439
+========================= Epoch 216 / 3000 =========================
+epoch_loss : 12.981
+epoch_criterion : 12.978
+epoch_loss_val : 11.093
+epoch_criterion_val : 11.093
+========================= Epoch 217 / 3000 =========================
+epoch_loss : 16.359
+epoch_criterion : 16.359
+epoch_loss_val : 13.712
+epoch_criterion_val : 13.712
+========================= Epoch 218 / 3000 =========================
+epoch_loss : 13.786
+epoch_criterion : 13.786
+epoch_loss_val : 11.688
+epoch_criterion_val : 11.688
+========================= Epoch 219 / 3000 =========================
+epoch_loss : 12.597
+epoch_criterion : 12.597
+epoch_loss_val : 11.387
+epoch_criterion_val : 11.387
+========================= Epoch 220 / 3000 =========================
+epoch_loss : 13.010
+epoch_criterion : 13.010
+epoch_loss_val : 12.284
+epoch_criterion_val : 12.283
+========================= Epoch 221 / 3000 =========================
+epoch_loss : 11.870
+epoch_criterion : 11.870
+epoch_loss_val : 13.254
+epoch_criterion_val : 13.254
+========================= Epoch 222 / 3000 =========================
+epoch_loss : 13.123
+epoch_criterion : 13.123
+epoch_loss_val : 13.568
+epoch_criterion_val : 13.565
+========================= Epoch 223 / 3000 =========================
+epoch_loss : 12.718
+epoch_criterion : 12.717
+epoch_loss_val : 12.563
+epoch_criterion_val : 12.563
+========================= Epoch 224 / 3000 =========================
+epoch_loss : 13.314
+epoch_criterion : 13.314
+epoch_loss_val : 13.210
+epoch_criterion_val : 13.210
+========================= Epoch 225 / 3000 =========================
+epoch_loss : 12.058
+epoch_criterion : 12.058
+epoch_loss_val : 11.655
+epoch_criterion_val : 11.655
+========================= Epoch 226 / 3000 =========================
+epoch_loss : 11.786
+epoch_criterion : 11.786
+epoch_loss_val : 12.829
+epoch_criterion_val : 12.829
+========================= Epoch 227 / 3000 =========================
+epoch_loss : 12.848
+epoch_criterion : 12.848
+epoch_loss_val : 13.067
+epoch_criterion_val : 13.067
+========================= Epoch 228 / 3000 =========================
+epoch_loss : 12.161
+epoch_criterion : 12.161
+epoch_loss_val : 11.438
+epoch_criterion_val : 11.438
+========================= Epoch 229 / 3000 =========================
+epoch_loss : 12.026
+epoch_criterion : 12.025
+epoch_loss_val : 10.795
+epoch_criterion_val : 10.795
+========================= Epoch 230 / 3000 =========================
+epoch_loss : 11.823
+epoch_criterion : 11.823
+epoch_loss_val : 11.522
+epoch_criterion_val : 11.522
+========================= Epoch 231 / 3000 =========================
+epoch_loss : 15.296
+epoch_criterion : 15.296
+epoch_loss_val : 9.566
+epoch_criterion_val : 9.566
+========================= Epoch 232 / 3000 =========================
+epoch_loss : 11.515
+epoch_criterion : 11.515
+epoch_loss_val : 12.465
+epoch_criterion_val : 12.465
+========================= Epoch 233 / 3000 =========================
+epoch_loss : 12.374
+epoch_criterion : 12.376
+epoch_loss_val : 9.600
+epoch_criterion_val : 9.600
+========================= Epoch 234 / 3000 =========================
+epoch_loss : 13.521
+epoch_criterion : 13.522
+epoch_loss_val : 11.280
+epoch_criterion_val : 11.280
+========================= Epoch 235 / 3000 =========================
+epoch_loss : 12.892
+epoch_criterion : 12.892
+epoch_loss_val : 9.128
+epoch_criterion_val : 9.128
+========================= Epoch 236 / 3000 =========================
+epoch_loss : 12.229
+epoch_criterion : 12.229
+epoch_loss_val : 12.074
+epoch_criterion_val : 12.079
+========================= Epoch 237 / 3000 =========================
+epoch_loss : 12.588
+epoch_criterion : 12.588
+epoch_loss_val : 10.420
+epoch_criterion_val : 10.420
+========================= Epoch 238 / 3000 =========================
+epoch_loss : 11.997
+epoch_criterion : 11.997
+epoch_loss_val : 13.031
+epoch_criterion_val : 13.031
+========================= Epoch 239 / 3000 =========================
+epoch_loss : 12.499
+epoch_criterion : 12.499
+epoch_loss_val : 10.831
+epoch_criterion_val : 10.831
+========================= Epoch 240 / 3000 =========================
+epoch_loss : 12.425
+epoch_criterion : 12.426
+epoch_loss_val : 12.789
+epoch_criterion_val : 12.789
+**********
+optimization iteration 1201, loss of query set in meta training 12.362
+optimization iteration 1201, criterion of query set in meta training  12.362
+**********
+========================= Epoch 241 / 3000 =========================
+epoch_loss : 11.699
+epoch_criterion : 11.700
+epoch_loss_val : 10.452
+epoch_criterion_val : 10.452
+========================= Epoch 242 / 3000 =========================
+epoch_loss : 12.172
+epoch_criterion : 12.172
+epoch_loss_val : 12.815
+epoch_criterion_val : 12.815
+========================= Epoch 243 / 3000 =========================
+epoch_loss : 11.707
+epoch_criterion : 11.707
+epoch_loss_val : 12.069
+epoch_criterion_val : 12.069
+========================= Epoch 244 / 3000 =========================
+epoch_loss : 11.381
+epoch_criterion : 11.380
+epoch_loss_val : 12.632
+epoch_criterion_val : 12.632
+========================= Epoch 245 / 3000 =========================
+epoch_loss : 11.120
+epoch_criterion : 11.120
+epoch_loss_val : 13.601
+epoch_criterion_val : 13.608
+========================= Epoch 246 / 3000 =========================
+epoch_loss : 11.879
+epoch_criterion : 11.879
+epoch_loss_val : 9.373
+epoch_criterion_val : 9.373
+========================= Epoch 247 / 3000 =========================
+epoch_loss : 11.949
+epoch_criterion : 11.949
+epoch_loss_val : 11.475
+epoch_criterion_val : 11.475
+========================= Epoch 248 / 3000 =========================
+epoch_loss : 11.157
+epoch_criterion : 11.150
+epoch_loss_val : 10.813
+epoch_criterion_val : 10.813
+========================= Epoch 249 / 3000 =========================
+epoch_loss : 10.518
+epoch_criterion : 10.518
+epoch_loss_val : 9.656
+epoch_criterion_val : 9.656
+========================= Epoch 250 / 3000 =========================
+epoch_loss : 11.390
+epoch_criterion : 11.390
+epoch_loss_val : 11.068
+epoch_criterion_val : 11.068
+========================= Epoch 251 / 3000 =========================
+epoch_loss : 11.812
+epoch_criterion : 11.812
+epoch_loss_val : 11.380
+epoch_criterion_val : 11.380
+========================= Epoch 252 / 3000 =========================
+epoch_loss : 11.054
+epoch_criterion : 11.054
+epoch_loss_val : 11.517
+epoch_criterion_val : 11.517
+========================= Epoch 253 / 3000 =========================
+epoch_loss : 11.162
+epoch_criterion : 11.162
+epoch_loss_val : 11.178
+epoch_criterion_val : 11.178
+========================= Epoch 254 / 3000 =========================
+epoch_loss : 11.301
+epoch_criterion : 11.301
+epoch_loss_val : 12.679
+epoch_criterion_val : 12.679
+========================= Epoch 255 / 3000 =========================
+epoch_loss : 11.162
+epoch_criterion : 11.163
+epoch_loss_val : 14.277
+epoch_criterion_val : 14.277
+========================= Epoch 256 / 3000 =========================
+epoch_loss : 11.734
+epoch_criterion : 11.734
+epoch_loss_val : 12.455
+epoch_criterion_val : 12.455
+========================= Epoch 257 / 3000 =========================
+epoch_loss : 12.690
+epoch_criterion : 12.690
+epoch_loss_val : 12.468
+epoch_criterion_val : 12.469
+========================= Epoch 258 / 3000 =========================
+epoch_loss : 12.905
+epoch_criterion : 12.905
+epoch_loss_val : 11.649
+epoch_criterion_val : 11.649
+========================= Epoch 259 / 3000 =========================
+epoch_loss : 10.942
+epoch_criterion : 10.942
+epoch_loss_val : 12.001
+epoch_criterion_val : 12.001
+========================= Epoch 260 / 3000 =========================
+epoch_loss : 10.622
+epoch_criterion : 10.622
+epoch_loss_val : 10.436
+epoch_criterion_val : 10.436
+========================= Epoch 261 / 3000 =========================
+epoch_loss : 11.047
+epoch_criterion : 11.047
+epoch_loss_val : 14.259
+epoch_criterion_val : 14.259
+========================= Epoch 262 / 3000 =========================
+epoch_loss : 10.930
+epoch_criterion : 10.930
+epoch_loss_val : 11.176
+epoch_criterion_val : 11.176
+========================= Epoch 263 / 3000 =========================
+epoch_loss : 13.909
+epoch_criterion : 13.909
+epoch_loss_val : 12.575
+epoch_criterion_val : 12.575
+========================= Epoch 264 / 3000 =========================
+epoch_loss : 11.478
+epoch_criterion : 11.479
+epoch_loss_val : 10.708
+epoch_criterion_val : 10.708
+========================= Epoch 265 / 3000 =========================
+epoch_loss : 11.971
+epoch_criterion : 11.970
+epoch_loss_val : 12.234
+epoch_criterion_val : 12.233
+========================= Epoch 266 / 3000 =========================
+epoch_loss : 13.857
+epoch_criterion : 13.857
+epoch_loss_val : 13.886
+epoch_criterion_val : 13.886
+========================= Epoch 267 / 3000 =========================
+epoch_loss : 12.041
+epoch_criterion : 12.041
+epoch_loss_val : 13.172
+epoch_criterion_val : 13.172
+========================= Epoch 268 / 3000 =========================
+epoch_loss : 12.158
+epoch_criterion : 12.156
+epoch_loss_val : 11.280
+epoch_criterion_val : 11.280
+========================= Epoch 269 / 3000 =========================
+epoch_loss : 14.954
+epoch_criterion : 14.954
+epoch_loss_val : 15.106
+epoch_criterion_val : 15.106
+========================= Epoch 270 / 3000 =========================
+epoch_loss : 15.414
+epoch_criterion : 15.416
+epoch_loss_val : 12.981
+epoch_criterion_val : 12.982
+========================= Epoch 271 / 3000 =========================
+epoch_loss : 22.802
+epoch_criterion : 22.761
+epoch_loss_val : 15.417
+epoch_criterion_val : 15.418
+========================= Epoch 272 / 3000 =========================
+epoch_loss : 13.969
+epoch_criterion : 13.970
+epoch_loss_val : 13.107
+epoch_criterion_val : 13.107
+========================= Epoch 273 / 3000 =========================
+epoch_loss : 15.798
+epoch_criterion : 15.798
+epoch_loss_val : 17.228
+epoch_criterion_val : 17.228
+========================= Epoch 274 / 3000 =========================
+epoch_loss : 19.934
+epoch_criterion : 19.934
+epoch_loss_val : 11.316
+epoch_criterion_val : 11.316
+========================= Epoch 275 / 3000 =========================
+epoch_loss : 15.276
+epoch_criterion : 15.276
+epoch_loss_val : 23.033
+epoch_criterion_val : 23.033
+========================= Epoch 276 / 3000 =========================
+epoch_loss : 30.181
+epoch_criterion : 30.167
+epoch_loss_val : 14.371
+epoch_criterion_val : 14.371
+========================= Epoch 277 / 3000 =========================
+epoch_loss : 31.604
+epoch_criterion : 31.624
+epoch_loss_val : 13.182
+epoch_criterion_val : 13.182
+========================= Epoch 278 / 3000 =========================
+epoch_loss : 16.351
+epoch_criterion : 16.351
+epoch_loss_val : 12.501
+epoch_criterion_val : 12.501
+========================= Epoch 279 / 3000 =========================
+epoch_loss : 15.057
+epoch_criterion : 15.058
+epoch_loss_val : 14.951
+epoch_criterion_val : 14.951
+========================= Epoch 280 / 3000 =========================
+epoch_loss : 14.336
+epoch_criterion : 14.336
+epoch_loss_val : 12.470
+epoch_criterion_val : 12.469
+**********
+optimization iteration 1401, loss of query set in meta training 11.855
+optimization iteration 1401, criterion of query set in meta training  11.855
+**********
+========================= Epoch 281 / 3000 =========================
+epoch_loss : 18.781
+epoch_criterion : 18.781
+epoch_loss_val : 15.030
+epoch_criterion_val : 15.030
+========================= Epoch 282 / 3000 =========================
+epoch_loss : 14.755
+epoch_criterion : 14.754
+epoch_loss_val : 20.528
+epoch_criterion_val : 20.528
+========================= Epoch 283 / 3000 =========================
+epoch_loss : 21.012
+epoch_criterion : 21.013
+epoch_loss_val : 32.614
+epoch_criterion_val : 32.613
+========================= Epoch 284 / 3000 =========================
+epoch_loss : 20.540
+epoch_criterion : 20.540
+epoch_loss_val : 13.940
+epoch_criterion_val : 13.940
+========================= Epoch 285 / 3000 =========================
+epoch_loss : 17.053
+epoch_criterion : 17.053
+epoch_loss_val : 57.731
+epoch_criterion_val : 57.735
+========================= Epoch 286 / 3000 =========================
+epoch_loss : 95.009
+epoch_criterion : 95.041
+epoch_loss_val : 109.650
+epoch_criterion_val : 109.650
+========================= Epoch 287 / 3000 =========================
+epoch_loss : 72.864
+epoch_criterion : 72.862
+epoch_loss_val : 21.088
+epoch_criterion_val : 21.088
+========================= Epoch 288 / 3000 =========================
+epoch_loss : 12.820
+epoch_criterion : 12.820
+epoch_loss_val : 13.157
+epoch_criterion_val : 13.156
+========================= Epoch 289 / 3000 =========================
+epoch_loss : 13.400
+epoch_criterion : 13.400
+epoch_loss_val : 14.477
+epoch_criterion_val : 14.477
+========================= Epoch 290 / 3000 =========================
+epoch_loss : 21.279
+epoch_criterion : 21.279
+epoch_loss_val : 27.500
+epoch_criterion_val : 27.500
+========================= Epoch 291 / 3000 =========================
+epoch_loss : 62.477
+epoch_criterion : 62.477
+epoch_loss_val : 299.116
+epoch_criterion_val : 299.116
+========================= Epoch 292 / 3000 =========================
+epoch_loss : 599.974
+epoch_criterion : 599.974
+epoch_loss_val : 444.137
+epoch_criterion_val : 444.131
+========================= Epoch 293 / 3000 =========================
+epoch_loss : 241.690
+epoch_criterion : 241.690
+epoch_loss_val : 51.715
+epoch_criterion_val : 51.715
+========================= Epoch 294 / 3000 =========================
+epoch_loss : 34.138
+epoch_criterion : 34.138
+epoch_loss_val : 11.614
+epoch_criterion_val : 11.614
+========================= Epoch 295 / 3000 =========================
+epoch_loss : 20.612
+epoch_criterion : 20.612
+epoch_loss_val : 12.625
+epoch_criterion_val : 12.624
+========================= Epoch 296 / 3000 =========================
+epoch_loss : 44.846
+epoch_criterion : 44.849
+epoch_loss_val : 202.073
+epoch_criterion_val : 202.080
+========================= Epoch 297 / 3000 =========================
+epoch_loss : 100.442
+epoch_criterion : 100.441
+epoch_loss_val : 85.548
+epoch_criterion_val : 85.548
+========================= Epoch 298 / 3000 =========================
+epoch_loss : 32.265
+epoch_criterion : 32.265
+epoch_loss_val : 28.080
+epoch_criterion_val : 28.080
+========================= Epoch 299 / 3000 =========================
+epoch_loss : 14.964
+epoch_criterion : 14.964
+epoch_loss_val : 12.279
+epoch_criterion_val : 12.279
+========================= Epoch 300 / 3000 =========================
+epoch_loss : 25.386
+epoch_criterion : 25.388
+epoch_loss_val : 26.739
+epoch_criterion_val : 26.739
+========================= Epoch 301 / 3000 =========================
+epoch_loss : 32.034
+epoch_criterion : 32.034
+epoch_loss_val : 20.752
+epoch_criterion_val : 20.752
+========================= Epoch 302 / 3000 =========================
+epoch_loss : 28.690
+epoch_criterion : 28.691
+epoch_loss_val : 23.979
+epoch_criterion_val : 23.978
+========================= Epoch 303 / 3000 =========================
+epoch_loss : 17.633
+epoch_criterion : 17.633
+epoch_loss_val : 22.132
+epoch_criterion_val : 22.132
+========================= Epoch 304 / 3000 =========================
+epoch_loss : 17.127
+epoch_criterion : 17.127
+epoch_loss_val : 23.199
+epoch_criterion_val : 23.199
+========================= Epoch 305 / 3000 =========================
+epoch_loss : 16.480
+epoch_criterion : 16.481
+epoch_loss_val : 18.648
+epoch_criterion_val : 18.647
+========================= Epoch 306 / 3000 =========================
+epoch_loss : 17.223
+epoch_criterion : 17.223
+epoch_loss_val : 13.362
+epoch_criterion_val : 13.362
+========================= Epoch 307 / 3000 =========================
+epoch_loss : 17.065
+epoch_criterion : 17.065
+epoch_loss_val : 16.941
+epoch_criterion_val : 16.941
+========================= Epoch 308 / 3000 =========================
+epoch_loss : 22.295
+epoch_criterion : 22.295
+epoch_loss_val : 19.249
+epoch_criterion_val : 19.249
+========================= Epoch 309 / 3000 =========================
+epoch_loss : 21.981
+epoch_criterion : 22.005
+epoch_loss_val : 20.520
+epoch_criterion_val : 20.520
+========================= Epoch 310 / 3000 =========================
+epoch_loss : 22.483
+epoch_criterion : 22.483
+epoch_loss_val : 22.041
+epoch_criterion_val : 22.041
+========================= Epoch 311 / 3000 =========================
+epoch_loss : 24.035
+epoch_criterion : 24.033
+epoch_loss_val : 22.313
+epoch_criterion_val : 22.313
+========================= Epoch 312 / 3000 =========================
+epoch_loss : 20.823
+epoch_criterion : 20.824
+epoch_loss_val : 13.690
+epoch_criterion_val : 13.690
+========================= Epoch 313 / 3000 =========================
+epoch_loss : 18.134
+epoch_criterion : 18.134
+epoch_loss_val : 32.354
+epoch_criterion_val : 32.354
+========================= Epoch 314 / 3000 =========================
+epoch_loss : 18.335
+epoch_criterion : 18.335
+epoch_loss_val : 12.756
+epoch_criterion_val : 12.756
+========================= Epoch 315 / 3000 =========================
+epoch_loss : 16.257
+epoch_criterion : 16.257
+epoch_loss_val : 13.942
+epoch_criterion_val : 13.942
+========================= Epoch 316 / 3000 =========================
+epoch_loss : 17.094
+epoch_criterion : 17.094
+epoch_loss_val : 18.140
+epoch_criterion_val : 18.142
+========================= Epoch 317 / 3000 =========================
+epoch_loss : 14.904
+epoch_criterion : 14.904
+epoch_loss_val : 13.698
+epoch_criterion_val : 13.698
+========================= Epoch 318 / 3000 =========================
+epoch_loss : 11.622
+epoch_criterion : 11.627
+epoch_loss_val : 12.278
+epoch_criterion_val : 12.270
+========================= Epoch 319 / 3000 =========================
+epoch_loss : 12.423
+epoch_criterion : 12.424
+epoch_loss_val : 10.222
+epoch_criterion_val : 10.222
+========================= Epoch 320 / 3000 =========================
+epoch_loss : 12.164
+epoch_criterion : 12.164
+epoch_loss_val : 14.527
+epoch_criterion_val : 14.528
+**********
+optimization iteration 1601, loss of query set in meta training 11.901
+optimization iteration 1601, criterion of query set in meta training  11.901
+**********
+========================= Epoch 321 / 3000 =========================
+epoch_loss : 11.842
+epoch_criterion : 11.843
+epoch_loss_val : 10.923
+epoch_criterion_val : 10.923
+========================= Epoch 322 / 3000 =========================
+epoch_loss : 11.903
+epoch_criterion : 11.903
+epoch_loss_val : 13.276
+epoch_criterion_val : 13.276
+========================= Epoch 323 / 3000 =========================
+epoch_loss : 15.248
+epoch_criterion : 15.249
+epoch_loss_val : 9.865
+epoch_criterion_val : 9.865
+========================= Epoch 324 / 3000 =========================
+epoch_loss : 23.111
+epoch_criterion : 23.111
+epoch_loss_val : 9.819
+epoch_criterion_val : 9.819
+========================= Epoch 325 / 3000 =========================
+epoch_loss : 14.270
+epoch_criterion : 14.270
+epoch_loss_val : 12.233
+epoch_criterion_val : 12.233
+========================= Epoch 326 / 3000 =========================
+epoch_loss : 13.207
+epoch_criterion : 13.205
+epoch_loss_val : 37.900
+epoch_criterion_val : 37.900
+========================= Epoch 327 / 3000 =========================
+epoch_loss : 18.265
+epoch_criterion : 18.265
+epoch_loss_val : 33.023
+epoch_criterion_val : 33.023
+========================= Epoch 328 / 3000 =========================
+epoch_loss : 21.598
+epoch_criterion : 21.598
+epoch_loss_val : 35.383
+epoch_criterion_val : 35.383
+========================= Epoch 329 / 3000 =========================
+epoch_loss : 20.231
+epoch_criterion : 20.230
+epoch_loss_val : 37.165
+epoch_criterion_val : 37.164
+========================= Epoch 330 / 3000 =========================
+epoch_loss : 20.287
+epoch_criterion : 20.287
+epoch_loss_val : 49.905
+epoch_criterion_val : 49.905
+========================= Epoch 331 / 3000 =========================
+epoch_loss : 26.447
+epoch_criterion : 26.447
+epoch_loss_val : 77.038
+epoch_criterion_val : 77.038
+========================= Epoch 332 / 3000 =========================
+epoch_loss : 33.402
+epoch_criterion : 33.402
+epoch_loss_val : 37.023
+epoch_criterion_val : 37.023
+========================= Epoch 333 / 3000 =========================
+epoch_loss : 52.008
+epoch_criterion : 52.001
+epoch_loss_val : 39.125
+epoch_criterion_val : 39.125
+========================= Epoch 334 / 3000 =========================
+epoch_loss : 40.945
+epoch_criterion : 40.947
+epoch_loss_val : 53.161
+epoch_criterion_val : 53.161
+========================= Epoch 335 / 3000 =========================
+epoch_loss : 30.008
+epoch_criterion : 30.008
+epoch_loss_val : 30.823
+epoch_criterion_val : 30.823
+========================= Epoch 336 / 3000 =========================
+epoch_loss : 20.575
+epoch_criterion : 20.575
+epoch_loss_val : 19.315
+epoch_criterion_val : 19.315
+========================= Epoch 337 / 3000 =========================
+epoch_loss : 16.318
+epoch_criterion : 16.318
+epoch_loss_val : 13.665
+epoch_criterion_val : 13.671
+========================= Epoch 338 / 3000 =========================
+epoch_loss : 16.738
+epoch_criterion : 16.738
+epoch_loss_val : 29.434
+epoch_criterion_val : 29.431
+========================= Epoch 339 / 3000 =========================
+epoch_loss : 23.332
+epoch_criterion : 23.332
+epoch_loss_val : 10.512
+epoch_criterion_val : 10.512
+========================= Epoch 340 / 3000 =========================
+epoch_loss : 16.654
+epoch_criterion : 16.655
+epoch_loss_val : 12.724
+epoch_criterion_val : 12.724
+========================= Epoch 341 / 3000 =========================
+epoch_loss : 22.384
+epoch_criterion : 22.384
+epoch_loss_val : 17.151
+epoch_criterion_val : 17.151
+========================= Epoch 342 / 3000 =========================
+epoch_loss : 23.612
+epoch_criterion : 23.612
+epoch_loss_val : 11.686
+epoch_criterion_val : 11.686
+========================= Epoch 343 / 3000 =========================
+epoch_loss : 16.830
+epoch_criterion : 16.830
+epoch_loss_val : 12.283
+epoch_criterion_val : 12.283
+========================= Epoch 344 / 3000 =========================
+epoch_loss : 17.356
+epoch_criterion : 17.356
+epoch_loss_val : 12.141
+epoch_criterion_val : 12.141
+========================= Epoch 345 / 3000 =========================
+epoch_loss : 17.365
+epoch_criterion : 17.365
+epoch_loss_val : 13.222
+epoch_criterion_val : 13.222
+========================= Epoch 346 / 3000 =========================
+epoch_loss : 15.906
+epoch_criterion : 15.906
+epoch_loss_val : 12.434
+epoch_criterion_val : 12.434
+========================= Epoch 347 / 3000 =========================
+epoch_loss : 16.089
+epoch_criterion : 16.089
+epoch_loss_val : 11.168
+epoch_criterion_val : 11.168
+========================= Epoch 348 / 3000 =========================
+epoch_loss : 14.005
+epoch_criterion : 14.005
+epoch_loss_val : 18.574
+epoch_criterion_val : 18.573
+========================= Epoch 349 / 3000 =========================
+epoch_loss : 16.982
+epoch_criterion : 16.982
+epoch_loss_val : 13.665
+epoch_criterion_val : 13.665
+========================= Epoch 350 / 3000 =========================
+epoch_loss : 20.658
+epoch_criterion : 20.658
+epoch_loss_val : 13.080
+epoch_criterion_val : 13.080
+========================= Epoch 351 / 3000 =========================
+epoch_loss : 12.500
+epoch_criterion : 12.500
+epoch_loss_val : 12.270
+epoch_criterion_val : 12.270
+========================= Epoch 352 / 3000 =========================
+epoch_loss : 18.534
+epoch_criterion : 18.534
+epoch_loss_val : 23.899
+epoch_criterion_val : 23.899
+========================= Epoch 353 / 3000 =========================
+epoch_loss : 14.133
+epoch_criterion : 14.132
+epoch_loss_val : 30.693
+epoch_criterion_val : 30.693
+========================= Epoch 354 / 3000 =========================
+epoch_loss : 14.600
+epoch_criterion : 14.600
+epoch_loss_val : 13.154
+epoch_criterion_val : 13.154
+========================= Epoch 355 / 3000 =========================
+epoch_loss : 13.404
+epoch_criterion : 13.405
+epoch_loss_val : 12.199
+epoch_criterion_val : 12.199
+========================= Epoch 356 / 3000 =========================
+epoch_loss : 13.474
+epoch_criterion : 13.474
+epoch_loss_val : 14.574
+epoch_criterion_val : 14.574
+========================= Epoch 357 / 3000 =========================
+epoch_loss : 12.346
+epoch_criterion : 12.346
+epoch_loss_val : 11.817
+epoch_criterion_val : 11.817
+========================= Epoch 358 / 3000 =========================
+epoch_loss : 11.105
+epoch_criterion : 11.105
+epoch_loss_val : 11.207
+epoch_criterion_val : 11.207
+========================= Epoch 359 / 3000 =========================
+epoch_loss : 9.697
+epoch_criterion : 9.697
+epoch_loss_val : 11.841
+epoch_criterion_val : 11.841
+========================= Epoch 360 / 3000 =========================
+epoch_loss : 12.243
+epoch_criterion : 12.243
+epoch_loss_val : 14.107
+epoch_criterion_val : 14.107
+**********
+optimization iteration 1801, loss of query set in meta training 14.254
+optimization iteration 1801, criterion of query set in meta training  14.254
+**********
+========================= Epoch 361 / 3000 =========================
+epoch_loss : 12.336
+epoch_criterion : 12.336
+epoch_loss_val : 10.081
+epoch_criterion_val : 10.081
+========================= Epoch 362 / 3000 =========================
+epoch_loss : 11.514
+epoch_criterion : 11.514
+epoch_loss_val : 12.370
+epoch_criterion_val : 12.370
+========================= Epoch 363 / 3000 =========================
+epoch_loss : 12.164
+epoch_criterion : 12.164
+epoch_loss_val : 10.982
+epoch_criterion_val : 10.982
+========================= Epoch 364 / 3000 =========================
+epoch_loss : 11.003
+epoch_criterion : 11.003
+epoch_loss_val : 11.099
+epoch_criterion_val : 11.099
+========================= Epoch 365 / 3000 =========================
+epoch_loss : 12.513
+epoch_criterion : 12.513
+epoch_loss_val : 11.384
+epoch_criterion_val : 11.384
+========================= Epoch 366 / 3000 =========================
+epoch_loss : 15.102
+epoch_criterion : 15.102
+epoch_loss_val : 12.818
+epoch_criterion_val : 12.818
+========================= Epoch 367 / 3000 =========================
+epoch_loss : 12.612
+epoch_criterion : 12.612
+epoch_loss_val : 14.081
+epoch_criterion_val : 14.081
+========================= Epoch 368 / 3000 =========================
+epoch_loss : 13.121
+epoch_criterion : 13.121
+epoch_loss_val : 12.482
+epoch_criterion_val : 12.482
+========================= Epoch 369 / 3000 =========================
+epoch_loss : 13.595
+epoch_criterion : 13.595
+epoch_loss_val : 14.668
+epoch_criterion_val : 14.668
+========================= Epoch 370 / 3000 =========================
+epoch_loss : 12.520
+epoch_criterion : 12.520
+epoch_loss_val : 14.705
+epoch_criterion_val : 14.705
+========================= Epoch 371 / 3000 =========================
+epoch_loss : 14.009
+epoch_criterion : 14.009
+epoch_loss_val : 12.751
+epoch_criterion_val : 12.751
+========================= Epoch 372 / 3000 =========================
+epoch_loss : 15.479
+epoch_criterion : 15.479
+epoch_loss_val : 16.654
+epoch_criterion_val : 16.654
+========================= Epoch 373 / 3000 =========================
+epoch_loss : 15.138
+epoch_criterion : 15.138
+epoch_loss_val : 14.756
+epoch_criterion_val : 14.756
+========================= Epoch 374 / 3000 =========================
+epoch_loss : 14.363
+epoch_criterion : 14.363
+epoch_loss_val : 15.134
+epoch_criterion_val : 15.134
+========================= Epoch 375 / 3000 =========================
+epoch_loss : 15.075
+epoch_criterion : 15.075
+epoch_loss_val : 12.188
+epoch_criterion_val : 12.188
+========================= Epoch 376 / 3000 =========================
+epoch_loss : 13.917
+epoch_criterion : 13.917
+epoch_loss_val : 10.744
+epoch_criterion_val : 10.744
+========================= Epoch 377 / 3000 =========================
+epoch_loss : 12.029
+epoch_criterion : 12.029
+epoch_loss_val : 10.392
+epoch_criterion_val : 10.392
+========================= Epoch 378 / 3000 =========================
+epoch_loss : 11.733
+epoch_criterion : 11.733
+epoch_loss_val : 12.613
+epoch_criterion_val : 12.613
+========================= Epoch 379 / 3000 =========================
+epoch_loss : 13.518
+epoch_criterion : 13.518
+epoch_loss_val : 14.330
+epoch_criterion_val : 14.330
+========================= Epoch 380 / 3000 =========================
+epoch_loss : 13.286
+epoch_criterion : 13.286
+epoch_loss_val : 13.052
+epoch_criterion_val : 13.052
+========================= Epoch 381 / 3000 =========================
+epoch_loss : 12.239
+epoch_criterion : 12.239
+epoch_loss_val : 9.768
+epoch_criterion_val : 9.768
+========================= Epoch 382 / 3000 =========================
+epoch_loss : 13.216
+epoch_criterion : 13.216
+epoch_loss_val : 14.562
+epoch_criterion_val : 14.564
+========================= Epoch 383 / 3000 =========================
+epoch_loss : 15.564
+epoch_criterion : 15.564
+epoch_loss_val : 13.135
+epoch_criterion_val : 13.135
+========================= Epoch 384 / 3000 =========================
+epoch_loss : 13.321
+epoch_criterion : 13.321
+epoch_loss_val : 11.926
+epoch_criterion_val : 11.926
+========================= Epoch 385 / 3000 =========================
+epoch_loss : 13.268
+epoch_criterion : 13.268
+epoch_loss_val : 13.757
+epoch_criterion_val : 13.757
+========================= Epoch 386 / 3000 =========================
+epoch_loss : 12.084
+epoch_criterion : 12.084
+epoch_loss_val : 14.729
+epoch_criterion_val : 14.729
+========================= Epoch 387 / 3000 =========================
+epoch_loss : 11.769
+epoch_criterion : 11.768
+epoch_loss_val : 12.341
+epoch_criterion_val : 12.339
+========================= Epoch 388 / 3000 =========================
+epoch_loss : 12.417
+epoch_criterion : 12.417
+epoch_loss_val : 10.851
+epoch_criterion_val : 10.851
+========================= Epoch 389 / 3000 =========================
+epoch_loss : 16.009
+epoch_criterion : 16.009
+epoch_loss_val : 17.139
+epoch_criterion_val : 17.139
+========================= Epoch 390 / 3000 =========================
+epoch_loss : 13.769
+epoch_criterion : 13.769
+epoch_loss_val : 17.907
+epoch_criterion_val : 17.908
+========================= Epoch 391 / 3000 =========================
+epoch_loss : 14.183
+epoch_criterion : 14.183
+epoch_loss_val : 10.592
+epoch_criterion_val : 10.592
+========================= Epoch 392 / 3000 =========================
+epoch_loss : 13.085
+epoch_criterion : 13.085
+epoch_loss_val : 12.135
+epoch_criterion_val : 12.135
+========================= Epoch 393 / 3000 =========================
+epoch_loss : 12.806
+epoch_criterion : 12.806
+epoch_loss_val : 21.139
+epoch_criterion_val : 21.139
+========================= Epoch 394 / 3000 =========================
+epoch_loss : 14.303
+epoch_criterion : 14.303
+epoch_loss_val : 12.264
+epoch_criterion_val : 12.264
+========================= Epoch 395 / 3000 =========================
+epoch_loss : 13.613
+epoch_criterion : 13.613
+epoch_loss_val : 13.613
+epoch_criterion_val : 13.613
+========================= Epoch 396 / 3000 =========================
+epoch_loss : 11.251
+epoch_criterion : 11.251
+epoch_loss_val : 14.539
+epoch_criterion_val : 14.539
+========================= Epoch 397 / 3000 =========================
+epoch_loss : 16.401
+epoch_criterion : 16.401
+epoch_loss_val : 14.843
+epoch_criterion_val : 14.843
+========================= Epoch 398 / 3000 =========================
+epoch_loss : 11.767
+epoch_criterion : 11.767
+epoch_loss_val : 30.237
+epoch_criterion_val : 30.237
+========================= Epoch 399 / 3000 =========================
+epoch_loss : 15.908
+epoch_criterion : 15.908
+epoch_loss_val : 12.766
+epoch_criterion_val : 12.766
+========================= Epoch 400 / 3000 =========================
+epoch_loss : 14.096
+epoch_criterion : 14.096
+epoch_loss_val : 16.218
+epoch_criterion_val : 16.218
+**********
+optimization iteration 2001, loss of query set in meta training 16.670
+optimization iteration 2001, criterion of query set in meta training  16.670
+**********
+---------- Temporarily save the model ----------
+========================= Epoch 401 / 3000 =========================
+epoch_loss : 14.695
+epoch_criterion : 14.695
+epoch_loss_val : 12.527
+epoch_criterion_val : 12.527
+========================= Epoch 402 / 3000 =========================
+epoch_loss : 13.999
+epoch_criterion : 14.000
+epoch_loss_val : 15.866
+epoch_criterion_val : 15.867
+========================= Epoch 403 / 3000 =========================
+epoch_loss : 18.247
+epoch_criterion : 18.247
+epoch_loss_val : 20.135
+epoch_criterion_val : 20.135
+========================= Epoch 404 / 3000 =========================
+epoch_loss : 17.338
+epoch_criterion : 17.338
+epoch_loss_val : 14.374
+epoch_criterion_val : 14.375
+========================= Epoch 405 / 3000 =========================
+epoch_loss : 15.641
+epoch_criterion : 15.641
+epoch_loss_val : 17.852
+epoch_criterion_val : 17.852
+========================= Epoch 406 / 3000 =========================
+epoch_loss : 15.005
+epoch_criterion : 15.006
+epoch_loss_val : 17.007
+epoch_criterion_val : 17.007
+========================= Epoch 407 / 3000 =========================
+epoch_loss : 14.250
+epoch_criterion : 14.250
+epoch_loss_val : 18.258
+epoch_criterion_val : 18.258
+========================= Epoch 408 / 3000 =========================
+epoch_loss : 13.944
+epoch_criterion : 13.944
+epoch_loss_val : 11.216
+epoch_criterion_val : 11.216
+========================= Epoch 409 / 3000 =========================
+epoch_loss : 13.538
+epoch_criterion : 13.538
+epoch_loss_val : 15.355
+epoch_criterion_val : 15.355
+========================= Epoch 410 / 3000 =========================
+epoch_loss : 13.212
+epoch_criterion : 13.212
+epoch_loss_val : 17.554
+epoch_criterion_val : 17.554
+========================= Epoch 411 / 3000 =========================
+epoch_loss : 15.125
+epoch_criterion : 15.130
+epoch_loss_val : 13.255
+epoch_criterion_val : 13.255
+========================= Epoch 412 / 3000 =========================
+epoch_loss : 14.102
+epoch_criterion : 14.102
+epoch_loss_val : 20.784
+epoch_criterion_val : 20.784
+========================= Epoch 413 / 3000 =========================
+epoch_loss : 18.524
+epoch_criterion : 18.524
+epoch_loss_val : 16.345
+epoch_criterion_val : 16.345
+========================= Epoch 414 / 3000 =========================
+epoch_loss : 16.999
+epoch_criterion : 17.000
+epoch_loss_val : 14.826
+epoch_criterion_val : 14.829
+========================= Epoch 415 / 3000 =========================
+epoch_loss : 15.384
+epoch_criterion : 15.468
+epoch_loss_val : 19.734
+epoch_criterion_val : 19.734
+========================= Epoch 416 / 3000 =========================
+epoch_loss : 15.745
+epoch_criterion : 15.745
+epoch_loss_val : 12.322
+epoch_criterion_val : 12.322
+========================= Epoch 417 / 3000 =========================
+epoch_loss : 16.738
+epoch_criterion : 16.738
+epoch_loss_val : 13.481
+epoch_criterion_val : 13.481
+========================= Epoch 418 / 3000 =========================
+epoch_loss : 14.614
+epoch_criterion : 14.615
+epoch_loss_val : 16.367
+epoch_criterion_val : 16.367
+========================= Epoch 419 / 3000 =========================
+epoch_loss : 14.796
+epoch_criterion : 14.796
+epoch_loss_val : 15.233
+epoch_criterion_val : 15.233
+========================= Epoch 420 / 3000 =========================
+epoch_loss : 14.323
+epoch_criterion : 14.323
+epoch_loss_val : 23.098
+epoch_criterion_val : 23.098
+========================= Epoch 421 / 3000 =========================
+epoch_loss : 21.294
+epoch_criterion : 21.294
+epoch_loss_val : 13.651
+epoch_criterion_val : 13.651
+========================= Epoch 422 / 3000 =========================
+epoch_loss : 16.612
+epoch_criterion : 16.611
+epoch_loss_val : 12.672
+epoch_criterion_val : 12.672
+========================= Epoch 423 / 3000 =========================
+epoch_loss : 17.515
+epoch_criterion : 17.515
+epoch_loss_val : 15.055
+epoch_criterion_val : 15.055
+========================= Epoch 424 / 3000 =========================
+epoch_loss : 18.290
+epoch_criterion : 18.290
+epoch_loss_val : 16.097
+epoch_criterion_val : 16.097
+========================= Epoch 425 / 3000 =========================
+epoch_loss : 23.262
+epoch_criterion : 23.262
+epoch_loss_val : 18.695
+epoch_criterion_val : 18.695
+========================= Epoch 426 / 3000 =========================
+epoch_loss : 18.306
+epoch_criterion : 18.309
+epoch_loss_val : 16.578
+epoch_criterion_val : 16.578
+========================= Epoch 427 / 3000 =========================
+epoch_loss : 19.203
+epoch_criterion : 19.202
+epoch_loss_val : 18.797
+epoch_criterion_val : 18.797
+========================= Epoch 428 / 3000 =========================
+epoch_loss : 16.492
+epoch_criterion : 16.492
+epoch_loss_val : 12.223
+epoch_criterion_val : 12.223
+========================= Epoch 429 / 3000 =========================
+epoch_loss : 18.016
+epoch_criterion : 18.016
+epoch_loss_val : 13.832
+epoch_criterion_val : 13.832
+========================= Epoch 430 / 3000 =========================
+epoch_loss : 19.411
+epoch_criterion : 19.411
+epoch_loss_val : 26.783
+epoch_criterion_val : 26.771
+========================= Epoch 431 / 3000 =========================
+epoch_loss : 19.698
+epoch_criterion : 19.698
+epoch_loss_val : 14.627
+epoch_criterion_val : 14.627
+========================= Epoch 432 / 3000 =========================
+epoch_loss : 17.204
+epoch_criterion : 17.204
+epoch_loss_val : 13.886
+epoch_criterion_val : 13.886
+========================= Epoch 433 / 3000 =========================
+epoch_loss : 18.817
+epoch_criterion : 18.818
+epoch_loss_val : 15.584
+epoch_criterion_val : 15.584
+========================= Epoch 434 / 3000 =========================
+epoch_loss : 15.837
+epoch_criterion : 15.837
+epoch_loss_val : 15.796
+epoch_criterion_val : 15.796
+========================= Epoch 435 / 3000 =========================
+epoch_loss : 16.955
+epoch_criterion : 16.955
+epoch_loss_val : 14.962
+epoch_criterion_val : 14.962
+========================= Epoch 436 / 3000 =========================
+epoch_loss : 16.178
+epoch_criterion : 16.178
+epoch_loss_val : 13.890
+epoch_criterion_val : 13.890
+========================= Epoch 437 / 3000 =========================
+epoch_loss : 16.106
+epoch_criterion : 16.106
+epoch_loss_val : 14.781
+epoch_criterion_val : 14.781
+========================= Epoch 438 / 3000 =========================
+epoch_loss : 15.989
+epoch_criterion : 15.989
+epoch_loss_val : 14.012
+epoch_criterion_val : 14.012
+========================= Epoch 439 / 3000 =========================
+epoch_loss : 13.682
+epoch_criterion : 13.682
+epoch_loss_val : 13.184
+epoch_criterion_val : 13.184
+========================= Epoch 440 / 3000 =========================
+epoch_loss : 12.360
+epoch_criterion : 12.360
+epoch_loss_val : 15.623
+epoch_criterion_val : 15.623
+**********
+optimization iteration 2201, loss of query set in meta training 13.809
+optimization iteration 2201, criterion of query set in meta training  13.809
+**********
+========================= Epoch 441 / 3000 =========================
+epoch_loss : 13.699
+epoch_criterion : 13.699
+epoch_loss_val : 13.429
+epoch_criterion_val : 13.429
+========================= Epoch 442 / 3000 =========================
+epoch_loss : 16.679
+epoch_criterion : 16.679
+epoch_loss_val : 13.324
+epoch_criterion_val : 13.324
+========================= Epoch 443 / 3000 =========================
+epoch_loss : 12.667
+epoch_criterion : 12.667
+epoch_loss_val : 13.450
+epoch_criterion_val : 13.450
+========================= Epoch 444 / 3000 =========================
+epoch_loss : 12.864
+epoch_criterion : 12.864
+epoch_loss_val : 13.831
+epoch_criterion_val : 13.831
+========================= Epoch 445 / 3000 =========================
+epoch_loss : 14.820
+epoch_criterion : 14.820
+epoch_loss_val : 11.503
+epoch_criterion_val : 11.503
+========================= Epoch 446 / 3000 =========================
+epoch_loss : 13.811
+epoch_criterion : 13.811
+epoch_loss_val : 13.775
+epoch_criterion_val : 13.775
+========================= Epoch 447 / 3000 =========================
+epoch_loss : 12.791
+epoch_criterion : 12.791
+epoch_loss_val : 9.629
+epoch_criterion_val : 9.629
+========================= Epoch 448 / 3000 =========================
+epoch_loss : 14.280
+epoch_criterion : 14.280
+epoch_loss_val : 13.190
+epoch_criterion_val : 13.190
+========================= Epoch 449 / 3000 =========================
+epoch_loss : 13.866
+epoch_criterion : 13.866
+epoch_loss_val : 13.164
+epoch_criterion_val : 13.164
+========================= Epoch 450 / 3000 =========================
+epoch_loss : 13.889
+epoch_criterion : 13.889
+epoch_loss_val : 11.385
+epoch_criterion_val : 11.385
+========================= Epoch 451 / 3000 =========================
+epoch_loss : 12.906
+epoch_criterion : 12.906
+epoch_loss_val : 10.795
+epoch_criterion_val : 10.795
+========================= Epoch 452 / 3000 =========================
+epoch_loss : 12.493
+epoch_criterion : 12.493
+epoch_loss_val : 13.614
+epoch_criterion_val : 13.614
+========================= Epoch 453 / 3000 =========================
+epoch_loss : 13.086
+epoch_criterion : 13.086
+epoch_loss_val : 11.785
+epoch_criterion_val : 11.785
+========================= Epoch 454 / 3000 =========================
+epoch_loss : 13.921
+epoch_criterion : 13.920
+epoch_loss_val : 12.054
+epoch_criterion_val : 12.054
+========================= Epoch 455 / 3000 =========================
+epoch_loss : 12.568
+epoch_criterion : 12.568
+epoch_loss_val : 13.655
+epoch_criterion_val : 13.655
+========================= Epoch 456 / 3000 =========================
+epoch_loss : 12.215
+epoch_criterion : 12.215
+epoch_loss_val : 12.182
+epoch_criterion_val : 12.182
+========================= Epoch 457 / 3000 =========================
+epoch_loss : 13.592
+epoch_criterion : 13.589
+epoch_loss_val : 13.642
+epoch_criterion_val : 13.642
+========================= Epoch 458 / 3000 =========================
+epoch_loss : 12.584
+epoch_criterion : 12.583
+epoch_loss_val : 10.977
+epoch_criterion_val : 10.977
+========================= Epoch 459 / 3000 =========================
+epoch_loss : 13.034
+epoch_criterion : 13.034
+epoch_loss_val : 11.898
+epoch_criterion_val : 11.898
+========================= Epoch 460 / 3000 =========================
+epoch_loss : 13.343
+epoch_criterion : 13.343
+epoch_loss_val : 10.582
+epoch_criterion_val : 10.582
+========================= Epoch 461 / 3000 =========================
+epoch_loss : 14.993
+epoch_criterion : 14.993
+epoch_loss_val : 11.836
+epoch_criterion_val : 11.836
+========================= Epoch 462 / 3000 =========================
+epoch_loss : 10.966
+epoch_criterion : 10.969
+epoch_loss_val : 11.695
+epoch_criterion_val : 11.695
+========================= Epoch 463 / 3000 =========================
+epoch_loss : 13.363
+epoch_criterion : 13.364
+epoch_loss_val : 12.503
+epoch_criterion_val : 12.503
+========================= Epoch 464 / 3000 =========================
+epoch_loss : 12.605
+epoch_criterion : 12.605
+epoch_loss_val : 11.792
+epoch_criterion_val : 11.792
+========================= Epoch 465 / 3000 =========================
+epoch_loss : 13.432
+epoch_criterion : 13.432
+epoch_loss_val : 11.935
+epoch_criterion_val : 11.935
+========================= Epoch 466 / 3000 =========================
+epoch_loss : 13.369
+epoch_criterion : 13.369
+epoch_loss_val : 12.007
+epoch_criterion_val : 12.007
+========================= Epoch 467 / 3000 =========================
+epoch_loss : 13.902
+epoch_criterion : 13.902
+epoch_loss_val : 12.585
+epoch_criterion_val : 12.585
+========================= Epoch 468 / 3000 =========================
+epoch_loss : 13.139
+epoch_criterion : 13.139
+epoch_loss_val : 10.904
+epoch_criterion_val : 10.904
+========================= Epoch 469 / 3000 =========================
+epoch_loss : 12.076
+epoch_criterion : 12.076
+epoch_loss_val : 10.775
+epoch_criterion_val : 10.775
+========================= Epoch 470 / 3000 =========================
+epoch_loss : 11.171
+epoch_criterion : 11.172
+epoch_loss_val : 11.807
+epoch_criterion_val : 11.807
+========================= Epoch 471 / 3000 =========================
+epoch_loss : 13.138
+epoch_criterion : 13.138
+epoch_loss_val : 10.084
+epoch_criterion_val : 10.084
+========================= Epoch 472 / 3000 =========================
+epoch_loss : 12.943
+epoch_criterion : 12.943
+epoch_loss_val : 10.483
+epoch_criterion_val : 10.483
+========================= Epoch 473 / 3000 =========================
+epoch_loss : 12.485
+epoch_criterion : 12.485
+epoch_loss_val : 11.423
+epoch_criterion_val : 11.423
+========================= Epoch 474 / 3000 =========================
+epoch_loss : 11.322
+epoch_criterion : 11.321
+epoch_loss_val : 11.519
+epoch_criterion_val : 11.519
+========================= Epoch 475 / 3000 =========================
+epoch_loss : 11.883
+epoch_criterion : 11.883
+epoch_loss_val : 11.085
+epoch_criterion_val : 11.085
+========================= Epoch 476 / 3000 =========================
+epoch_loss : 11.568
+epoch_criterion : 11.568
+epoch_loss_val : 10.119
+epoch_criterion_val : 10.119
+========================= Epoch 477 / 3000 =========================
+epoch_loss : 11.957
+epoch_criterion : 11.957
+epoch_loss_val : 12.691
+epoch_criterion_val : 12.691
+=========================

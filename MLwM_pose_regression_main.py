@@ -1,5 +1,5 @@
 import os
-from datetime import datetime
+import yaml
 
 import numpy as np
 
@@ -9,17 +9,14 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 
 # Model
-from model.maml_meta import Meta
-from model.MLwM_model import MLwM
+from model.MAML.maml_meta import Meta
+from model.MAML.MLwM_model import MLwM
 
 # Dataset
 from dataset.MLwM_poseregression_dataset import meta_pose_regression_dataset
 
 # Operator (Trainer, Tester)
 from MLwM_operator import MAML_operator
-
-# Config
-from MLwM_config import *
 
 # Utils
 from utils import *
@@ -37,17 +34,9 @@ def parse_args():
     common.add_argument('--n_way', default=1, type=int, help='n_way')
     common.add_argument('--k_shot_support', default=10, type=int, help='k shot for support set')
     common.add_argument('--k_shot_query', default=10, type=int, help='k shot for query set')
-    common.add_argument('--img_size', default=128, type=int, help='image size')
     common.add_argument('--epochs', default=60000, type=int, help='epoch number')
-    common.add_argument('--meta_lr', default=0.002, type=float, help='learning rate for meta update')
-    common.add_argument('--update_lr', default=0.002, type=float, help='learning rate for inner update')
-    common.add_argument('--update_step', default=5, type=int, help='update steps for meta_training')
-    common.add_argument('--update_step_test', default=10, type=int, help='update steps for meta_testing')
-    common.add_argument('--encoder_type', default="BBB", type=str, help='what encoder we use')
-    common.add_argument('--encoder_output_dim', default=784, type=str, help='output_dim_by_encoded (it should be divided to (img_size * img_size)')
-    common.add_argument('--beta_kl', default=1.0, type=float, help='Beta kl')
+    common.add_argument('--description', default='Meta_learning', type=str, help='save file name')
     
-
     # dataset
     common.add_argument('--data_path', default = '/home/mgyukim/Data/rotate_resize/Dataset',\
          type=str, help='directory path for training data')
@@ -65,7 +54,7 @@ def parse_args():
 
     return args
 
-def train(model, save_model_path, initializer=torch.nn.init.xavier_normal_):
+def train(model, config, save_model_path, initializer=torch.nn.init.xavier_normal_):
     # Create Model
     model = model
     
@@ -85,7 +74,7 @@ def train(model, save_model_path, initializer=torch.nn.init.xavier_normal_):
 
     # dataloader
     train_loader = DataLoader(pose_training_set, batch_size=args.task_size, shuffle=True)
-    valid_loader = DataLoader(pose_valid_set, batch_size=1, shuffle=True)
+    valid_loader = DataLoader(pose_valid_set, batch_size=args.task_size, shuffle=True)
     
 
     # Print length of a episode
@@ -101,22 +90,24 @@ def train(model, save_model_path, initializer=torch.nn.init.xavier_normal_):
         print("query_y shape : ", query_y.shape)
 
     # Set the optimizer
-    optimizer = optim.Adam(model.parameters(), lr=args.meta_lr)
+    optimizer = optim.Adam(model.parameters(), lr=config['meta_lr'])
 
     # Operator
     maml_operator = MAML_operator(model, device, train_loader, optimizer, args.epochs, save_model_path, valid_loader)
     maml_operator.train()
 
     # Save Model
-    torch.save(model.state_dict(), os.path.join(save_model_path, "Model_{}_{}.pt".format(args.model, args.encoder_type)))
+    torch.save(model.state_dict(), os.path.join(save_model_path, "Model_{}.pt".format(args.datatypes)))
     print("="*20, "Save the model (After training)", "="*20)
 
+    '''
     # Move saved files to the result folder
     remove_temp_files_and_move_directory(save_model_path, "/home/mgyukim/workspaces/result_MLwM", args.model, \
-        args.encoder_type, args.beta_kl, "poseregression", args.datatypes)
+        config['encoder_type'], config['beta_kl'], "poseregression", args.datatypes)
+    '''
     
 
-def test(model, load_model_path, initializer=torch.nn.init.xavier_normal_):
+def test(model, load_model_path, save_model_path, initializer=torch.nn.init.xavier_normal_):
     # Create Model
     model = model
     
@@ -142,9 +133,6 @@ def test(model, load_model_path, initializer=torch.nn.init.xavier_normal_):
         print("query_x shape : ", query_x.shape)
         print("query_y shape : ", query_y.shape)
 
-    
-    
-
     # Load a model
     checkpoint = torch.load(load_model_path)
     model.load_state_dict(checkpoint)
@@ -169,28 +157,34 @@ if __name__ == '__main__':
     # save model path
     save_model_path = get_save_model_path(args)
 
+    # Load config
+    config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/MLwM_config.yml", 'r'), \
+            Loader=yaml.SafeLoader)
+    config = config['Pose_regression']
+
     # Architecture Config
     if args.model == "MLwM":
         # Set Configuration (Encoder)
-        ENCODER_CONFIG = set_config_encoder(ENCODER_CONFIG_POSE_REGRESSION, args.encoder_type, args.encoder_output_dim)
+        ENCODER_CONFIG = set_config_encoder(config['ENCODER_CONFIG'], \
+            config['encoder_type'], config['encoder_output_dim'])
         
         # Set Configuration (MAML)
-        encoded_img_size = math.floor(math.sqrt(args.encoder_output_dim))
-        architecture = set_config(CONFIG_CONV_4, args.n_way, encoded_img_size, is_regression=False)
+        encoded_img_size = math.floor(math.sqrt(config['encoder_output_dim']))
+        architecture = set_config(config['CONFIG_CONV_4'], args.n_way, encoded_img_size, is_regression=False)
     else:
-        architecture = set_config(CONFIG_CONV_4, args.n_way, args.img_size, is_regression=False)
+        architecture = set_config(config['CONFIG_CONV_4'], args.n_way, config['img_size'], is_regression=False)
 
     # Create Model
     if args.model == "MAML":
-        model = Meta(architecture, args.update_lr, args.update_step, is_regression=True)
+        model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=True)
     elif args.model =="MLwM":
-        model = MLwM(ENCODER_CONFIG, architecture, args.update_lr, args.update_step,\
-            is_regression=True, is_kl_loss=True, beta_kl=args.beta_kl)
+        model = MLwM(ENCODER_CONFIG, architecture, config['update_lr'], config['update_step'],\
+            is_regression=True, is_kl_loss=True, beta_kl=config['beta_kl'])
     else:
         NotImplementedError
     
     # Train
-    train(model, save_model_path) 
+    train(model, config, save_model_path) 
 
     # load model path
     if args.model_save_root_dir == args.model_load_dir:
@@ -199,7 +193,7 @@ if __name__ == '__main__':
         load_model_path = args.model_load_dir
 
     # Test
-    test(model, load_model_path)
+    test(model, load_model_path, save_model_path)
 
     
 

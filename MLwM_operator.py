@@ -174,7 +174,7 @@ class MAML_operator(object):
             if epoch % self.figure_freq == 0:
                 training_line_plot(filename_train_result, filename_val_result)
 
-            # Termination Condition
+            # Termination Condition (Step termination)
             if self.steps >= 100000:
                 break
                     

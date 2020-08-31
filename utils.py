@@ -139,7 +139,7 @@ def get_save_model_path(args):
     current_datetime = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.strftime('%M'))
         
     # Make a save(model) directory (Optional)
-    save_model_path = os.path.join(save_model_root, args.datatypes, current_datetime)
+    save_model_path = os.path.join(save_model_root, args.datatypes, args.description, current_datetime)
     os.makedirs(save_model_path)
 
     return save_model_path
@@ -149,11 +149,17 @@ def latest_load_model_filepath(args):
     filepath = None
     
     # make a file path
-    load_model_path = os.path.join(args.model_load_dir, args.datatypes, "Model_{}.pt".format(args.datatypes))
+    temp_path = os.path.join(args.model_load_dir, args.datatypes, args.description)
+    item_list = os.listdir(temp_path)
+    item_list = sorted(item_list)
+    directory_name = item_list[-1]
+    
+    load_model_path = os.path.join(args.model_load_dir, args.datatypes, args.description,\
+         directory_name, "Model_{}.pt".format(args.datatypes))
 
     # look for the latest directory and model file ~.pt
     if not os.path.isfile(load_model_path):
-        temp_path = os.path.join(args.model_load_dir, args.datatypes)
+        temp_path = os.path.join(args.model_load_dir, args.datatypes, args.description)
         item_list = os.listdir(temp_path)
         item_list = sorted(item_list)
 

@@ -6,12 +6,15 @@ import math
 
 class LEO_network(nn.Module):
     """docstring for Encoder"""
-    def __init__(self, embedding_size, hidden_size, dropout_rate):
+    def __init__(self, embedding_size, hidden_size, dropout_rate, is_deterministic=False):
         super(LEO_network, self).__init__()
         
         # Dimnesion
         self.embed_size = embedding_size
         self.hidden_size = hidden_size
+
+        # Properties
+        self.is_deterministic = is_deterministic
 
         # Hyper parameters
         self.dropout = nn.Dropout(p=dropout_rate)
@@ -87,7 +90,10 @@ class LEO_network(nn.Module):
         dist = torch.distributions.Normal(mean, var)
 
         # Sample
-        sample = dist.rsample()
+        if self.is_deterministic:
+            sample = mean
+        else:
+            sample = dist.rsample()
 
         return sample
 
@@ -100,16 +106,16 @@ class LEO_network(nn.Module):
         # make prediction
         outputs = torch.bmm(inputs, weights)
         outputs = outputs.view(-1, outputs.size(-1))
-        outputs = F.log_softmax(outputs, dim = -1)
+        outputs = F.log_softmax(outputs, dim = -1) #[b_size * N * K, n_way]
 
         return outputs
 
     def cal_target_loss(self, inputs, classifier_weights, target):
-        outputs = self.predict(inputs, classifier_weights)
+        outputs = self.predict(inputs, classifier_weights) #[b_size * N * K, n_way]
         # target -> [batch, num_classes]; pred -> [batch, num_classes]
         criterion = nn.NLLLoss()
         target = target.view(target.size(0), -1, target.size(-1))
-        target = target.view(-1, target.size(-1)).squeeze()
+        target = target.view(-1, target.size(-1)).squeeze() # [b_size * N * K]
 
         target_loss = criterion(outputs, target)
 

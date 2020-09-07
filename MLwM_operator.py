@@ -158,7 +158,6 @@ class MAML_operator(object):
                 self._write_results(filename_train_result, epoch, epoch_loss, epoch_criterion, \
                     filename_val_result, epoch_loss_val, epoch_criterion_val)
 
-                # At the last epoch
             else:
                 # Current Time / Indicate a filename
                 filename_last_result = os.path.join(temp_dir, "train_result.txt")
@@ -183,7 +182,6 @@ class MAML_operator(object):
         if update_step is not None:
             self.model.set_update_step(update_step)
         
-        # Run one poech
         test_data, pred_y, (_, epoch_criterion) = self._epochs(self.data_loader, train=False)
 
         # Write the train result

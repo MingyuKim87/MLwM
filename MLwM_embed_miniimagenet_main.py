@@ -20,9 +20,6 @@ from dataset.MLwM_embedded_miniimagenet_dataset import meta_embedded_miniimagene
 # Operator (Trainer, Tester)
 from MLwM_operator import MAML_operator
 
-# Config
-from MLwM_config import *
-
 # Utils
 from utils import *
 
@@ -33,22 +30,15 @@ def parse_args():
 
     common = parser.add_argument_group('common')
     common.add_argument('--device', default='0', type=str, help='which device to use')
-    common.add_argument('--model', default='MAML', type=str, help='which model to use ')
+    common.add_argument('--model', default='LEO', type=str, help='which model to use ')
     common.add_argument('--datatypes', default='inter_shuffle', type=str, help='which datatype to use')
     common.add_argument('--task_size', default=4, type=int, help='task size')
     common.add_argument('--n_way', default=5, type=int, help='n_way')
     common.add_argument('--k_shot_support', default=1, type=int, help='k shot for support set')
     common.add_argument('--k_shot_query', default=1, type=int, help='k shot for query set')
-    common.add_argument('--img_size', default=80, type=int, help='image size')
     common.add_argument('--epochs', default=100000, type=int, help='epoch number')
-    common.add_argument('--meta_lr', default=1e-4, type=float, help='learning rate for meta update')
-    common.add_argument('--update_lr', default=0.01, type=float, help='learning rate for inner update')
-    common.add_argument('--update_step', default=5, type=int, help='update steps for meta_training')
-    common.add_argument('--update_step_test', default=10, type=int, help='update steps for meta_testing')
-    common.add_argument('--encoder_type', default="BBB", type=str, help='what encoder we use')
-    common.add_argument('--encoder_output_dim', default=640, type=str, help='output_dim_by_encoded (it should be divided to (img_size * img_size)')
-    common.add_argument('--beta_kl', default=1.0, type=float, help='Beta kl')
-
+    common.add_argument('--description', default='embedded_miniimagenet', type=str, help='save file name')
+    
     # dataset
     common.add_argument('--data_path', default='/home/mgyukim/Data/embeddings/miniImageNet/center',\
          type=str, help='directory path for training data')
@@ -65,7 +55,7 @@ def parse_args():
 
     return args
 
-def train(model, save_model_path, initializer=torch.nn.init.xavier_normal_):
+def train(model, config, save_model_path, initializer=torch.nn.init.xavier_normal_):
     # Create Model
     model = model
     
@@ -100,7 +90,7 @@ def train(model, save_model_path, initializer=torch.nn.init.xavier_normal_):
         print("query_y shape : ", query_y.shape)
 
     # Set the optimizer
-    optimizer = optim.Adam(model.parameters(), lr=args.meta_lr)
+    optimizer = optim.Adam(model.parameters(), lr=config['meta_lr'])
 
     # Operator
     maml_operator = MAML_operator(model, device, train_loader, optimizer, args.epochs, save_model_path, val_loader)
@@ -112,9 +102,9 @@ def train(model, save_model_path, initializer=torch.nn.init.xavier_normal_):
 
     # Move saved files to the result folder
     remove_temp_files_and_move_directory(save_model_path, "/home/mgyukim/workspaces/result_MLwM", args.model, \
-        args.encoder_type, args.beta_kl, "miniimagenet", args.datatypes)
+        config['encoder_type'], config['beta_kl'], "embedded_miniimagenet", args.datatypes, args.description)
 
-def test(model, load_model_path, initializer=torch.nn.init.xavier_normal_):
+def test(model, load_model_path, save_model_path, initializer=torch.nn.init.xavier_normal_):
     # Create Model
     model = model
     
@@ -156,7 +146,7 @@ if __name__ == '__main__':
 
     # Parser
     args = parse_args()
-    args = set_dir_path_args(args, "miniimagenet")
+    args = set_dir_path_args(args, "embedded_miniimagenet")
 
     # filePath
     miniimagenet_filepath = args.data_path
@@ -166,37 +156,46 @@ if __name__ == '__main__':
 
     # Architecture Config
     if args.model == "MLwM":
-        # Set Configuration (Encoder)
-        ENCODER_CONFIG = set_config_encoder(ENCODER_CONFIG_EMBED_MINIIMAGENET, args.encoder_type, args.encoder_output_dim)
+        # Load config
+        config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/MLwM_config.yml", 'r'), \
+            Loader=yaml.SafeLoader)
+        config = config['miniImageNet']
         
-        # Set Configuration (MAML)
-        #encoded_img_size = math.floor(math.sqrt(args.encoder_output_dim))
-        #architecture = set_config(CONFIG_CONV_4, args.n_way, encoded_img_size, is_regression=False)
-        architecture = set_config_fc_layers(args.n_way, 640, 64, 4)
+        # Set Configuration (Encoder) <- should be modified (stochastic linear 활용)
+        ENCODER_CONFIG = set_config_encoder(config['ENCODER_CONFIG_FC'], \
+            config['encoder_type_FC'], config['encoder_output_dim'])
 
+        # Set Configuration (MAML)
+        encoded_img_size = math.floor(math.sqrt(config['encoder_output_dim']))
+        architecture = set_config(config['CONFIG_CONV_4'], args.n_way, encoded_img_size, is_regression=False)
+        
     elif args.model == "LEO":
         # Config
-        leo_config = yaml.load(open("/home/mgyukim/workspaces/MLwM/LEO_config.yml", 'r'), \
+        leo_config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/LEO_config.yml", 'r'), \
             Loader=yaml.SafeLoader)
-        leo_config = leo_config['miniImageNet']
+        config = leo_config['miniImageNet']
         
     else:
+        # Load config
+        config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/MLwM_config.yml", 'r'), \
+            Loader=yaml.SafeLoader)
+        config = config['miniImageNet']
+        
         architecture = set_config_fc_layers(args.n_way, 640, 64, 4)
-        #architecture = set_config(CONFIG_CONV_4_MAXPOOL, args.n_way, args.img_size, is_regression=False)
-
+        
     # Create Model
     if args.model == "MAML":
-        model = Meta(architecture, args.update_lr, args.update_step, is_regression=False, is_image_feature=False)
+        model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=False, is_image_feature=False)
     elif args.model == "LEO":
-        model = LEO(leo_config)
+        model = LEO(config)
     elif args.model =="MLwM":
-        model = MLwM(ENCODER_CONFIG, architecture, args.update_lr, args.update_step,\
-            is_regression=False, is_image_feature=False, is_kl_loss=True, beta_kl=args.beta_kl)
+        model = MLwM(ENCODER_CONFIG, architecture, config['update_lr'], config['update_step'],\
+            is_regression=False, is_kl_loss=True, beta_kl=config['beta_kl'])
     else:
         NotImplementedError
     
     # Train
-    train(model, save_model_path) 
+    train(model, config, save_model_path) 
 
     # load model path
     if args.model_save_root_dir == args.model_load_dir:
@@ -205,7 +204,7 @@ if __name__ == '__main__':
         load_model_path = args.model_load_dir
 
     # Test
-    test(model, load_model_path)
+    test(model, load_model_path, save_model_path)
 
     
 

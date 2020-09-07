@@ -31,9 +31,10 @@ def parse_args():
     common.add_argument('--model', default='MLwM', type=str, help='which model to use ')
     common.add_argument('--datatypes', default='non_mutual_exclusive', type=str, help='which datatype to use')
     common.add_argument('--task_size', default=10, type=int, help='task size')
+    common.add_argument('--test_task_size', default=20, type=int, help='task size')
     common.add_argument('--n_way', default=1, type=int, help='n_way')
-    common.add_argument('--k_shot_support', default=10, type=int, help='k shot for support set')
-    common.add_argument('--k_shot_query', default=10, type=int, help='k shot for query set')
+    common.add_argument('--k_shot_support', default=15, type=int, help='k shot for support set')
+    common.add_argument('--k_shot_query', default=15, type=int, help='k shot for query set')
     common.add_argument('--epochs', default=60000, type=int, help='epoch number')
     common.add_argument('--description', default='Meta_learning', type=str, help='save file name')
     
@@ -100,11 +101,11 @@ def train(model, config, save_model_path, initializer=torch.nn.init.xavier_norma
     torch.save(model.state_dict(), os.path.join(save_model_path, "Model_{}.pt".format(args.datatypes)))
     print("="*20, "Save the model (After training)", "="*20)
 
-    '''
+    
     # Move saved files to the result folder
     remove_temp_files_and_move_directory(save_model_path, "/home/mgyukim/workspaces/result_MLwM", args.model, \
-        config['encoder_type'], config['beta_kl'], "poseregression", args.datatypes)
-    '''
+        config['encoder_type'], config['beta_kl'], "poseregression", args.datatypes, args.description)
+    
     
 
 def test(model, load_model_path, save_model_path, initializer=torch.nn.init.xavier_normal_):
@@ -170,9 +171,9 @@ if __name__ == '__main__':
         
         # Set Configuration (MAML)
         encoded_img_size = math.floor(math.sqrt(config['encoder_output_dim']))
-        architecture = set_config(config['CONFIG_CONV_4'], args.n_way, encoded_img_size, is_regression=False)
+        architecture = set_config(config['CONFIG_CONV_4'], args.n_way, encoded_img_size, is_regression=True)
     else:
-        architecture = set_config(config['CONFIG_CONV_4'], args.n_way, config['img_size'], is_regression=False)
+        architecture = set_config(config['CONFIG_CONV_4_MAML'], args.n_way, config['img_size'], is_regression=True)
 
     # Create Model
     if args.model == "MAML":

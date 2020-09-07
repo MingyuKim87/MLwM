@@ -12,8 +12,9 @@ class LEO(nn.Module):
     def __init__(self, config):
         super(LEO, self).__init__()
 
-        # Regression
+        # Properties
         self._is_regression = False
+        self._is_deterministic = config['is_deterministic']
 
         # Dimension for LEO part
         self.embed_size = config['embedding_size']
@@ -33,9 +34,7 @@ class LEO(nn.Module):
         self.finetune_lr = nn.Parameter(torch.FloatTensor([config['finetuning_lr_init']]))
 
         # LEO network
-        self.model = LEO_network(self.embed_size, self.hidden_size, self.dropout)
-
-        # 
+        self.model = LEO_network(self.embed_size, self.hidden_size, self.dropout, self._is_deterministic)
 
         # Model initialize
         for p in self.model.parameters():
@@ -176,9 +175,15 @@ class LEO(nn.Module):
         orthogonality_penalty = self.orthogonality(list(self.model.decoder.parameters())[0])
 
         # Total loss
-        total_loss = val_loss + (self.kl_weight * kl_div) \
-            + (self.encoder_panelty_weight * encoder_penalty) \
-            + (self.orthogonality_penalty_weight * orthogonality_penalty)
+        if self._is_deterministic:
+            total_loss = val_loss \
+                + (self.encoder_panelty_weight * encoder_penalty) \
+                + (self.orthogonality_penalty_weight * orthogonality_penalty)
+
+        else:
+            total_loss = val_loss + (self.kl_weight * kl_div) \
+                + (self.encoder_panelty_weight * encoder_penalty) \
+                + (self.orthogonality_penalty_weight * orthogonality_penalty)
 
         return total_loss, val_accuracy
 

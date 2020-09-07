@@ -2,12 +2,20 @@ miniImageNet:
   # Architecture of Encoder
     # what encoder we use
   encoder_type : 'BBB'
+    # what encoder we use
+  encoder_type_FC : 'BBB_FC'
     # output_dim_by_encoded (it should be divided to (img_size * img_size]
-  encoder_output_dim : 784
+    
+  encoder_output_dim : 400
     # 'Beta kl'
-  beta_kl : 1.0
+  beta_kl : 1.0e-3
     # Encode for dataset
-  ENCODER_CONFIG : ['VAE', [84, 3, 784, [32, 48, 64], 3]]
+      # Encoder type, [input_image_size, input_channel, output_dim(Flatten), hidden_unit_sizes, layer_count] 
+  ENCODER_CONFIG : ['VAE', [84, 3, 400, [32, 48, 64], 3]]
+
+  # Encode for dataset (Stochastic FC layer)
+    # Encoder_type, [feature_dim, hidden_dim, output_dim, layer_count]
+  ENCODER_CONFIG_FC : ['VAE', [640, 600, 400, 3]]
 
   # Architecture of Main MAML body
   CONFIG_CONV_4 : [['conv2d', [64, 1, 3, 3, 2, 0]],
@@ -16,10 +24,10 @@ miniImageNet:
     ['conv2d', [64, 64, 3, 3, 2, 0]],
     ['relu', [True]],
     ['bn', [64]],
-    ['conv2d', [64, 64, 3, 3, 2, 0]],
+    ['conv2d', [64, 64, 2, 2, 2, 0]],
     ['relu', [True]],
     ['bn', [64]],
-    ['conv2d', [64, 64, 2, 2, 1, 0]],
+    ['conv2d', [64, 64, 1, 1, 1, 0]],
     ['relu', [True]],
     ['bn', [64]]
   ]
@@ -72,15 +80,30 @@ Omniglot:
     # what encoder we use
   encoder_type : 'BBB'
     # output_dim_by_encoded (it should be divided to (img_size * img_size]
-  encoder_output_dim : 784
+  encoder_output_dim : 196
     # 'Beta kl'
-  beta_kl : 1.0
+  beta_kl : 1.0e-5
     # Encode for dataset
-  ENCODER_CONFIG : ['VAE', [28, 1, 784, [32, 48, 64], 3]]
+  ENCODER_CONFIG : ['VAE', [28, 1, 196, [32, 48, 64], 3]]
   
 
   # Architecture of Main MAML body
+  # 'layer", [ch_out, ch_in, kernel_size, kernel_size, stride, padding]
   CONFIG_CONV_4 : [['conv2d', [64, 1, 3, 3, 2, 0]],
+    ['relu', [True]],
+    ['bn', [64]],
+    ['conv2d', [64, 64, 3, 3, 2, 0]],
+    ['relu', [True]],
+    ['bn', [64]],
+    ['conv2d', [64, 64, 2, 2, 2, 0]],
+    ['relu', [True]],
+    ['bn', [64]],
+    ['conv2d', [64, 64, 1, 1, 1, 0]],
+    ['relu', [True]],
+    ['bn', [64]]
+  ]
+
+  CONFIG_CONV_4_MAML : [['conv2d', [64, 1, 3, 3, 2, 0]],
     ['relu', [True]],
     ['bn', [64]],
     ['conv2d', [64, 64, 3, 3, 2, 0]],
@@ -109,13 +132,12 @@ Pose_regression:
     # what encoder we use
   encoder_type : 'BBB'
     # output_dim_by_encoded (it should be divided to (img_size * img_size]
-  encoder_output_dim : 784
+  encoder_output_dim : 196
     # 'Beta kl'
-  beta_kl : 1.0
+  beta_kl : 0.1
     # Encode for dataset
-  ENCODER_CONFIG : ['VAE', [128, 1, 784, [32, 48, 64], 3]]
+  ENCODER_CONFIG : ['VAE', [128, 1, 196, [32, 48, 64], 3]]
   
-
   # Architecture of Main MAML body
   CONFIG_CONV_4 : [['conv2d', [64, 1, 3, 3, 2, 0]],
     ['relu', [True]],
@@ -123,10 +145,25 @@ Pose_regression:
     ['conv2d', [64, 64, 3, 3, 2, 0]],
     ['relu', [True]],
     ['bn', [64]],
+    ['conv2d', [64, 64, 2, 2, 2, 0]],
+    ['relu', [True]],
+    ['bn', [64]],
+    ['conv2d', [64, 64, 1, 1, 1, 0]],
+    ['relu', [True]],
+    ['bn', [64]]
+  ]
+
+  # Architecture of Main MAML body
+  CONFIG_CONV_4_MAML : [['conv2d', [64, 1, 3, 3, 2, 0]],
+    ['relu', [True]],
+    ['bn', [64]],
     ['conv2d', [64, 64, 3, 3, 2, 0]],
     ['relu', [True]],
     ['bn', [64]],
-    ['conv2d', [64, 64, 2, 2, 1, 0]],
+    ['conv2d', [64, 64, 3, 3, 2, 0]],
+    ['relu', [True]],
+    ['bn', [64]],
+    ['conv2d', [64, 64, 3, 3, 1, 0]],
     ['relu', [True]],
     ['bn', [64]]
   ]
@@ -134,12 +171,12 @@ Pose_regression:
   # inner update step -> update how many gradient steps in inner loop
   # finetuning updata step -> update how many gradient steps during finetuning
   update_step : 5
-  update_step_test : 10
+  update_step_test : 20
   img_size : 128
   
   #hyperparams
   meta_lr : 1.0e-3
-  update_lr : 1.0e-4
+  update_lr : 1.0e-3
 
 
 

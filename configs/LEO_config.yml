@@ -6,15 +6,23 @@ miniImageNet:
   finetuning_update_step: 5 
   clip_value: 0.1
   total_steps: 100000
+  img_size : 80
 
   #hyperparams
-  outer_lr: 1.0e-4
+  meta_lr: 1.0e-4
   kl_weight: 0.001                     # beta in leo paper
   encoder_penalty_weight: 1.0e-9       # gamma in leo paper
   l2_penalty_weight: 1.0e-8            # lambda1 in leo paper
   orthogonality_penalty_weight: 0.1    # lambda2 in leo paper
   inner_lr_init: 1
   finetuning_lr_init: 0.001
-  dropout: 0.3
+  dropout: 0
   embedding_size: 640                  # must match embedding size in 'data'
   hidden_size: 64                      # size of latent code(z)
+
+  # Propertires
+  is_deterministic : True
+
+  # name (Just for matching directory name)
+  encoder_type : "ResNet_28_10"
+  beta_kl : 0

@@ -32,7 +32,7 @@ def parse_args():
     common.add_argument('--device', default='0', type=str, help='which device to use')
     common.add_argument('--model', default='MLwM', type=str, help='which model to use ')
     common.add_argument('--datatypes', default='inter_shuffle', type=str, help='which datatype to use')
-    common.add_argument('--task_size', default=32, type=int, help='task size')
+    common.add_argument('--task_size', default=16, type=int, help='task size')
     common.add_argument('--n_way', default=5, type=int, help='n_way')
     common.add_argument('--k_shot_support', default=1, type=int, help='k shot for support set')
     common.add_argument('--k_shot_query', default=1, type=int, help='k shot for query set')
@@ -105,11 +105,11 @@ def train(model, config, save_model_path, initializer=torch.nn.init.xavier_norma
     torch.save(model.state_dict(), os.path.join(save_model_path, "Model_{}.pt".format(args.datatypes)))
     print("="*20, "Save the model (After training)", "="*20)
 
-    '''
+    
     # Move saved files to the result folder
     remove_temp_files_and_move_directory(save_model_path, "/home/mgyukim/workspaces/result_MLwM", args.model, \
-        config['encoder_type'], config['beta_kl'], "Omniglot", args.datatypes)
-    '''
+        config['encoder_type'], config['beta_kl'], "Omniglot", args.datatypes, args.description)
+    
 
 def test(model, config, load_model_path, save_model_path, initializer=torch.nn.init.xavier_normal_):
     # Create Model
@@ -177,7 +177,7 @@ if __name__ == '__main__':
         encoded_img_size = math.floor(math.sqrt(config['encoder_output_dim']))
         architecture = set_config(config['CONFIG_CONV_4'], args.n_way, encoded_img_size, is_regression=False)
     else:
-        architecture = set_config(config['CONFIG_CONV_4'], args.n_way, config['img_size'], is_regression=False)
+        architecture = set_config(config['CONFIG_CONV_4_MAML'], args.n_way, config['img_size'], is_regression=False)
 
     # Create Model
     if args.model == "MAML":

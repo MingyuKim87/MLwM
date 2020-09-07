@@ -67,6 +67,9 @@ def set_config(config, n_way, img_size, is_regression=False):
 
         length = math.floor((numerator / denominator) + 1)
 
+        if length <= 0:
+            print("Conv network is too deep")
+
         return length
     
     for name, properties in config:
@@ -175,9 +178,7 @@ def latest_load_model_filepath(args):
             raise NotImplementedError
         else:
             return filepath
-        
-        
-
+            
     else: 
         return load_model_path
 
@@ -325,7 +326,7 @@ def set_dir_path_args(args, dataset_name):
     return args
 
 def remove_temp_files_and_move_directory(save_model_path, result_path, model, \
-    encoder_type, beta_kl, problem_name, datatype):
+    encoder_type, beta_kl, problem_name, datatype, description):
     temp_path = os.path.join(save_model_path, "temp")
     file_names = os.listdir(temp_path)
 
@@ -334,7 +335,7 @@ def remove_temp_files_and_move_directory(save_model_path, result_path, model, \
             filepath = os.path.join(temp_path, filename)
             os.remove(filepath)
 
-    last_path = model + "_" + encoder_type + "_" + str(beta_kl) + "_" + problem_name + "_" + datatype
+    last_path = model + "_" + encoder_type + "_" + str(beta_kl) + "_" + problem_name + "_" + datatype + "_" + description
     result_path = os.path.join(result_path, last_path)
 
     # copy a temp folder to result folder
@@ -346,6 +347,17 @@ def remove_temp_files_and_move_directory(save_model_path, result_path, model, \
     print("*"*10, "move the result folder", "*"*10)
 
     return 0
+
+def output_img_size(img_size, padding, dilation, kernel_size, stride):
+        numerator = (img_size + (2*padding) - (dilation * (kernel_size - 1)) -1)
+        denominator = stride
+
+        length = math.floor((numerator / denominator) + 1)
+
+        if length <= 0:
+            print("Conv network is too deep")
+
+        return length
 
 if __name__ == '__main__':
 
@@ -359,10 +371,10 @@ if __name__ == '__main__':
         ('conv2d', [64, 64, 3, 3, 2, 0]),
         ('relu', [True]),
         ('bn', [64]),
-        ('conv2d', [64, 64, 3, 3, 2, 0]),
+        ('conv2d', [64, 64, 2, 2, 2, 0]),
         ('relu', [True]),
         ('bn', [64]),
-        ('conv2d', [64, 64, 2, 2, 1, 0]),
+        ('conv2d', [64, 64, 1, 1, 1, 0]),
         ('relu', [True]),
         ('bn', [64])
     ]
@@ -386,7 +398,7 @@ if __name__ == '__main__':
         ('max_pool2d', [2, 1, 0])
     ]
 
-    new_config_omniglot = set_config(CONFIG_OMNIGLOT, 5, 28)
+    new_config_omniglot = set_config(CONFIG_OMNIGLOT, 5, 14)
     new_config_imagenet = set_config(CONFIG_IMAGENET, 5, 84)
 
     print(new_config_omniglot)

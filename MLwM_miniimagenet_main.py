@@ -101,10 +101,9 @@ def train(model, config, save_model_path, initializer=torch.nn.init.xavier_norma
     print("="*20, "Save the model (After training)", "="*20)
 
     # Move saved files to the result folder
-    '''
     remove_temp_files_and_move_directory(save_model_path, "/home/mgyukim/workspaces/result_MLwM", args.model, \
-        config['encoder_type'], config['beta_kl'], "miniimagenet", args.datatypes)
-    '''
+        config['encoder_type'], config['beta_kl'], "miniimagenet", args.datatypes, args.description)
+    
 
 def test(model, config, load_model_path, save_model_path, initializer=torch.nn.init.xavier_normal_):
     # Create Model

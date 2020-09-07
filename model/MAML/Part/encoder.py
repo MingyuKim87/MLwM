@@ -171,6 +171,9 @@ class Stochastic_Conv_Encoder(Abstract_Encoder):
         hidden = hidden.view(num_task, n_way, k_shot, -1)  #(num_task, n_way, k_shot, output_dim)
         hidden = self._last_layer(hidden) #(num_task * num_points, output_dim)
 
+        # KL loss
+        kl_loss += self._last_layer.kl_loss()
+
         # Shape of img_size = sqrt(output_dim)
         output_dim = hidden.size(-1)
         img_size = int(math.sqrt(output_dim))
@@ -379,7 +382,7 @@ class Stochastic_FC_Encoder(Abstract_Encoder):
             
             if i == 0 :
                 layer = Stochastic_FC(self._feature_dim, self._hidden_dim)
-            if i == (self._layer_count - 1):
+            elif i == (self._layer_count - 1):
                 layer = Stochastic_FC(self._hidden_dim, self._output_dim)
             else:
                 layer = Stochastic_FC(self._hidden_dim, self._hidden_dim)
@@ -415,14 +418,13 @@ class Stochastic_FC_Encoder(Abstract_Encoder):
             hidden = F.relu(layer(hidden))
             kl_loss += layer.kl_loss()
 
-        # Last layer (FC)
-            # Flatten (num_task * n_way * k_shot ) --> (num_task, n_way, k_shot)
-        hidden = hidden.view(num_task, n_way, k_shot, -1)  #(num_task, n_way, k_shot, output_dim)
-        hidden = self._last_layer(hidden) #(num_task * num_points, output_dim)
-
         # Shape of img_size = sqrt(output_dim)
         output_dim = hidden.size(-1)
-        
+        img_size = int(math.sqrt(output_dim))
+
+        # Reshape hidden to a image type
+        hidden = hidden.view(num_task, n_way, k_shot, 1, img_size, -1)
+
         return hidden, kl_loss
 
 

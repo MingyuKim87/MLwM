@@ -6,6 +6,7 @@ from torch import optim
 from torch.nn import functional as F
 
 from model.MAML.maml_meta import Meta
+from model.MAML.meta_sgd import MetaSGD
 
 from model.MAML.Part.encoder import Deterministic_Conv_Encoder, \
     Stochastic_Conv_Encoder, Conv_Reparameterization_Encoder, Stochastic_FC_Encoder
@@ -15,7 +16,7 @@ from torch.utils.data import DataLoader
 
 class MLwM(nn.Module):
     def __init__(self, encoder_config, maml_config, update_lr, update_step, initializer=None, \
-        is_regression=False, is_image_feature=True, is_kl_loss=False, beta_kl=1):
+        is_regression=False, is_image_feature=True, is_kl_loss=False, beta_kl=1, is_meta_sgd=False):
         super().__init__()
         
         self.encoder_type = encoder_config[0]
@@ -25,6 +26,7 @@ class MLwM(nn.Module):
         self._is_image_feature = is_image_feature
         self._is_kl_loss = is_kl_loss
         self._beta_kl = beta_kl
+        self._is_meta_sgd = is_meta_sgd
 
         if encoder_config[0] == 'deterministic':
             self.encoder = \
@@ -44,7 +46,11 @@ class MLwM(nn.Module):
         else:
             NotImplementedError
 
-        self.maml = Meta(self.maml_config, update_lr, update_step, initializer=None, is_regression=self._is_regression, is_image_feature=self._is_image_feature )
+        # choose 'update_lr' can be learned or not
+        if self._is_meta_sgd:
+            self.maml = MetaSGD(self.maml_config, update_lr, update_step, initializer=None, is_regression=self._is_regression, is_image_feature=self._is_image_feature )
+        else:
+            self.maml = Meta(self.maml_config, update_lr, update_step, initializer=None, is_regression=self._is_regression, is_image_feature=self._is_image_feature )
 
     def forward(self, x_support, y_support, x_query, is_hessian=True):
         '''

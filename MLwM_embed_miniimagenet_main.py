@@ -11,8 +11,10 @@ from torch.utils.data import DataLoader
 
 # Model
 from model.MAML.maml_meta import Meta
+from model.MAML.meta_sgd import MetaSGD
 from model.MAML.MLwM_model import MLwM
 from model.LEO.LEO_model import LEO
+from model.SIB.SIB_model import SIB
 
 # Dataset
 from dataset.MLwM_embedded_miniimagenet_dataset import meta_embedded_miniimagenet_dataset
@@ -174,6 +176,12 @@ if __name__ == '__main__':
         leo_config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/LEO_config.yml", 'r'), \
             Loader=yaml.SafeLoader)
         config = leo_config['miniImageNet']
+
+    elif args.model == "SIB":
+        # Config
+        SIB_config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/SIB_config.yml", 'r'), \
+            Loader=yaml.SafeLoader)
+        config = SIB_config['miniImageNet']
         
     else:
         # Load config
@@ -185,12 +193,19 @@ if __name__ == '__main__':
         
     # Create Model
     if args.model == "MAML":
-        model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=False, is_image_feature=False)
+        # Meta SGD or MAML
+        if config['is_meta_sgd']:
+            model = MetaSGD(architecture, config['update_lr'], config['update_step'], is_regression=False, is_image_feature=False)
+        else:
+            model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=False, is_image_feature=False)
     elif args.model == "LEO":
         model = LEO(config)
+    elif args.model == "SIB":
+        model = SIB(args.n_way, config)
     elif args.model =="MLwM":
+        # MLwM with MAML or MetaSGD
         model = MLwM(ENCODER_CONFIG, architecture, config['update_lr'], config['update_step'],\
-            is_regression=False, is_kl_loss=True, beta_kl=config['beta_kl'])
+            is_regression=False, is_kl_loss=True, beta_kl=config['beta_kl'], is_meta_sgd=config['is_meta_sgd'])
     else:
         NotImplementedError
     

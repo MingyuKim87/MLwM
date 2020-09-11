@@ -16,12 +16,12 @@ miniImageNet:
   orthogonality_penalty_weight: 0.1    # lambda2 in leo paper
   inner_lr_init: 1
   finetuning_lr_init: 0.001
-  dropout: 0
+  dropout: 0.3
   embedding_size: 640                  # must match embedding size in 'data'
   hidden_size: 64                      # size of latent code(z)
 
   # Propertires
-  is_deterministic : True
+  is_deterministic : False
 
   # name (Just for matching directory name)
   encoder_type : "ResNet_28_10"

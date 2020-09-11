@@ -134,8 +134,9 @@ if __name__ == "__main__":
     b = torch.Tensor(np.random.normal(size=(5,3,7)))
     c = torch.Tensor(np.random.normal(size=(9,8,3)))
 
-    d = torch.matmul(a, b)
-    e = torch.mul(a,c)
+    
 
-    print(c.shape)
-    print(d.shape)
+    a = a.view(-1)
+
+    print(a.shape)
+    

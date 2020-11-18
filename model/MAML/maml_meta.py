@@ -319,6 +319,133 @@ class Meta(nn.Module):
         return loss, criterion
 
 
+    def get_embedded_vector_forward(self, x_support, y_support, x_query, is_hessian=True, is_adaptation=False):
+        '''
+            Model Agnostic Meta Learning
+            
+            Args:
+                x_support : [task_size, n_way, k_shot, channel, height, width]
+                y_support : [task_size, n_way, k_shot, , ] # not one-hot vector
+                x_query : [task_size, n_way, k_shot, channel, height, width]
+                y_support : [task_size, n_way, k_shot, ] # not one-hot vector
+            Returns:
+                embedded_vectors : [task_size, n_way, k_shot, embedded_dims] # 
+        '''
+        
+        if self._is_image_feature:
+            _, _, k_shot_support, _, _, _ = x_support.size()
+            task_size, n_way, k_shot_query, channel_count, height, width = x_query.size()
+
+            # Reshape x and y
+            x_support = x_support.view(task_size, -1, channel_count, height, width)
+            x_query = x_query.view(task_size, -1, channel_count, height, width)
+
+        else:
+            _, _, k_shot_support, _,  = x_support.size()
+            task_size, n_way, k_shot_query, feature_dim = x_query.size()
+
+            # Reshape x and y
+            x_support = x_support.view(task_size, -1, feature_dim)
+            x_query = x_query.view(task_size, -1, feature_dim)
+
+        # Depending on the problem type, target dimension should be changed. 
+        if self._is_regression:
+            # For mathcing a dimension, [n_way * k_shot, 1] by evaluating F.mse_loss 
+            # It requires same same logtis and target [n_way * k_shot, 1]
+            y_support = y_support.view(task_size, -1, 1)
+        else:
+            # By loss func, F.cross_entropy requires a target shape : [n_way * k_shot] 
+            y_support = y_support.view(task_size, -1)
+
+        # Get Parameters
+        parameters = self.net.parameters()
+        
+        # Pred Container
+        embedded_vector_list = []
+
+        if not is_adaptation:
+            for i in range(task_size):
+                embedded_vector = self.net.get_embedded_vector(x_query[i], parameters)
+                embedded_vector = embedded_vector.view(n_way, k_shot_query, -1)
+                embedded_vector_list.append(embedded_vector)
+
+            # Reshape
+            embedded_vector_stack = torch.stack(embedded_vector_list, dim=0) #[task_size, n_way, k_shot_query], type=torch.long
+
+            return embedded_vector_stack
+
+        else:
+            for i in range(task_size):
+                # Run the i-th task and compute loss for k = 0 
+                    # Forward (bn_training)
+                logits = self.net(x_support[i], vars=None, bn_training=True)
+            
+                if self._is_regression:
+                    task_loss = F.mse_loss(logits, y_support[i])
+                else:
+                    task_loss = F.cross_entropy(logits, y_support[i], reduction='sum')
+
+                # Parameters
+                parameters = self.net.parameters()
+
+                # Gradient
+                grads = torch.autograd.grad(task_loss, parameters)
+                
+                # Initializing the container of task-specific parameters
+                task_parameter = []
+
+                # Inner Update
+                for j, (grad, param) in enumerate(zip(grads, parameters)):
+                    new_weight = gradient_descent(grad, param, self.update_lr, is_hessian)
+                    task_parameter.append(new_weight)
+
+                # By using the query set, we assess loss and accuracy with meta-parameters
+                with torch.no_grad():
+                    # Evaluated by meta parameter
+                    logit_q = self.net(x_query[i], self.net.parameters(), bn_training=True) #[n_way * k_shot, classess]
+                    if not self._is_regression:
+                        pred_q = F.softmax(logit_q, dim=1).argmax(dim=1) #[n_way * k_shot,]
+
+                    # Evaluated by first updated parameter
+                    logit_q = self.net(x_query[i], task_parameter, bn_training=True)
+                    if not self._is_regression:
+                        pred_q = F.softmax(logit_q, dim=1).argmax(dim=1)
+                    
+                for k in range(1, self.update_step):
+                    # Run the i-th task and compute loss for k = 1
+                    # Forward (bn_training)
+                    logits = self.net(x_support[i], vars=task_parameter, bn_training=True)
+                    
+                    if not self._is_regression:
+                        task_loss = F.cross_entropy(logits, y_support[i], reduction='sum')
+                    else:
+                        task_loss = F.mse_loss(logits, y_support[i])
+
+                    # Gradient
+                    grads = torch.autograd.grad(task_loss, task_parameter)
+
+                    # Inner update
+                    for j, (grad, param) in enumerate(zip(grads, task_parameter)):
+                        new_weight = gradient_descent(grad, param, self.update_lr, is_hessian)
+                        task_parameter[j] = new_weight
+
+                    with torch.no_grad():
+                        # Assessment
+                        embedded_vector = self.net.get_embedded_vector(x_query[i], task_parameter, bn_training=True) #[n_way * k_shot_query, num_class]
+                        embedded_vector = embedded_vector.view(n_way, k_shot_query, -1)
+
+                # Append
+                embedded_vector_list.append(embedded_vector)
+                                
+            # Reshape
+            embedded_vector_stack = torch.stack(embedded_vector_list, dim=0) #[task_size, n_way, k_shot_query], type=torch.long
+            
+            return embedded_vector_stack
+
+
+    
+
+
 if __name__ == '__main__':    
     # Set Config
     config = list()

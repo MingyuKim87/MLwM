@@ -6,7 +6,7 @@ import math
 
 class LEO_network(nn.Module):
     """docstring for Encoder"""
-    def __init__(self, embedding_size, hidden_size, dropout_rate, is_deterministic=False):
+    def __init__(self, embedding_size, hidden_size, dropout_rate, layer_count=[1,3,1], is_deterministic=False):
         super(LEO_network, self).__init__()
         
         # Dimnesion
@@ -18,8 +18,12 @@ class LEO_network(nn.Module):
 
         # Hyper parameters
         self.dropout = nn.Dropout(p=dropout_rate)
+
+        # Layer count
+        self.layer_count = layer_count
         
         # Networks
+        '''
         self.encoder = nn.Linear(self.embed_size, self.hidden_size, bias = False)
         self.relation_net = nn.Sequential(
                                  nn.Linear(2*self.hidden_size, 2*self.hidden_size, bias = False),
@@ -30,7 +34,55 @@ class LEO_network(nn.Module):
                                  nn.ReLU()
                                  )
         self.decoder = nn.Linear(self.hidden_size, 2*self.embed_size, bias = False)
+        '''
         
+        
+        # Network
+        self.encoder = self._fc_layer(self.layer_count[0], self.embed_size, self.hidden_size)
+        self.relation_net = self._fc_layer(self.layer_count[1], 2*self.hidden_size, 2*self.hidden_size, 2*self.hidden_size, True)
+        self.decoder = self._fc_layer(self.layer_count[2], self.hidden_size, 2*self.embed_size)
+        
+
+    def _fc_layer(self, layer_count, input_size, output_size, hidden_size=None, is_last_layer_activated=False, bias=False):
+        modules = []
+
+        if hidden_size == None:
+            hidden_size = self.hidden_size
+        
+        
+        for i in range(layer_count):
+            if layer_count == 1:
+                layer = nn.Linear(input_size, output_size, bias=bias)
+                modules.append(layer)
+            else:
+                if i == layer_count -1 and is_last_layer_activated:
+                    layer = nn.Linear(hidden_size, output_size, bias=bias)
+                    activation = nn.ReLU()
+                    modules.append(layer)
+                    modules.append(activation)
+
+                elif i == layer_count -1 and not is_last_layer_activated:
+                    layer = nn.Linear(hidden_size, output_size, bias=bias)
+                    modules.append(layer)
+                    
+                elif i == 0:
+                    layer = nn.Linear(input_size, hidden_size, bias=bias)
+                    activation = nn.ReLU()
+
+                    modules.append(layer)
+                    modules.append(activation)
+                    
+                else:
+                    layer = nn.Linear(hidden_size, hidden_size,bias=bias)
+                    activation = nn.ReLU()
+
+                    modules.append(layer)
+                    modules.append(activation)
+
+        layer_sequence = nn.Sequential(*modules)
+                
+        return layer_sequence
+
     def encode(self, inputs):
         # inputs -> [batch, N, K, embed_size]
         inputs = self.dropout(inputs)

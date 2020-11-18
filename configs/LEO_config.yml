@@ -8,6 +8,10 @@ miniImageNet:
   total_steps: 100000
   img_size : 80
 
+  # Layer count
+    # encoder layer count, relations_net layer count, decoder layer count
+  layer_count : [4, 12, 4]
+
   #hyperparams
   meta_lr: 1.0e-4
   kl_weight: 0.001                     # beta in leo paper

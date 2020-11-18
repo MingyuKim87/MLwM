@@ -15,6 +15,7 @@ from model.MAML.meta_sgd import MetaSGD
 from model.MAML.MLwM_model import MLwM
 from model.LEO.LEO_model import LEO
 from model.SIB.SIB_model import SIB
+from model.PrototypicalNet.PrototypicalNet_model import PrototypeNet_embedded
 
 # Dataset
 from dataset.MLwM_embedded_miniimagenet_dataset import meta_embedded_miniimagenet_dataset
@@ -24,6 +25,7 @@ from MLwM_operator import MAML_operator
 
 # Utils
 from utils import *
+from torchsummary import summary
 
 import argparse
 
@@ -32,9 +34,10 @@ def parse_args():
 
     common = parser.add_argument_group('common')
     common.add_argument('--device', default='0', type=str, help='which device to use')
-    common.add_argument('--model', default='LEO', type=str, help='which model to use ')
+    common.add_argument('--model', default='MLwM', type=str, help='which model to use ')
     common.add_argument('--datatypes', default='inter_shuffle', type=str, help='which datatype to use')
     common.add_argument('--task_size', default=4, type=int, help='task size')
+    common.add_argument('--task_size_test', default=32, type=int, help='task size')
     common.add_argument('--n_way', default=5, type=int, help='n_way')
     common.add_argument('--k_shot_support', default=1, type=int, help='k shot for support set')
     common.add_argument('--k_shot_query', default=1, type=int, help='k shot for query set')
@@ -106,7 +109,7 @@ def train(model, config, save_model_path, initializer=torch.nn.init.xavier_norma
     remove_temp_files_and_move_directory(save_model_path, "/home/mgyukim/workspaces/result_MLwM", args.model, \
         config['encoder_type'], config['beta_kl'], "embedded_miniimagenet", args.datatypes, args.description)
 
-def test(model, load_model_path, save_model_path, initializer=torch.nn.init.xavier_normal_):
+def test(model, save_model_path, load_model_path=None,  initializer=torch.nn.init.xavier_normal_):
     # Create Model
     model = model
     
@@ -121,7 +124,7 @@ def test(model, load_model_path, save_model_path, initializer=torch.nn.init.xavi
     miniimagenet_test_set = meta_embedded_miniimagenet_dataset(args.n_way, args.k_shot_support, args.k_shot_query, \
         args.data_path, mode='test', types=args.datatypes)
 
-    test_loader = DataLoader(miniimagenet_test_set, batch_size=args.task_size, shuffle=True)
+    test_loader = DataLoader(miniimagenet_test_set, batch_size=args.task_size_test, shuffle=True)
 
     if DEBUG:
         support_x, support_y, query_x, query_y = miniimagenet_test_set[0]
@@ -133,8 +136,8 @@ def test(model, load_model_path, save_model_path, initializer=torch.nn.init.xavi
         print("query_y shape : ", query_y.shape)
 
     # Load a model
-    checkpoint = torch.load(load_model_path)
-    model.load_state_dict(checkpoint)
+    checkpoint = torch.load(load_model_path) if not load_model_path == None else None
+    model.load_state_dict(checkpoint) if not load_model_path == None else None
     print("="*20, "Load the model : {}".format(load_model_path), "="*20)
 
     # Operator
@@ -182,6 +185,12 @@ if __name__ == '__main__':
         SIB_config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/SIB_config.yml", 'r'), \
             Loader=yaml.SafeLoader)
         config = SIB_config['miniImageNet']
+
+    elif args.model == "Prototypes_embedded":
+        # Config
+        Prototypes_embedded_config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/Prototypes_embedded_config.yml", 'r'), \
+            Loader=yaml.SafeLoader)
+        config = Prototypes_embedded_config['miniImageNet']
         
     else:
         # Load config
@@ -189,7 +198,7 @@ if __name__ == '__main__':
             Loader=yaml.SafeLoader)
         config = config['miniImageNet']
         
-        architecture = set_config_fc_layers(args.n_way, 640, 64, 4)
+        architecture = set_config_fc_layers(args.n_way, 640, 64, config['layer_count'])
         
     # Create Model
     if args.model == "MAML":
@@ -202,6 +211,8 @@ if __name__ == '__main__':
         model = LEO(config)
     elif args.model == "SIB":
         model = SIB(args.n_way, config)
+    elif args.model == "Prototypes_embedded":
+        model = PrototypeNet_embedded(args.n_way, config)
     elif args.model =="MLwM":
         # MLwM with MAML or MetaSGD
         model = MLwM(ENCODER_CONFIG, architecture, config['update_lr'], config['update_step'],\
@@ -217,9 +228,12 @@ if __name__ == '__main__':
         load_model_path = latest_load_model_filepath(args)
     else:
         load_model_path = args.model_load_dir
+    
+    
 
     # Test
-    test(model, load_model_path, save_model_path)
+    for i in range(10):
+        test(model, save_model_path, load_model_path=None )
 
     
 

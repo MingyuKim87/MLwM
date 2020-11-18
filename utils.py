@@ -119,15 +119,20 @@ def set_config(config, n_way, img_size, is_regression=False):
 def set_config_fc_layers(n_way, embed_size, hidden_size, layer_counts):
     Layers = []
 
-    for i in range(layer_counts):
-        if i == 0:
-            fc_layer = fc_layer = ('fc', [hidden_size, embed_size])
-        elif i == (layer_counts - 1):
-            fc_layer = fc_layer = ('fc', [n_way, hidden_size])
-        else:
-            fc_layer = fc_layer = ('fc', [hidden_size, hidden_size])
-
+    if layer_counts == 1:
+        fc_layer = ('fc', [n_way, embed_size])
         Layers.append(fc_layer)
+
+    else:
+        for i in range(layer_counts):
+            if i == 0:
+                fc_layer = ('fc', [hidden_size, embed_size])
+            elif i == (layer_counts - 1):
+                fc_layer = ('fc', [n_way, hidden_size])
+            else:
+                fc_layer = ('fc', [hidden_size, hidden_size])
+
+            Layers.append(fc_layer)
 
     return Layers
 
@@ -139,7 +144,7 @@ def get_save_model_path(args):
         
     # Current time
     now = datetime.now()
-    current_datetime = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.strftime('%M'))
+    current_datetime = str(now.year) + str(now.month) + str(now.day) + str(now.hour) + str(now.strftime('%M')) + str(now.strftime('%S'))
         
     # Make a save(model) directory (Optional)
     save_model_path = os.path.join(save_model_root, args.datatypes, args.description, current_datetime)

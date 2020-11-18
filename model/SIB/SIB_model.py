@@ -49,6 +49,7 @@ class SIB(nn.Module):
         self.n_way = n_way
         self.feature_dim = config['feature_dim']
         self.update_step = config['inner_update_step']
+        self.layer_count = config['layer_count']
         self.lr = config['inner_lr']
         self.coefficient_synthetic_grad_loss = config['coefficient_synthetic_grad_loss']
 
@@ -65,7 +66,7 @@ class SIB(nn.Module):
         # grad_net (aka decoupled network interface) phi(x_t)
             # Synthetic gradient networks
             # Translate to Logit for class [batch, n_way * k_shot, n_way] --> [batch, n_way * k_shot, n_way]
-        self.synthetic_grad_net = Synthetic_grad_linear(self.n_way, hidden_size=self.n_way*8)
+        self.synthetic_grad_net = Synthetic_grad_linear(self.n_way, layer_count=self.layer_count, hidden_size=self.n_way*8)
 
         # setting
         self._is_regression = False
@@ -154,9 +155,7 @@ class SIB(nn.Module):
             grad_theta = torch.autograd.grad([logits], [theta],
                                        grad_outputs=[synthetic_grad_logits],
                                        create_graph=True, retain_graph=True,
-                                       only_inputs=True)[0] 
-            
-
+                                       only_inputs=True)[0]
             # perform synthetic GD
             theta = theta - lr * grad_theta
 
@@ -208,7 +207,7 @@ class SIB(nn.Module):
         # Get shapes
         task_size, n_way, k_shot_support, feature_dim = support_x_transformed.size()
         _, _, k_shot_query, _ = query_x_transformed.size()
-        
+         
         
         # Forward
             # [batch_size * n_way * k_shot, n_way]
@@ -245,8 +244,9 @@ class SIB(nn.Module):
             query_x_transformed, self.lr)
 
         # calculate logits
+            # [batch_size, n_way, k_shot, feature_dim]  
         logits = self.apply_classification_weights(query_x_transformed, weights)
-            # [batch_size, n_way, k_shot, feature_dim]
+            
 
         return logits, weights 
 
@@ -270,12 +270,13 @@ class SIB(nn.Module):
         # For hook, move to grad --> grad_nonleaf 
             # It does not give impact on Autograd graph of "backward"
 
+        '''
         def require_nonleaf_grad(v):
             def hook(g):
                 v.grad_nonleaf = g
             h = v.register_hook(hook)
             return h
-        
+        '''
         
         # criterion
         criterion_1 = F.cross_entropy
@@ -291,6 +292,7 @@ class SIB(nn.Module):
 
         # Reshape
         logits = logits.view(-1, n_way) #[batch_size * n_way * k_shot, n_way]
+        logits.retain_grad()
         query_y_flatten = query_y.view(-1) #[batch_size * n_way * k_shot,]
 
         # Loss 1 : Evaluate loss for query_y and predicted value
@@ -298,16 +300,18 @@ class SIB(nn.Module):
 
         # Loss 2 : Synthetic gradient
         synthetic_grad_logits = self.synthetic_grad_net(logits)
-        handle = require_nonleaf_grad(logits)
+        #handle = require_nonleaf_grad(logits)
+
 
             # eval grad of logits
         loss_classification.backward(retain_graph=True)
 
             # remove handle
-        handle.remove()
+        #handle.remove()
 
             # true graident of logits
-        grad_logits = logits.grad_nonleaf.detach()
+        grad_logits = logits.grad.detach()
+        #grad_logits = logits.grad_nonleaf.detach()
         #grad_logits = torch.autograd.grad([loss_classification], [logits])[0].detach()
 
         loss_gradients = criterion_2(synthetic_grad_logits, grad_logits)

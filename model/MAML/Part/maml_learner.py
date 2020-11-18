@@ -292,6 +292,98 @@ class Learner(nn.Module):
         '''
         return self.vars
 
+    def get_embedded_vector(self, x, vars=None, bn_training=True, DEBUG=False):
+        '''
+            get_embedded_vector(self)
+
+            return : embedded vectors (n_way * k_shot, 800)
+        '''
+
+        if vars is None:
+            vars = self.vars
+
+        idx = 0 
+        bn_idx = 0
+
+        hidden = x
+
+        for name, param in self.config:    
+            # Weights
+            if name == 'conv2d':
+                w, b = vars[idx], vars[idx + 1]
+
+                # remember to keep synchrozied of forward_encoder and forward_decoder
+                hidden = F.conv2d(hidden, w, b, stride=param[4], padding=param[5])
+                idx += 2
+
+                if DEBUG == True:
+                    print(name, param, "shape: ", hidden.shape)
+
+            elif name == 'convt2d':
+                w, b = vars[idx], vars[idx+1]
+                # remember to keep synchrozied of forward_encoder and forward_decoder
+                hidden = F.conv_transpose2d(hidden, w, b, stride=param[4], padding=param[5])
+                idx += 2
+
+                if DEBUG == True:
+                    print(name, param, "shape: ", hidden.shape)
+
+            elif name == 'fc':
+                break
+
+            elif name == 'bn':
+                w, b = vars[idx], vars[idx+1]
+                running_mean, running_var = self.vars_bn[bn_idx], self.vars_bn[bn_idx+1]
+
+                hidden = F.batch_norm(hidden, running_mean, running_var, weight=w, bias=b, training=bn_training)
+                idx += 2
+                bn_idx += 2
+
+                if DEBUG == True:
+                    print(name, param, "shape: ", hidden.shape)
+
+            # Activations
+            elif name == 'flatten':
+                if DEBUG == True:
+                    print(name, param, "Before flatten shape: ", hidden.shape)
+                
+                hidden = hidden.view(hidden.size(0), -1) # synchronize the number of data point
+
+                if DEBUG == True:
+                    print(name, param, "shape: ", hidden.shape)
+
+            elif name == 'reshape':
+                hidden = hidden.view(hidden.size(0), *param)
+
+            elif name == 'relu':
+                hidden = F.relu(hidden, inplace=param[0])
+
+            elif name == 'reakyrelu':
+                hidden = F.leaky_relu(hidden, negative_slope=param[0], inplace=param[1])
+
+            elif name == 'tanh':
+                hidden = F.tanh(hidden)
+
+            elif name == 'sigmoid':
+                hidden = F.sigmoid(hidden)
+
+            elif name == 'upsample':
+                hidden = F.upsample_nearest(hidden, scale_factor=param[0])
+
+            elif name == 'max_pool2d':
+                hidden = F.max_pool2d(hidden, param[0], param[1], param[2])
+
+            elif name == 'avg_pool2d':
+                hidden = F.avg_pool2d(hidden, param[0], param[1], param[2])
+
+            else:
+                raise NotImplementedError
+
+        return hidden
+
+
+
+
 
 if __name__ == '__main__':
     # Set Config

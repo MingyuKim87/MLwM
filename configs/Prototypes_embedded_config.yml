@@ -1,0 +1,7 @@
+miniImageNet:
+  # Parameter
+  feature_dim : 640
+  
+  # name (Just for matching directory name)
+  encoder_type : "ResNet_28_10"
+  beta_kl : 0

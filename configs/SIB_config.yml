@@ -5,6 +5,9 @@ miniImageNet:
   # Network
   inner_update_step : 3 # number of synthetic gradient steps
 
+  # Layer count
+  layer_count : 12
+
   # Optimizer
   meta_lr : 1.0e-3 # lr is fixed
   inner_lr: 1.0e-3 # lr is fixed

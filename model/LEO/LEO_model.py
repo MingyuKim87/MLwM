@@ -20,6 +20,9 @@ class LEO(nn.Module):
         self.embed_size = config['embedding_size']
         self.hidden_size = config['hidden_size']
 
+        # Layer count
+        self.layer_count = config['layer_count']
+
         # Hyper-parameter for LEO part
         self.dropout = config['dropout']
         self.kl_weight = config['kl_weight']
@@ -34,7 +37,7 @@ class LEO(nn.Module):
         self.finetune_lr = nn.Parameter(torch.FloatTensor([config['finetuning_lr_init']]))
 
         # LEO network
-        self.model = LEO_network(self.embed_size, self.hidden_size, self.dropout, self._is_deterministic)
+        self.model = LEO_network(self.embed_size, self.hidden_size, self.dropout, self.layer_count, is_deterministic=self._is_deterministic)
 
         # Model initialize
         for p in self.model.parameters():

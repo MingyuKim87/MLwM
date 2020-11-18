@@ -1,4 +1,5 @@
 import os
+import subprocess
 from datetime import datetime
 
 import numpy as np
@@ -6,6 +7,7 @@ import torch
 import torch.nn
 import torch.nn.functional as F
 import torchsummary
+from torch.utils.tensorboard import SummaryWriter
 
 from torch.utils.data import Dataset, DataLoader
 
@@ -16,7 +18,8 @@ from utils import *
 
 
 class MAML_operator(object):
-    def __init__(self, model, device, data_loader, optimizer=None, num_epochs=None, savedir=None, val_data_loader=None):
+    def __init__(self, model, device, data_loader, optimizer=None, num_epochs=None,\
+        savedir=None, val_data_loader=None, on_tensorboard=False):
         # Training setting
         self.optimizer = optimizer
         self.device = device
@@ -36,9 +39,13 @@ class MAML_operator(object):
         self.save_freq = 1000
         self.figure_freq = 3000
 
-        # Model Save (Temp)
+        # Model and result Save (I/O)
         self.savedir = savedir
-    
+        self.train_summary, self.train_summary_path, \
+            self.val_summary, self.val_summary_path \
+                = self._get_summary_writer()
+        self.on_tensorboard = on_tensorboard
+        
     def _epochs(self, data_loader, train):
         # data_loader should call self.dataset.reset_eposide()
         data_loader.dataset.reset_episode()
@@ -104,7 +111,6 @@ class MAML_operator(object):
                     torch.save(self.model.state_dict(), filename)
                     print("-"*10, "Temporarily save the model", "-"*10)
 
-                
             # Loss
             epoch_loss += meta_loss.item()
 
@@ -120,7 +126,11 @@ class MAML_operator(object):
         return (support_x, support_y, query_x, query_y), pred, (epoch_loss, epoch_criterion)
 
     def train(self):
-        
+        # Open and run tensorboard 
+        if self.on_tensorboard:
+            self._turn_on_tensorboard()
+
+        # Start training
         print('=' * 25, 'Meta trainig', '=' * 25)
         
         for epoch in range(1, self.num_epochs + 1):            
@@ -177,7 +187,6 @@ class MAML_operator(object):
             if self.steps >= 100000:
                 break
                     
-            
     def test(self, update_step=None):
         if update_step is not None:
             self.model.set_update_step(update_step)
@@ -193,7 +202,6 @@ class MAML_operator(object):
         self._print_and_write(filename, '=' * 25 + 'Meta testing' + '=' * 25)
         self._print_and_write(filename, "1 epoech criterion : {:.3f}".format(epoch_criterion / len(self.data_loader)))
 
-
     def _make_dir(self, dirpath):
         try:
             if not(os.path.isdir(dirpath)):
@@ -203,6 +211,27 @@ class MAML_operator(object):
                 print("Failed to create directory!!!!!")
         
         return os.path.join(dirpath)
+
+    def _get_summary_writer(self):
+        '''
+            Get tensorboard summary writer. 
+            (It's used to initialize Operator instance.)
+
+            Return : (train_summary_writer, val_summary_writer)
+        '''
+        
+        temp_dir = self._make_dir(os.path.join(self.savedir, "temp"))
+
+        train_path = os.path.join(temp_dir, "train")
+        train_writer = SummaryWriter(train_path)
+
+        if self.val_data_loader == None:
+            val_writer = None
+        else:
+            val_path = os.path.join(temp_dir, "val")
+            val_writer = SummaryWriter(val_path)
+
+        return train_writer, train_path, val_writer, val_path
 
     def _print_and_write(self, filepath, string):
         if not os.path.isfile(filepath):
@@ -214,17 +243,40 @@ class MAML_operator(object):
 
     def _write_results(self, filepath, epoch, epoch_loss, epoch_criterion, \
             filepath2=None, epoch_loss_val=None, epoch_criterion_val=None):
+        '''
+            Write loss and accuracy to specific files (both train and val)
+
+            Args:
+                filpath : train result file
+                epoch : the number of epoch
+                epoch_loss : loss
+                epoch_criterion : generally, acccuracy
+                filepath2 : if exists, val result file
+                epoch_loss_val : val loss
+                epoch_criterion_val : val accuracy
+
+            Returns: None
+        '''
         # Print a training procedure 
         print('=' * 25, 'Epoch {} / {}'.format(epoch, self.num_epochs), '=' * 25)
         print("epoch_loss : {:.3f}".format(epoch_loss))
         print("epoch_criterion : {:.3f}".format(epoch_criterion))
 
+        # Add scalars to summary
+        self.train_summary.add_scalar('loss', epoch_loss, epoch)
+        self.train_summary.add_scalar('criterion', epoch_criterion, epoch)
+
+        # Add this line (option : ab)
         with open(filepath, 'ab') as f:
             epoch_result = [[epoch_loss, epoch_criterion]]
             np.savetxt(f, epoch_result, delimiter=',', fmt='%.3f')
         
-        
+        # Add this line (option : ab)
         if filepath2 is not None:
+            # Add scalars to summary
+            self.val_summary.add_scalar('loss', epoch_loss_val, epoch)
+            self.val_summary.add_scalar('criterion', epoch_criterion_val, epoch)
+            
             print("epoch_loss_val : {:.3f}".format(epoch_loss_val))
             print("epoch_criterion_val : {:.3f}".format(epoch_criterion_val))
 
@@ -232,6 +284,19 @@ class MAML_operator(object):
                 epoch_result = [[epoch_loss_val, epoch_criterion_val]]
                 np.savetxt(f, epoch_result, delimiter=',', fmt='%.3f')
 
+    def _turn_on_tensorboard(self):
+        '''
+            Turn on tensorboard on a background shell.
+        '''
+        
+        if self.val_data_loader is not None:
+            exe_tensorboard_command_line = \
+                "tensorboard --logdir=train:" + self.train_summary_path + ",val:" + self.val_summary_path
+            subprocess.Popen(exe_tensorboard_command_line.split())
+        else:
+            exe_tensorboard_command_line = \
+                "tensorboard --logdir=train:" + self.train_summary_path
+            subprocess.Popen(exe_tensorboard_command_line.split())
 
 if __name__ == "__main__":
     now = datetime.now()

@@ -1,0 +1,20 @@
+=========================Meta testing=========================
+1 epoech criterion : 0.750
+=========================Meta testing=========================
+1 epoech criterion : 0.783
+=========================Meta testing=========================
+1 epoech criterion : 0.700
+=========================Meta testing=========================
+1 epoech criterion : 0.767
+=========================Meta testing=========================
+1 epoech criterion : 0.767
+=========================Meta testing=========================
+1 epoech criterion : 0.700
+=========================Meta testing=========================
+1 epoech criterion : 0.783
+=========================Meta testing=========================
+1 epoech criterion : 0.700
+=========================Meta testing=========================
+1 epoech criterion : 0.800
+=========================Meta testing=========================
+1 epoech criterion : 0.800

@@ -139,7 +139,6 @@ def test(model, config, load_model_path, save_model_path, initializer=torch.nn.i
     # Operator
     maml_operator = MAML_operator(model, device, test_loader, savedir=save_model_path)
     maml_operator.test()
-    
 
 if __name__ == '__main__':
     # DEBUG
@@ -182,6 +181,14 @@ if __name__ == '__main__':
     # Create Model
     if args.model == "MAML":
         model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=False)
+
+        # Debug
+        for name, param in model.named_parameters():
+            if param.requires_grad:
+                print("parameter name : ", name)
+
+        # Debug
+        print(model.net.vars)
 
     elif args.model == "LEO":
         model = LEO(leo_config)

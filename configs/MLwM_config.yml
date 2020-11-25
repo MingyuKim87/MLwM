@@ -74,7 +74,7 @@ miniImageNet:
   meta_lr : 1.0e-4
   update_lr : 0.01
   is_meta_sgd : True
-  layer_count : 4
+  layer_count : 1
 
 
 Omniglot:

@@ -52,7 +52,7 @@ class MLwM(nn.Module):
         else:
             self.maml = Meta(self.maml_config, update_lr, update_step, initializer=None, is_regression=self._is_regression, is_image_feature=self._is_image_feature )
 
-    def forward(self, x_support, y_support, x_query, is_hessian=True):
+    def forward(self, x_support, y_support, x_query, is_hessian=True, is_adaptation=True):
         '''
             Model Agnostic Meta Learning with an encoder
             
@@ -74,7 +74,7 @@ class MLwM(nn.Module):
         encoded_x_query, _ = self.encoder(x_query)
 
         # Forward by MAML
-        pred_y_stack = self.maml.forward(encoded_x_support, y_support, encoded_x_query, is_hessian) #[task_size, n_way, k_shot_query]
+        pred_y_stack = self.maml.forward(encoded_x_support, y_support, encoded_x_query, is_hessian, is_adaptation) #[task_size, n_way, k_shot_query]
 
         return pred_y_stack
 

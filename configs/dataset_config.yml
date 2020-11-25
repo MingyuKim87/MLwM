@@ -1,0 +1,13 @@
+miniimagenet:
+  data_path : "/home/mgyukim/Data/miniimagenet"
+    
+embedded_miniimagenet:
+  data_path : '/home/mgyukim/Data/embeddings/miniImageNet/center'
+
+Omniglot:
+  training_data_path : "/home/mgyukim/Data/omniglot/images_background"
+  test_data_path : "/home/mgyukim/Data/omniglot/images_evaluation"
+
+Pose_regression:
+  data_path : '/home/mgyukim/Data/rotate_resize/Dataset'
+

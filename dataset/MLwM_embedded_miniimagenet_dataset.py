@@ -43,7 +43,7 @@ class meta_embedded_miniimagenet_dataset(Dataset):
     '''
 
     def __init__(self, n_way, k_shot_support, k_shot_query, root_path, \
-        mode=None, types='non_mutual_exclusive'):
+        mode=None, types='non_mutual_exclusive', perm_index_list=None):
 
         '''
             Args
@@ -70,6 +70,9 @@ class meta_embedded_miniimagenet_dataset(Dataset):
         # Define episode length
         self.episode_length = self._get_episode_length(self.num_classes, self.n_way)
 
+        # Permutation list
+        self.perm_index_list = perm_index_list
+
         # Data
         self.data = self._generate_episode(self.inputs)
 
@@ -79,6 +82,9 @@ class meta_embedded_miniimagenet_dataset(Dataset):
 
     def __getitem__(self, index):
         return self.data[index]
+
+    def set_perm_index_list(self, perm_list):
+        self.perm_index_list = perm_list
 
     def _get_num_classes(self):
         num_classes_x = self.inputs.shape[0]
@@ -93,7 +99,7 @@ class meta_embedded_miniimagenet_dataset(Dataset):
         
         return num_datapoints_x
 
-    def _generate_episode(self, inputs):
+    def _generate_episode(self, inputs, **kwargs):
         '''
             Generate a meta-learning episode    
 
@@ -113,9 +119,13 @@ class meta_embedded_miniimagenet_dataset(Dataset):
             perm = np.random.permutation(self.num_classes)
             self.inputs = self.inputs[perm] # random permutation according to class index
 
-        # Permutation of num_points
-        perm_num_points = np.random.permutation(self.min_num_points)
-        self.inputs = self.inputs[:, perm_num_points]
+        if self.perm_index_list is None:
+            # Permutation of num_points
+            perm_num_points = np.random.permutation(self.min_num_points)
+            self.inputs = self.inputs[:, perm_num_points]
+        else:
+            self.inputs = self.inputs[:, self.perm_index_list]
+        
 
         # Random choice of k_shot_support and k_shot_query
         num_point_index = np.random.choice(self.min_num_points, \

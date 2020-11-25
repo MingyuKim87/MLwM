@@ -1,4 +1,0 @@
-===============Meta trainig at the last epoch===============
-===============Epoch 200 / 200===============
-epoch_loss : 2.679
-epoch_criterion : 0.083

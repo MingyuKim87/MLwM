@@ -72,7 +72,7 @@ class MetaSGD(nn.Module):
 
         return total_norm/counter
 
-    def forward(self, x_support, y_support, x_query, is_hessian=True):
+    def forward(self, x_support, y_support, x_query, is_hessian=True, is_adaptation=True):
         '''
             Model Agnostic Meta Learning
             
@@ -116,67 +116,77 @@ class MetaSGD(nn.Module):
             # Run the i-th task and compute loss for k = 0 
                 # Forward (bn_training)
             logits = self.net(x_support[i], vars=None, bn_training=True)
-        
-            if self._is_regression:
-                task_loss = F.mse_loss(logits, y_support[i])
-            else:
-                task_loss = F.cross_entropy(logits, y_support[i], reduction='sum')
 
-            # Parameters
-            parameters = self.net.parameters()
-
-            # Gradient
-            grads = torch.autograd.grad(task_loss, parameters)
-            
-            # Initializing the container of task-specific parameters
-            task_parameter = []
-
-            # Inner Update
-            for j, (grad, param) in enumerate(zip(grads, parameters)):
-                new_weight = gradient_descent(grad, param, self.update_lr, is_hessian)
-                task_parameter.append(new_weight)
-
-            # By using the query set, we assess loss and accuracy with meta-parameters
-            with torch.no_grad():
-                # Evaluated by meta parameter
-                logit_q = self.net(x_query[i], self.net.parameters(), bn_training=True) #[n_way * k_shot, classess]
+            if not is_adaptation:
                 if not self._is_regression:
-                    pred_q = F.softmax(logit_q, dim=1).argmax(dim=1) #[n_way * k_shot,]
+                    pred_q = F.softmax(logits, dim=1).argmax(dim=1) #[n_way * k_shot_query, ]
+                    pred_y = pred_q.view(n_way, k_shot_query) #[n_way, k_shot_query]
+                    pred_y_list.append(pred_y)
 
-                # Evaluated by first updated parameter
-                logit_q = self.net(x_query[i], task_parameter, bn_training=True)
-                if not self._is_regression:
-                    pred_q = F.softmax(logit_q, dim=1).argmax(dim=1)
-                
-            for k in range(1, self.update_step):
-                # Run the i-th task and compute loss for k = 1
-                # Forward (bn_training)
-                logits = self.net(x_support[i], vars=task_parameter, bn_training=True)
-                
-                if not self._is_regression:
-                    task_loss = F.cross_entropy(logits, y_support[i], reduction='sum')
                 else:
+                    pred_y_list.append(logits)
+
+            else:
+                if self._is_regression:
                     task_loss = F.mse_loss(logits, y_support[i])
+                else:
+                    task_loss = F.cross_entropy(logits, y_support[i], reduction='sum')
+
+                # Parameters
+                parameters = self.net.parameters()
 
                 # Gradient
-                grads = torch.autograd.grad(task_loss, task_parameter)
+                grads = torch.autograd.grad(task_loss, parameters)
+                
+                # Initializing the container of task-specific parameters
+                task_parameter = []
 
-                # Inner update
-                for j, (grad, param) in enumerate(zip(grads, task_parameter)):
+                # Inner Update
+                for j, (grad, param) in enumerate(zip(grads, parameters)):
                     new_weight = gradient_descent(grad, param, self.update_lr, is_hessian)
-                    task_parameter[j] = new_weight
+                    task_parameter.append(new_weight)
 
+                # By using the query set, we assess loss and accuracy with meta-parameters
                 with torch.no_grad():
-                    # Assessment
-                    logit_q = self.net(x_query[i], task_parameter, bn_training=True) #[n_way * k_shot_query, num_class]
+                    # Evaluated by meta parameter
+                    logit_q = self.net(x_query[i], self.net.parameters(), bn_training=True) #[n_way * k_shot, classess]
                     if not self._is_regression:
-                        pred_q = F.softmax(logit_q, dim=1).argmax(dim=1) #[n_way * k_shot_query, ]
-                        pred_y = pred_q.view(n_way, k_shot_query) #[n_way, k_shot_query]
+                        pred_q = F.softmax(logit_q, dim=1).argmax(dim=1) #[n_way * k_shot,]
 
-            if not self._is_regression:
-                pred_y_list.append(pred_y)
-            else:
-                pred_y_list.append(logit_q)
+                    # Evaluated by first updated parameter
+                    logits = self.net(x_query[i], task_parameter, bn_training=True)
+                    if not self._is_regression:
+                        pred_q = F.softmax(logits, dim=1).argmax(dim=1)
+                    
+                for k in range(1, self.update_step):
+                    # Run the i-th task and compute loss for k = 1
+                    # Forward (bn_training)
+                    logits = self.net(x_support[i], vars=task_parameter, bn_training=True)
+                    
+                    if not self._is_regression:
+                        task_loss = F.cross_entropy(logits, y_support[i], reduction='sum')
+                    else:
+                        task_loss = F.mse_loss(logits, y_support[i])
+
+                    # Gradient
+                    grads = torch.autograd.grad(task_loss, task_parameter)
+
+                    # Inner update
+                    for j, (grad, param) in enumerate(zip(grads, task_parameter)):
+                        new_weight = gradient_descent(grad, param, self.update_lr, is_hessian)
+                        task_parameter[j] = new_weight
+
+                    with torch.no_grad():
+                        # Assessment
+                        logit_q = self.net(x_query[i], task_parameter, bn_training=True) #[n_way * k_shot_query, num_class]
+                        if not self._is_regression:
+                            pred_q = F.softmax(logit_q, dim=1).argmax(dim=1) #[n_way * k_shot_query, ]
+                            pred_y = pred_q.view(n_way, k_shot_query) #[n_way, k_shot_query]
+
+                if not self._is_regression:
+                    pred_y_list.append(pred_y)
+                else:
+                    pred_y_list.append(logit_q)
                     
         # Reshape
         pred_y_stack = torch.stack(pred_y_list, dim=0) #[task_size, n_way, k_shot_query], type=torch.long
@@ -261,7 +271,12 @@ class MetaSGD(nn.Module):
                     loss_q = F.mse_loss(logit_q, y_support[i])
                 else:
                     loss_q = F.cross_entropy(logit_q, y_support[i], reduction='sum')
-                losses_q[0] += loss_q
+                
+                # Evaluation
+                losses_q[0] += loss_q / task_size
+                correct = torch.eq(pred_q, y_query[i]).sum().item() 
+                corrects[0] += correct / (task_size * n_way * k_shot_query)
+
 
                 # Evaluated by first updated parameter
                 logit_q = self.net(x_query[i], task_parameter, bn_training=True) #[num_points, classess]
@@ -272,7 +287,11 @@ class MetaSGD(nn.Module):
                     loss_q = F.mse_loss(logit_q, y_query[i])
                 else:
                     loss_q = F.cross_entropy(logit_q, y_query[i], reduction='sum')
-                losses_q[1] += loss_q
+
+                # Evaluation
+                losses_q[1] += loss_q / task_size
+                correct = torch.eq(pred_q, y_query[i]).sum().item() 
+                corrects[1] += correct / (task_size * n_way * k_shot_query)
 
             for k in range(1, self.update_step):
                 # Run the i-th task and compute loss for k = 1 
@@ -303,21 +322,20 @@ class MetaSGD(nn.Module):
 
                     with torch.no_grad():
                         correct = torch.eq(pred_q, y_query[i]).sum().item() # correct : scalar (summation of n_way * k_shot_query)
-                        corrects[k+1] = corrects[k+1] + correct 
+                        corrects[k+1] += correct / (task_size * n_way * k_shot_query)
 
-                losses_q[k+1] += loss_q
+                losses_q[k+1] += loss_q / task_size
 
-            
-        loss = losses_q[-1] / task_size
-
+    
         if not self._is_regression:
             # criterion = accuracy
-            criterion = corrects[-1] / (task_size * n_way * k_shot_query)
+            criterion = corrects[-1] 
+            
         else:
             # criterion = mse_loss
-            criterion = loss
+            criterion = losses_q[-1]
 
-        return loss, criterion
+        return losses_q[-1], criterion, losses_q
 
 
 if __name__ == '__main__':    

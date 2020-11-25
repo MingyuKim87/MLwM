@@ -141,7 +141,7 @@ class meta_miniImagenet_dataset(Dataset):
                 : in self._generate_eposide, we sample random numbers for task     
     '''
 
-    def __init__(self, n_way, k_shot_support, k_shot_query, root_path, img_size, transform=None, mode=None, types='non_mutual_exclusive'):
+    def __init__(self, n_way, k_shot_support, k_shot_query, root_path, img_size, transform=None, mode=None, types='non_mutual_exclusive', perm_index_list=None):
         # Set Image Size
         self._img_size = img_size
         
@@ -188,6 +188,9 @@ class meta_miniImagenet_dataset(Dataset):
         # Define episode length
         self.episode_length = self._get_episode_length(self.num_classes, self.n_way)
 
+        # Permutation list
+        self.perm_index_list = perm_index_list
+
         # Data
         self.data = self._generate_episode(self.inputs)
 
@@ -197,8 +200,11 @@ class meta_miniImagenet_dataset(Dataset):
 
     def __getitem__(self, index):
         return self.data[index]
+
+    def set_perm_index_list(self, perm_list):
+        self.perm_index_list = perm_list
     
-    def _generate_episode(self, inputs):
+    def _generate_episode(self, inputs, **kwargs):
         '''
             Generate a meta-learning episode    
 
@@ -218,9 +224,12 @@ class meta_miniImagenet_dataset(Dataset):
             perm = np.random.permutation(self.num_classes)
             self.inputs = self.inputs[perm] # random permutation according to class index
 
-        # Permutation of num_points
-        perm_num_points = np.random.permutation(self.min_num_points)
-        self.inputs = self.inputs[:, perm_num_points]
+        if self.perm_index_list is None:
+            # Permutation of num_points
+            perm_num_points = np.random.permutation(self.min_num_points)
+            self.inputs = self.inputs[:, perm_num_points]
+        else:
+            self.inputs = self.inputs[:, self.perm_index_list]
 
         # Random choice of k_shot_support and k_shot_query
         num_point_index = np.random.choice(self.min_num_points, \

@@ -35,11 +35,9 @@ class model_operator(object):
         # Training parameters
         self.num_epochs = num_epochs
         self.steps = 0
-        self.max_step = 20
-        #self.max_step = 100000
+        self.max_step = 100000
         self.print_freq = 200
-        self.save_freq = 10
-        #self.save_freq = 1000
+        self.save_freq = 1000
         self.figure_freq = 3000
 
         # Model and result Save (I/O)

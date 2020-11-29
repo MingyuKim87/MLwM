@@ -72,7 +72,7 @@ class meta_pose_regression_dataset(Dataset):
         self.num_classes = self._get_num_classes()
         self.min_points = self._get_num_datapoint()
 
-        # Define Omniglot_dataset
+        # Define pose_regression_dataset
         self.n_way = n_way
         self.k_shot_support = k_shot_support
         self.k_shot_query = k_shot_query
@@ -135,6 +135,7 @@ class meta_pose_regression_dataset(Dataset):
             (self.k_shot_support + self.k_shot_query), False)
 
         # Generate a episode list
+            # Pose regression have only non-mutual-exclusive types
         episode_task_list = self._get_episode_task_index(\
             self.num_classes, self.n_way, self.types) #[episode_length, n_way]
 

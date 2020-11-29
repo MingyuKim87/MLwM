@@ -1,0 +1,44 @@
+Pose_regression:
+  # Architecture of Encoder
+    # what encoder we use
+  encoder_type : 'deterministic'
+    # what encoder we use
+  encoder_type_FC : 'BBB_FC'
+
+  # Encoder max pool
+  encoder_maxpool_count: 1
+
+  # Image Feature
+  is_image_feature: False
+  
+  # is_image_feature
+  encoder_output_dim_image : 196 
+
+  # output_dim_by_encoded (it should be divided to (img_size * img_size]  
+  encoder_output_dim : 20
+
+  # Is beta kl
+  is_kl_loss: True
+
+  # 'Beta kl'
+  beta_kl : 1.0e-3
+  
+  # Encode architecture
+  img_size: 128
+  input_channel: 1
+  filter_size: [32, 48, 64]
+  kernel_size: 3
+
+  # Hyper parameters
+  meta_lr : 0.005
+  img_size : 128
+
+  # Body Architecture
+  dim_w: 20
+  dim_embed_y_divisor: 4 # divide
+  dim_r: 200
+  dim_z: 200
+  dim_y: 1
+  hidden_r: 100
+  hidden_g: 100
+  hidden_d: 100

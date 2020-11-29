@@ -5,18 +5,26 @@ miniImageNet:
     # what encoder we use
   encoder_type_FC : 'BBB_FC'
     # output_dim_by_encoded (it should be divided to (img_size * img_size]
+
+  # Image Feature
+  is_image_feature: False
+  encoder_output_dim_image : 400
+  encoder_output_dim : 20
+
+  # MAML Body (If FC MAML)
+  layer_count: 3
+  hidden: 64
     
-  encoder_output_dim : 400
+  # Encode for dataset
+  img_size: 84
+  input_channel: 3
+  filter_size: [32, 48, 64]
+  kernel_size: 3
+  encoder_type: "BBB"
+      
     # 'Beta kl'
   beta_kl : 1.0e-3
-    # Encode for dataset
-      # Encoder type, [input_image_size, input_channel, output_dim(Flatten), hidden_unit_sizes, layer_count] 
-  ENCODER_CONFIG : ['VAE', [84, 3, 400, [32, 48, 64], 3]]
-
-  # Encode for dataset (Stochastic FC layer)
-    # Encoder_type, [feature_dim, hidden_dim, output_dim, layer_count]
-  ENCODER_CONFIG_FC : ['VAE', [640, 600, 400, 3]]
-
+    
   # Architecture of Main MAML body
   CONFIG_CONV_4 : [['conv2d', [64, 1, 3, 3, 2, 0]],
     ['relu', [True]],
@@ -74,7 +82,7 @@ miniImageNet:
   meta_lr : 1.0e-4
   update_lr : 0.01
   is_meta_sgd : True
-  layer_count : 1
+  layer_count : 1 # For embedded_mini_imagenet
 
 
 Omniglot:
@@ -82,11 +90,25 @@ Omniglot:
     # what encoder we use
   encoder_type : 'BBB'
     # output_dim_by_encoded (it should be divided to (img_size * img_size]
-  encoder_output_dim : 196
+      # is_image_feature
+  encoder_output_dim_image : 196 
+  encoder_output_dim : 20
     # 'Beta kl'
   beta_kl : 1.0e-5
-    # Encode for dataset
-  ENCODER_CONFIG : ['VAE', [28, 1, 196, [32, 48, 64], 3]]
+
+  # Image Feature
+  is_image_feature: False
+
+  # MAML Body (If FC MAML)
+  layer_count: 3
+  hidden: 64
+    
+  # Encode for dataset
+  img_size: 128
+  input_channel: 1
+  filter_size: [32, 48, 64]
+  kernel_size: 3
+  encoder_type: "BBB"
   
 
   # Architecture of Main MAML body
@@ -128,17 +150,30 @@ Omniglot:
   #hyperparams
   meta_lr : 1.0e-4
   update_lr : 0.01
+  is_meta_sgd : True
 
 Pose_regression:
   # Architecture of Encoder
     # what encoder we use
-  encoder_type : 'BBB'
+  encoder_type : 'deterministic'
     # output_dim_by_encoded (it should be divided to (img_size * img_size]
-  encoder_output_dim : 196
+      # is_image_feature
+  encoder_output_dim_image : 196 
+  encoder_output_dim : 20
+
+  # Encoder max pool
+  encoder_maxpool_count: 1
+    
+  # Is Beta KL
+  is_kl_loss: True
+    
     # 'Beta kl'
-  beta_kl : 0.1
+  beta_kl : 1.0e-3
     # Encode for dataset
-  ENCODER_CONFIG : ['VAE', [128, 1, 196, [32, 48, 64], 3]]
+  img_size: 128
+  input_channel: 1
+  filter_size: [32, 48, 64]
+  kernel_size: 3
   
   # Architecture of Main MAML body
   CONFIG_CONV_4 : [['conv2d', [64, 1, 3, 3, 2, 0]],
@@ -177,8 +212,19 @@ Pose_regression:
   img_size : 128
   
   #hyperparams
-  meta_lr : 1.0e-3
-  update_lr : 1.0e-3
+  meta_lr : 1.0e-4
+  update_lr : 1.0e-4
+  is_meta_sgd : True
+
+  # Image Feature
+  is_image_feature: False
+
+  # MAML Body (If FC layer)
+  layer_count: 3
+  hidden: 64
+
+
+
 
 
 

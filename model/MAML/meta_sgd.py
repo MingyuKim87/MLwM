@@ -274,8 +274,8 @@ class MetaSGD(nn.Module):
                 
                 # Evaluation
                 losses_q[0] += loss_q / task_size
-                correct = torch.eq(pred_q, y_query[i]).sum().item() 
-                corrects[0] += correct / (task_size * n_way * k_shot_query)
+                correct = torch.eq(pred_q, y_query[i]).sum().item() if not self._is_regression else None
+                corrects[0] += correct / (task_size * n_way * k_shot_query) if not self._is_regression else 0
 
 
                 # Evaluated by first updated parameter
@@ -290,8 +290,8 @@ class MetaSGD(nn.Module):
 
                 # Evaluation
                 losses_q[1] += loss_q / task_size
-                correct = torch.eq(pred_q, y_query[i]).sum().item() 
-                corrects[1] += correct / (task_size * n_way * k_shot_query)
+                correct = torch.eq(pred_q, y_query[i]).sum().item() if not self._is_regression else None
+                corrects[1] += correct / (task_size * n_way * k_shot_query) if not self._is_regression else 0
 
             for k in range(1, self.update_step):
                 # Run the i-th task and compute loss for k = 1 
@@ -321,21 +321,22 @@ class MetaSGD(nn.Module):
                     loss_q = F.cross_entropy(logit_q, y_query[i], reduction='sum')
 
                     with torch.no_grad():
-                        correct = torch.eq(pred_q, y_query[i]).sum().item() # correct : scalar (summation of n_way * k_shot_query)
-                        corrects[k+1] += correct / (task_size * n_way * k_shot_query)
+                        # correct : scalar (summation of n_way * k_shot_query)
+                        correct = torch.eq(pred_q, y_query[i]).sum().item() if not self._is_regression else None
+                        corrects[k+1] += correct / (task_size * n_way * k_shot_query) if not self._is_regression else 0
 
                 losses_q[k+1] += loss_q / task_size
 
     
         if not self._is_regression:
             # criterion = accuracy
-            criterion = corrects[-1] 
+            criterion = corrects
             
         else:
             # criterion = mse_loss
-            criterion = losses_q[-1]
+            criterion = losses_q
 
-        return losses_q[-1], criterion, losses_q
+        return losses_q[-1], criterion[-1], losses_q
 
 
 if __name__ == '__main__':    

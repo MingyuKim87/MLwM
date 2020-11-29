@@ -329,9 +329,9 @@ class Meta(nn.Module):
             criterion = corrects
         else:
             # criterion = mse_loss
-            criterion = losses_q[-1]
+            criterion = losses_q
 
-        return losses_q[-1], criterion[-1] if not self._is_regression else losses_q[-1], losses_q
+        return losses_q[-1], criterion[-1], losses_q
 
 
     def get_embedded_vector_forward(self, x_support, y_support, x_query, is_hessian=True, is_adaptation=False):

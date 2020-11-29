@@ -15,42 +15,41 @@ from torch.utils.data import DataLoader
 
 
 class MLwM(nn.Module):
-    def __init__(self, encoder_config, maml_config, update_lr, update_step, initializer=None, \
-        is_regression=False, is_image_feature=True, is_kl_loss=False, beta_kl=1, is_meta_sgd=False):
+    def __init__(self, config, architecture, update_lr, update_step, initializer=None, \
+        is_regression=False):
         super().__init__()
         
-        self.encoder_type = encoder_config[0]
-        self.encoder_property = encoder_config[1]
-        self.maml_config = maml_config
+        self.encoder_type = config['encoder_type']
+        self.config = config
         self._is_regression = is_regression
-        self._is_image_feature = is_image_feature
-        self._is_kl_loss = is_kl_loss
-        self._beta_kl = beta_kl
-        self._is_meta_sgd = is_meta_sgd
+        self._is_image_feature = config['is_image_feature']
+        self._is_kl_loss = config['is_kl_loss']
+        self._beta_kl = config['beta_kl']
+        self._is_meta_sgd = config['is_meta_sgd']
 
-        if encoder_config[0] == 'deterministic':
+        if self.encoder_type == 'deterministic':
             self.encoder = \
-                Deterministic_Conv_Encoder(self.encoder_property)
+                Deterministic_Conv_Encoder(self.config)
 
         elif self.encoder_type == 'VAE':
             self.encoder = \
-                Conv_Reparameterization_Encoder(self.encoder_property)
+                Conv_Reparameterization_Encoder(self.config)
         
         elif self.encoder_type == 'BBB':
             self.encoder = \
-                Stochastic_Conv_Encoder(self.encoder_property)
+                Stochastic_Conv_Encoder(self.config)
 
         elif self.encoder_type == 'BBB_FC':
             self.encoder = \
-                Stochastic_FC_Encoder(self.encoder_property)
+                Stochastic_FC_Encoder(self.config)
         else:
             NotImplementedError
 
         # choose 'update_lr' can be learned or not
         if self._is_meta_sgd:
-            self.maml = MetaSGD(self.maml_config, update_lr, update_step, initializer=None, is_regression=self._is_regression, is_image_feature=self._is_image_feature )
+            self.maml = MetaSGD(architecture, update_lr, update_step, initializer=None, is_regression=self._is_regression, is_image_feature=self._is_image_feature )
         else:
-            self.maml = Meta(self.maml_config, update_lr, update_step, initializer=None, is_regression=self._is_regression, is_image_feature=self._is_image_feature )
+            self.maml = Meta(architecture, update_lr, update_step, initializer=None, is_regression=self._is_regression, is_image_feature=self._is_image_feature )
 
     def forward(self, x_support, y_support, x_query, is_hessian=True, is_adaptation=True):
         '''
@@ -100,10 +99,9 @@ class MLwM(nn.Module):
         # Encode x_support and x_query
         encoded_x_support, kl_loss_support = self.encoder(x_support)
         encoded_x_query, kl_loss_query = self.encoder(x_query)
-
         
         # Forward by MAML
-        maml_loss, criterion = self.maml.meta_loss(encoded_x_support, y_support, encoded_x_query, y_query, is_hessian) #[task_size, n_way, k_shot_query]
+        maml_loss, criterion, losses_list = self.maml.meta_loss(encoded_x_support, y_support, encoded_x_query, y_query, is_hessian) #[task_size, n_way, k_shot_query]
 
         # kl_loss and total loss
         if self.encoder_type != "deterministic" and self._is_kl_loss:
@@ -112,7 +110,7 @@ class MLwM(nn.Module):
         else:
             total_loss = maml_loss
 
-        return total_loss, criterion
+        return total_loss, criterion, losses_list
 
 
 if __name__ == '__main__':

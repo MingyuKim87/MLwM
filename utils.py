@@ -13,6 +13,7 @@ from model.MAML.MLwM_model import MLwM
 from model.LEO.LEO_model import LEO
 from model.SIB.SIB_model import SIB
 from model.PrototypicalNet.PrototypicalNet_model import PrototypeNet_embedded
+from model.CNP.cnp import CNP
 
 # Helper
 from helper.config_helper import *
@@ -128,12 +129,15 @@ def load_config_embed_miniimagenet(args):
         Prototypes_embedded_config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/Prototypes_embedded_config.yml", 'r'), \
             Loader=yaml.SafeLoader)
         config = Prototypes_embedded_config['miniImageNet']
-        
+    
     else:
         # Set MAML config 
         config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/MLwM_config.yml", 'r'), \
             Loader=yaml.SafeLoader)
         config = config['miniImageNet']
+
+        # MetaSGD option
+        config["is_meta_sgd"] = True if args.model == "MetaSGD" else False
         
         architecture = set_config_fc_layers(args.n_way, 640, 64, config['layer_count'])
 
@@ -171,6 +175,9 @@ def load_config_miniimagenet(args):
         config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/MLwM_config.yml", 'r'), \
                 Loader=yaml.SafeLoader)
         config = config['miniImageNet']
+
+        # MetaSGD option
+        config["is_meta_sgd"] = True if args.model == "MetaSGD" else False
         
         # MAML
         architecture = set_architecture_config_MAML(config['CONFIG_CONV_4_MAXPOOL'],\
@@ -188,6 +195,9 @@ def load_config_omniglot(args):
     config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/MLwM_config.yml", 'r'), \
             Loader=yaml.SafeLoader)
     config = config['Omniglot']
+    
+    # MetaSGD option
+    config["is_meta_sgd"] = True if args.model == "MetaSGD" else False
 
     # Architecture Config
     if args.model == "MLwM":
@@ -216,18 +226,32 @@ def load_config_poseregression(args):
             Loader=yaml.SafeLoader)
     config = config['Pose_regression']
 
+    # MetaSGD option
+    config["is_meta_sgd"] = True if args.model == "MetaSGD" else False
+
     # Architecture Config
     if args.model == "MLwM":
-        # Set Configuration (Encoder)
-        ENCODER_CONFIG = set_config_encoder(config['ENCODER_CONFIG'], \
-            config['encoder_type'], config['encoder_output_dim'])
-        
         # Set Configuration (MAML)
         encoded_img_size = math.floor(math.sqrt(config['encoder_output_dim']))
-        architecture = set_architecture_config_MAML(config['CONFIG_CONV_4'], \
-            args.n_way, \
-            encoded_img_size,\
-            is_regression=True)
+
+        if config['is_image_feature']:
+            # Body architecture
+            architecture = set_architecture_config_MAML(config['CONFIG_CONV_4'], \
+                args.n_way, \
+                encoded_img_size,\
+                is_regression=True)
+        else:
+            # Body architecture
+            architecture = set_config_fc_layers(1, config['encoder_output_dim'], config['hidden'], config['layer_count'])
+
+
+    elif args.model == "CNP":
+        # Load config
+        config = yaml.load(open("/home/mgyukim/workspaces/MLwM/configs/cnp_config.yml", 'r'), \
+            Loader=yaml.SafeLoader)
+        config = config['Pose_regression']
+        architecture = None
+
     else:
         architecture = set_architecture_config_MAML(config['CONFIG_CONV_4_MAML'],\
             args.n_way, config['img_size'],\
@@ -237,11 +261,17 @@ def load_config_poseregression(args):
 
 def create_model_poseregression(args, config, architecture, ENCODER_CONFIG=None):
     # Create Model
-    if args.model == "MAML":
-        model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=True)
+    if args.model == "MAML" or args.model == "MetaSGD":
+        # Meta SGD or MAML
+        if config['is_meta_sgd']:
+            model = MetaSGD(architecture, config['update_lr'], config['update_step'], is_regression=True)
+        else:
+            model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=True)
     elif args.model =="MLwM":
-        model = MLwM(ENCODER_CONFIG, architecture, config['update_lr'], config['update_step'],\
-            is_regression=True, is_kl_loss=True, beta_kl=config['beta_kl'])
+            model = MLwM(config, architecture, config['update_lr'], config['update_step'],\
+                is_regression=True)
+    elif args.model == "CNP":
+        model = CNP(config, is_regression=True)
     else:
         NotImplementedError
 
@@ -249,11 +279,15 @@ def create_model_poseregression(args, config, architecture, ENCODER_CONFIG=None)
 
 def create_model_omniglot(args, config, architecture, ENCODER_CONFIG=None):
     # Create Model
-    if args.model == "MAML":
-        model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=False)
+    if args.model == "MAML" or args.model == "MetaSGD":
+        # Meta SGD or MAML
+        if config['is_meta_sgd']:
+            model = MetaSGD(architecture, config['update_lr'], config['update_step'], is_regression=False)
+        else:
+            model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=False)
     elif args.model =="MLwM":
         model = MLwM(ENCODER_CONFIG, architecture, config['update_lr'], config['update_step'], \
-            is_regression=False, is_kl_loss=True, beta_kl=config['beta_kl'])
+            is_regression=False)
     else:
         NotImplementedError
 
@@ -261,22 +295,26 @@ def create_model_omniglot(args, config, architecture, ENCODER_CONFIG=None):
 
 def create_model_miniimagenet(args, config, architecture, ENCODER_CONFIG=None):
     # Create Model
-    if args.model == "MAML":
-        model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=False)
+    if args.model == "MAML" or args.model == "MetaSGD":
+        # Meta SGD or MAML
+        if config['is_meta_sgd']:
+            model = MetaSGD(architecture, config['update_lr'], config['update_step'], is_regression=False)
+        else:
+            model = Meta(architecture, config['update_lr'], config['update_step'], is_regression=False)
 
     elif args.model == "LEO":
         model = LEO(config)
         
     elif args.model =="MLwM":
         model = MLwM(ENCODER_CONFIG, architecture, config['update_lr'], config['update_step'],\
-            is_regression=False, is_kl_loss=True, beta_kl=config['beta_kl'])
+            is_regression=False)
     else:
         NotImplementedError
 
     return model
 
 def create_model_embed_miniimagenet(args, config, architecture, ENCODER_CONFIG=None):
-    if args.model == "MAML":
+    if args.model == "MAML" or args.model=="MetaSGD":
         # Meta SGD or MAML
         if config['is_meta_sgd']:
             model = MetaSGD(architecture, config['update_lr'], config['update_step'], is_regression=False, is_image_feature=False)
@@ -291,7 +329,7 @@ def create_model_embed_miniimagenet(args, config, architecture, ENCODER_CONFIG=N
     elif args.model =="MLwM":
         # MLwM with MAML or MetaSGD
         model = MLwM(ENCODER_CONFIG, architecture, config['update_lr'], config['update_step'],\
-            is_regression=False, is_kl_loss=True, beta_kl=config['beta_kl'], is_meta_sgd=config['is_meta_sgd'])
+            is_regression=False)
     else:
         NotImplementedError
 

@@ -99,7 +99,7 @@ class model_operator(object):
                 if self.steps % self.print_freq == 1:
                     print("*"*10)
                     print("optimization iteration {}, loss of query set in meta training {:.3f}".format(self.steps, meta_loss.item()))
-                    print("optimization iteration {}, criterion of query set in meta training  {:.3f}".format(self.steps, criterion))
+                    print("optimization iteration {}, criterion of query set in meta training  {:.3f}".format(self.steps, criterion.item()))
                     print("*"*10)
 
                 if self.steps % self.save_freq == 1:
@@ -119,7 +119,7 @@ class model_operator(object):
             # Crierion (Accuracy or MSE loss)
             if self.model._is_regression:
                 pred = pred.view(task_size, n_way, k_shot, -1)
-                epoch_criterion += F.mse_loss(pred, query_y)
+                epoch_criterion += F.mse_loss(pred, query_y).item()
             else:
                 total_elements_in_this_task = torch.numel(query_y)
                 epoch_criterion += (torch.eq(query_y, pred).sum().item() / total_elements_in_this_task)
@@ -184,11 +184,7 @@ class model_operator(object):
                     + '=' * 15)
                 self._print_and_write(filename_last_result, "epoch_loss : {:.3f}".format(epoch_loss / len(self.data_loader)))
                 self._print_and_write(filename_last_result, "epoch_criterion : {:.3f}".format(epoch_criterion / len(self.data_loader)))
-
-            # Plot a figure
-            if epoch % self.figure_freq == 0:
-                training_line_plot(filename_train_result, filename_val_result)
-
+                s
             # Termination Condition (Step termination)
             if self.steps >= self.max_step:
                 break
@@ -254,8 +250,15 @@ class model_operator(object):
 
     def _write_result_args(self, filepath, *args):
         with open(filepath, 'ab') as f:
-            epoch_result = [[arg for arg in args]]
+            epoch_result= []
+            for arg in args:
+                if type(arg) == float or type(arg) == int:
+                    epoch_result.append(arg)
+
+            epoch_result = [epoch_result]
             np.savetxt(f, epoch_result, delimiter=',', fmt='%.3f')
+
+        f.close()
 
 
     def _turn_on_tensorboard(self):
